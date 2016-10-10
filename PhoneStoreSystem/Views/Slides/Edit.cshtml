@@ -1,0 +1,110 @@
+﻿@model PhoneStoreSystem.Models.Slide
+
+
+@{
+    ViewBag.Title = "编辑幻灯片";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<span class="createLink" style="width:120px;padding:0px;">@Html.ActionLink("返回上一页", "Index")</span>
+
+@using (Html.BeginForm("Edit", "Slides", FormMethod.Post, new { enctype = "multipart/form-data", id = "formUpdateMain" }))
+{
+     @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset class="create_edit_div">
+        <legend>幻灯片信息</legend>
+        <span style="color:red">@ViewBag.StatusMessage</span>
+
+        @Html.HiddenFor(model => model.SidId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SidImgUrl)
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.SidImgUrl)
+
+            <input type="file" name="InfoLitimg1" id="InfoLitimg1" />
+            <input type="button" name="btnFileImage" value="上 传 " id="btnFileImage" class="btn"/>
+            <span id="editMesssge" style="color:red"></span>
+            <br />
+            <span style="color:green;font-size:12px; line-height:16px;">*推荐图片比例10：3(1000*400)</span>
+            <br />
+            <img id="uploadImg" src="/Images/web/slideImg/@ViewBag.ImagUrl" width="750" height="300" />
+
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SidUrl)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SidUrl)
+            @Html.ValidationMessageFor(model => model.SidUrl)
+        </div>
+
+        <p>
+            <input type="submit" value="保 存"  class="btn"/>
+        </p>
+    </fieldset>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/MyAjaxForm.js")
+
+
+   <script>
+       jQuery(function ($) {
+           $("#slideSet").addClass("selected");
+           $("#main_container").fadeIn("slow");
+
+
+           $('input[type=submit]').click(function () {
+               //$("#load_div").fadeIn(0);
+               //$("#load_div").css({ "filter": "alpha(opacity:70)", "opacity": "0.7" });    //opacity后面不能用“=”，
+
+               var index = layer.load(2, { shade: [0.1, '#fff'] });
+
+               setTimeout(function () {
+                   if ($(".field-validation-error").length > 0) {
+                       //$("#load_div").fadeOut(250);
+                       layer.close(index);
+                   }
+               }, 200);
+           });
+
+           //异步实现对数据库的图片的修改作用
+           $("#btnFileImage").click(function () {
+               if ($("#InfoLitimg1").val() != "") {
+
+                   //$("#load_div").fadeIn(0);
+                   //$("#load_div").css({ "filter": "alpha(opacity:70)", "opacity": "0.7" });
+                   var index = layer.load(2, { shade: [0.1, '#fff'] });
+
+                   $("#formUpdateMain").ajaxSubmit({
+                       url: '/Slides/FileImgUpload',
+                       type: 'post',
+                       success: function (imgData) {
+                           $("#uploadImg").attr("src", imgData);
+                           $("#editMesssge").html("上传图片成功！");
+                           //$("#load_div").fadeOut(250);
+                           layer.close(index);
+                       },
+                       error: function (msg) {
+                           console.log(msg);
+                           $("#editMesssge").html("上传图片失败，请联系管理员！" + msg.statusText + "");
+                           //$("#load_div").fadeOut(250);
+                           layer.close(index);
+                       }
+
+                   });
+               }
+           });
+
+       });
+
+   </script>
+}

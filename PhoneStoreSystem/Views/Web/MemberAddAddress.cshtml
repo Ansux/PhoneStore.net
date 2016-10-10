@@ -1,0 +1,100 @@
+﻿@model PhoneStoreSystem.Models.Address
+
+@{
+    ViewBag.Title = "添加收货地址";
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+@section css {   
+    @Styles.Render("~/Content/web/MemberAddress.css")
+    @Styles.Render("~/Content/web/_MemberCenterStyle.css")
+}
+
+<div class="inner">
+   
+    <div class="Nav">
+        <a href="/Web/index" title="首页">首页</a>
+        &gt;          
+        <a href="/Web/MemberCenter" title="我的商城">我的商城</a>
+        &gt;
+        <span>@ViewBag.Title</span>
+    </div>
+
+    <div class="leftCenterDIV">
+        @Html.Action("_MemberCenterPartial","WebPartial")       
+    </div>
+
+    
+    <div class="rightCenterDIV">
+        <h1 class="box-title">@ViewBag.Title</h1>    
+            
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            
+         
+             <div class="create_edit_div">
+
+                <span style="color:red">@ViewBag.StatusMessage</span>
+
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.AddressName,new {placeholder=Html.DisplayNameFor(model => model.AddressName)})
+                    @Html.ValidationMessageFor(model => model.AddressName)
+                </div>
+                
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.AddressPhone ,new {placeholder=Html.DisplayNameFor(model => model.AddressPhone) })
+                    @Html.ValidationMessageFor(model => model.AddressPhone)
+                </div>
+                                        
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.AddressProvince,new {placeholder=Html.DisplayNameFor(model => model.AddressProvince) })
+                    @Html.ValidationMessageFor(model => model.AddressProvince)
+                </div>
+                
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.AddressCity,new {placeholder=Html.DisplayNameFor(model => model.AddressCity)} )
+                    @Html.ValidationMessageFor(model => model.AddressCity)
+                </div>
+
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.AddressCounty,new {placeholder=Html.DisplayNameFor(model => model.AddressCounty)} )
+                    @Html.ValidationMessageFor(model => model.AddressCounty)
+                </div>
+
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.AddressCode, new { placeholder = Html.DisplayNameFor(model => model.AddressCode) })
+                    @Html.ValidationMessageFor(model => model.AddressCode)
+                </div>
+
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.AddressDetail, new { placeholder = Html.DisplayNameFor(model => model.AddressDetail)})
+                    @Html.ValidationMessageFor(model => model.AddressDetail)
+                </div>
+
+               
+
+
+                @Html.Hidden("MemberId",Session["MemberId"])
+                @*Html.HiddenFor(model => model.MemberId /*Session["MemberId"]*/)*@
+               
+
+                  <p style="text-align:left;width:100%;margin-top:10px;">
+                    <input type="submit" value="保　存" class="btn btn-primary" />&nbsp;&nbsp;&nbsp;
+                    <input type="reset" value="重　置" class="btn btn-primary" />
+                </p>
+            </div>
+        }
+    </div>
+
+    <div style="clear:both"></div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/web/other.js")
+    
+
+
+}

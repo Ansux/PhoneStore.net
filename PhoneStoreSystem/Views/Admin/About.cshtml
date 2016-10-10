@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "关于我们";
+}
+
+
+
+
+<hgroup class="title">
+    <h3>本系统用于对商城的信息管理，实现了各种管理功能，具体请点击右侧栏目。</h3>
+</hgroup>
+
+<article style="line-height:40px">
+   
+</article>
+
+<h4> ← 点击右侧的栏目，开始使用系统。</h4>
+
+<br />
+<hgroup class="title" style="color:#4ebaf5">
+    <h3>开发人员：　赵志康　　刘义海　　黄艳金</h3>
+</hgroup>
+
+<hgroup class="title" style="color:green">
+    <h3></h3>
+</hgroup>
+
+<hgroup class="title" style="color:green">
+    <h3></h3>
+</hgroup>
+
+@section scripts {
+   <script>
+       jQuery(function ($) {
+           $("#about").addClass("selected");
+           $("#main_container").fadeIn("slow");
+       });
+
+   </script>
+}

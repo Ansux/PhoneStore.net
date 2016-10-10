@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "数据备份还原";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm()) {
+
+    <fieldset class="create_edit_div">
+    <legend>备份还原</legend>
+    <span style="color:red">@ViewBag.dataMessage</span>
+    <div class="editor-label">
+        操作
+    </div>
+    <div class="editor-field">
+        @Html.RadioButton("dataRadio", "backup", true) 数据备份
+        <br />
+          <br />
+        <span style="color:green">*还原数据，需要选择还原的bat文件!</span><br />
+        @Html.RadioButton("dataRadio", "restore", false) 数据还原
+         @Html.TextBox("fileTxt", "",new { type="file"})
+        
+    </div>
+
+  
+
+    <p style="text-align:center;width:100%">
+        <!--<input type="button" name="btnUpdate" value="创建" id="btnUpdate" />-->
+        <input type="submit" value="提 交" class="btn" />&nbsp;&nbsp;
+    </p>
+</fieldset>
+}
+
+@section scripts {
+   <script>
+       jQuery(function ($) {
+           $('input[type=submit]').click(function () {
+               $("#load_div").fadeIn(0);
+           });
+           $("#backupRestore").addClass("selected");
+           $("#main_container").fadeIn("slow");
+       });
+
+   </script>
+}

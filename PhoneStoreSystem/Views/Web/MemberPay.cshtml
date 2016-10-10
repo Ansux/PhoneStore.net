@@ -1,0 +1,336 @@
+﻿@model PhoneStoreSystem.Models.Payment
+@{
+    ViewBag.Title = "支付通";
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+@section css {
+    @Styles.Render("~/Content/web/MemberPay.css")
+    @Styles.Render("~/Content/web/_MemberCenterStyle.css")
+}
+<div class="inner">
+    <!-- 当再次点击同一件物品加入购物车时，进行判断，然后数量+1 -->
+    <div class="Nav">
+        <a href="/Web/index" title="首页">首页</a>
+        &gt;          
+        <a href="/Web/MemberCenter" title="我的商城">我的商城</a>
+        &gt;
+        <span>我的支付通</span>
+    </div>
+
+    <div class="leftCenterDIV">
+        @Html.Action("_MemberCenterPartial", "WebPartial")       
+    </div>
+
+    
+    <div class="rightCenterDIV">
+        <h1 class="box-title">我的支付通</h1>    
+        
+        @if (Model == null)
+        {
+            <div class="NoPay">
+                <h2 class="title">您尚未开通支付通账户</h2>
+                <p class="description">使用支付通账户会让您在本网站购物、支付更加便捷。</p>
+                <div class="action">
+                    <a class="btn btn-primary" href="/Web/MemberPayRegister">免费安全开通</a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="payContent">
+                <div class="cash-overall">
+                    <div class="balance">
+                        <span class="type">余额：<b>@Model.PaymentBalance</b>元</span>
+                      
+                       
+                        <a href="javascript:;" class="btn btn-primary" id="J_Recharge">充值</a>
+                        
+                        <a href="javascript:;" id="J_EditPwd">修改支付密码</a>
+                        <a href="/Web/MemberEditPay/@Model.PaymentId">修改账户信息</a>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+
+                <div id="payList">
+                    <span class="title">消费记录</span>
+
+                    
+
+                    <table class="cash-change-list" id="List">                       
+                        <tr>  
+                            <th style="width:40%;">消费名称</th>
+                            <th style="width:30%;">金额</th>                            
+                            <th style="width:30%;">消费日期</th>                               
+                        </tr>
+                        
+                                              
+                    </table>
+
+                    <div id="Pagination" class="right quotes" style="display:none"></div>
+
+                    <link href="~/Content/pagination.css" rel="stylesheet" type="text/css" />
+
+                   
+                </div>
+            </div>
+            
+            <div id="RechargeDiv" class="OpenDiv">
+                <div class="editor-label">
+                    天地银行卡号：@Html.Label("BankId", Model.PaymentBankCard)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBox("RechargePrice", null, new { placeholder = "充值金额（100-10000元）" })       
+                </div>
+
+                <div class="editor-field">
+                    @Html.Password("PassWord", null, new { placeholder = "交易密码" })
+                </div>
+                <p style="text-align:left;width:100%;margin-top:20px;">
+                    <input type="button" value="保　存" class="btn btn-primary" id="J_SubmitRecharge"/>&nbsp;&nbsp;&nbsp;
+                    <input type="button" value="取　消" class="btn btn-line-gray" id="J_CancelRecharge"/>
+                </p>
+            </div>
+
+            <div id="EditPwdDiv" class="OpenDiv">
+            
+                <div class="editor-field">
+                    @Html.Password("OldPassWord", null, new { placeholder = "原始支付密码（初始密码:123456）" })
+                </div>
+
+                <div class="editor-field">
+                    @Html.Password("NewPassWord", null, new { placeholder = "最新支付密码（6位数支付密码）" })
+                </div>
+
+                <div class="editor-field">
+                    @Html.Password("ConfirmPassword", null, new { placeholder = "确认支付密码（6位数支付密码）" })
+                </div>
+
+                <p style="text-align:left;width:100%;margin-top:20px;">
+                    <input type="button" value="修　改" class="btn btn-primary" id="J_SubmitEditPwd"/>&nbsp;&nbsp;&nbsp;
+                    <input type="button" value="取　消" class="btn btn-line-gray" id="J_CancelEditPwd"/>
+                </p>
+            </div>
+        }
+        <div style="clear:both"></div>
+
+    </div>
+
+    <div style="clear:both"></div>
+
+</div>
+
+
+
+
+@section scripts{
+    @Scripts.Render("~/Scripts/web/other.js")
+    @Scripts.Render("~/Scripts/jquery.pagination.js")
+    <script src="~/Scripts/layer-v2.1/layer/layer.js"></script>
+
+    <script>
+        jQuery(function ($) {
+            var isHavePayment =@(ViewBag.IsHavePayment) +"";
+
+            if (isHavePayment != 0) {
+                var lodding = layer.load(0, { shade: [0.1, '#000'] });
+
+                var listCount = @(ViewBag.listCount) +"";
+                var pageIndex = @(ViewBag.pageIndex) +"";
+
+                setTimeout(function () { InitTable(pageIndex); }, 300)
+
+            }
+            var pageSize = 10; //每页显示多少条信息
+            
+
+            //Load事件，初始化表格数据，页面索引为0（第一页）
+            //分页，PageCount是总条目数，这是必选参数，其它参数都是可选
+            $("#Pagination").pagination(listCount, {
+                callback: PageCallback,  //PageCallback() 为翻页调用次函数。
+                prev_text: "« 上一页",
+                next_text: "下一页 »",
+                items_per_page: pageSize,
+                num_edge_entries: 2,       //两侧首尾分页条目数
+                num_display_entries: 6,    //连续分页主体部分分页条目数
+                current_page: pageIndex   //当前页索引
+            });
+            //翻页调用   
+            function PageCallback(index, jq) {
+                InitTable(index);
+            }
+            //请求数据   
+            function InitTable(index) {                           
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "text",
+                    url: '/Web/GetPageListToPaylog',      //提交到一般处理程序请求数据   
+                    data: "pageIndex=" + index + "&pageSize=" + pageSize + "&payMentId=@ViewBag.PayMentId"  ,           //提交两个参数：pageIndex(页面索引)，pageSize(显示条数)                   
+                    success: function (data) {
+                        var str = "";
+
+                        $.each(eval(data), function (index, item) {
+                            
+                            var time = eval('new ' + (item.PaymentLogTime.replace(/\//g, '')));
+                            time = time.getFullYear() + "-" + (time.getMonth() + 1) + "-" + time.getDate() + " " + time.getHours() + ":" + time.getMinutes();
+                            
+                            str += "<tr><td>" + item.PaymentLogName +
+                                    "</td><td>" + item.PaymentLogPrice +
+                                    "</td><td>" + time +
+                                    "</td></tr>";
+                            $("#Pagination").show();
+                        });
+                        if (str == "") {
+                            str = "<tr><td colspan='3'>没有记录可以显示！</td></tr>";                          
+                        }
+                        $("#List tr:gt(0)").remove();
+                        $("#List").append(str);
+
+                        layer.close(lodding);
+                       
+                    },
+                    error: function (msg) {
+                        console.log(msg);
+                        str = "<tr><td colspan='3'>请求数据失败，请刷新！</td></tr>";
+
+                        $("#List tr:gt(0)").remove();
+                        $("#List").append(str);
+                        layer.close(lodding);
+                    }
+                });             
+            }
+
+
+            var RechargeDiv;
+            $("#J_Recharge").click(function () {
+                RechargeDiv=layer.open({
+                    type:1,
+                    title:'账户充值',
+                    closeBtn :0,
+                    area: ['360px', '260px'],
+                    content: $("#RechargeDiv").show()
+                })
+            });
+            $("#J_SubmitRecharge").click(function () {
+
+                var memberId =@Session["MemberId"] +"";
+                if (memberId == 0) {
+                    layer.alert("请登录！\(^o^)/", { icon: 7, closeBtn: 0, btn: ["前往登录", "取消"] }, function () {
+                        window.location.href = "/Web/MemberLogin";
+                    });
+                    return;
+                }
+
+                var payPrice = $("#RechargeDiv #RechargePrice").val();                             
+                var payPwd = $("#RechargeDiv #PassWord").val();
+
+                layer.confirm('你确定要充值吗？', {
+                    btn: ['确定', '再想想'], //按钮
+                    icon: 3,
+                    closeBtn:0
+                }, function (index) {
+                    var loadding = layer.load(0, { shade: [0.1, '#000'] });
+
+                    $.ajax({
+                        type: "Post",
+                        dataType: "text",
+                        url: '/WebPublic/SubmitRecharge',     //提交到一般处理程序请求数据   
+                        data: "payMentId=@ViewBag.PayMentId" + "&payPrice=" + payPrice + "&payPwd=" + payPwd,           //提交参数              
+                        success: function (data) {
+                            layer.close(loadding);
+                            if (data == "True")
+                                layer.alert("充值成功！\(^o^)/", { icon: 6 },
+                                    function () {
+                                        window.location.reload();
+                                    }
+                                );
+                            else {
+                                layer.alert(data, { icon: 5 });
+                            }
+                        },
+                        error: function (msg) {
+                            layer.close(loadding);
+                            layer.alert('系统错误，咋回事？', { icon: 5 });
+                        }
+                    });
+                });
+            });
+            $("#J_CancelRecharge").click(function () {
+                layer.close(RechargeDiv);
+            });
+            
+
+
+            var EditPwdDiv;
+            $("#J_EditPwd").click(function () {
+                EditPwdDiv = layer.open({
+                    type: 1,
+                    title: '修改支付密码',
+                    closeBtn: 0,
+                    area: ['360px', '290px'],
+                    content: $("#EditPwdDiv").show()
+                })
+            });
+            $("#J_SubmitEditPwd").click(function () {
+
+                var memberId =@Session["MemberId"] +"";
+                if (memberId == 0) {
+                    layer.alert("请登录！\(^o^)/", { icon: 7, closeBtn: 0, btn: ["前往登录", "取消"] }, function () {
+                        window.location.href = "/Web/MemberLogin";
+                    });
+                    return;
+                }
+
+                var oldPwd = $("#EditPwdDiv #OldPassWord").val();
+                var newPwd = $("#EditPwdDiv #NewPassWord").val();
+                var ConfirmPwd = $("#EditPwdDiv #ConfirmPassword").val();
+                
+                if (oldPwd.length != 6 || newPwd.length != 6) {
+                    layer.alert("请输入6位数的密码！", { icon: 7 });
+                    return false;
+                }
+
+                if (newPwd != ConfirmPwd) {
+                    layer.msg("新密码与确认密码不一致！", { icon: 7 });
+                    return false;
+                }
+                
+                layer.confirm('你确定要修改密码吗？', {
+                    btn: ['确定', '再想想'], //按钮
+                    icon: 3,
+                    closeBtn: 0
+                }, function (index) {
+                    var loadding = layer.load(0, { shade: [0.1, '#000'] });
+
+                    $.ajax({
+                        type: "Post",
+                        dataType: "text",
+                        url: '/WebPublic/EditPayPwd',     //提交到一般处理程序请求数据   
+                        data: "payMentId=@ViewBag.PayMentId" + "&oldPwd=" + oldPwd + "&newPwd=" + newPwd,           //提交参数              
+                        success: function (data) {
+                            layer.close(loadding);
+                            if (data == "True")
+                                layer.alert("修改成功！\(^o^)/", { icon: 6 },
+                                    function () {
+                                        window.location.reload();
+                                    }
+                                );
+                            else {
+                                layer.alert(data, { icon: 5 });
+                            }
+                        },
+                        error: function (msg) {
+                            layer.close(loadding);
+                            layer.alert('系统错误，咋回事？', { icon: 5 });
+                        }
+                    });
+                });
+            });
+            $("#J_CancelEditPwd").click(function () {
+                layer.close(EditPwdDiv);
+            });
+            
+        });
+    </script>
+
+}

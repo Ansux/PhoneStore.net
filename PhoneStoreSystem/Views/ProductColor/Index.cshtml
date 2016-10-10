@@ -1,0 +1,54 @@
+﻿@model IEnumerable<PhoneStoreSystem.Models.ProductColor>
+
+@{
+    ViewBag.Title = "产品颜色管理";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<span class="createLink">@Html.ActionLink("添加颜色", "Create")</span>
+
+
+<table class="table_div" style="width:400px;text-align:center">
+    <tr>
+        <th style="width:20%;">
+            @Html.DisplayNameFor(model=>model.ColorId)
+        </th>
+        <th style="width:55%;">
+            @Html.DisplayNameFor(model => model.ColorName)
+        </th>
+        <th style="width:25%;"></th>
+    </tr>
+@if (Model.Count() == 0) { 
+    <tr>
+        <td colspan="3">暂无数据，请添加！</td>
+    </tr>
+}else{
+    foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ColorId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ColorName)
+            </td>
+            <td>
+                @Html.ActionLink("编辑颜色", "Edit", new { id=item.ColorId })
+            </td>
+        </tr>
+    }
+}
+</table>
+
+
+
+@section scripts {
+   <script>
+       jQuery(function ($) {
+           $("#proColor").addClass("selected");
+           $("#main_container").fadeIn("slow");
+       });
+
+
+   </script>
+}

@@ -1,0 +1,141 @@
+﻿.leftCenterDIV .MyInfo {
+    background-color: #e63547;
+    color: #fff;
+}
+
+.rightCenterDIV .box-title {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 68px;
+    color: #757575;
+}
+
+.rightCenterDIV .infoDiv{
+    background: #fff;
+    padding: 34px 30px 0px 30px;
+}
+.rightCenterDIV .main_left{
+    float: left;
+    width: 112px;
+    text-align:center;
+}
+.rightCenterDIV .infoImgBox{
+  width: 100px;
+  height: 100px;
+  border: 2px solid #e3e3e3;
+  border-radius: 50%;
+  padding: 4px;
+  background: #fff;
+  position: relative;
+  z-index: 4;
+}
+.infoImgBox img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.main_left .imgLink {
+    padding-top: 10px;
+}
+.main_left .imgLink a {
+    color:#e63547;    
+}
+.main_left .imgLink a:hover {
+    color:#ff6a00;    
+}
+
+.main_right {
+    float: left;
+    height:auto;
+    width:650px;
+    padding-left:50px;
+    position:relative;
+}
+.main_right .userName {
+    font-size:20px;
+    color:#e63547;
+}
+.main_right .btn {
+    width:100px !important;
+    height:25px !important;
+    font-size:14px !important;
+    line-height:25px !important;
+    margin-top:5px;
+    position:absolute;
+    right:10px;
+}
+.main_right ul {
+    margin:0px;
+    padding:0px;
+}
+.main_right li {
+    width:100%;
+    border-bottom:1px dashed #e3e3e3;
+    overflow:hidden;
+    height:30px;
+    padding:10px 0px;
+}
+.main_right li span.name {
+    font-size:16px;
+    color:#999;  
+    padding:10px 0px;  
+}
+.main_right li span.value {
+    font-size:16px;
+    color:#666;  
+}
+
+
+.photoDiv {
+    width:360px !important;
+
+    text-align:center;
+}
+.create_edit_div {
+    width:100%;
+    border-radius:5px;    
+    padding:10px 0px;
+}
+.create_edit_div legend {
+    font-size:20px;
+    color:#e63547;
+    font-weight:bold;
+}
+.create_edit_div .btn {
+    width: 150px !important;
+    height: 30px !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+    margin-left:0px !important;
+
+}
+/*help帮助器的类*/
+.create_edit_div .editor-label {
+    font-size:14px;
+    color:#666;
+}
+.create_edit_div .editor-field {
+    margin-top:0px;
+    margin-bottom:5px;
+    font-size:12px;
+    color:#000;
+    padding:2px 0px;
+    position: relative;
+}
+.create_edit_div .editor-field input {
+    height:25px;
+    width:300px;
+    padding:5px;
+}
+.create_edit_div .editor-field input[type='radio'] {
+    height:15px;
+    width:15px;
+    padding:0px;  
+}
+.create_edit_div .editor-field textarea {
+    height:40px;
+    width:300px;  
+    padding:5px;
+}

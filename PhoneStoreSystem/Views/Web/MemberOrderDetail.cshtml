@@ -1,0 +1,451 @@
+﻿@model PhoneStoreSystem.Models.Order
+@{
+    ViewBag.Title = "订单详情";
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+@section css {
+    @Styles.Render("~/Content/web/MemberOrderDetail.css")
+    @Styles.Render("~/Content/web/_MemberCenterStyle.css")
+}
+<div class="inner">
+    <!-- 当再次点击同一件物品加入购物车时，进行判断，然后数量+1 -->
+    <div class="Nav">
+        <a href="/Web/index" title="首页">首页</a>
+        &gt;          
+        <a href="/Web/MemberCenter" title="我的商城">我的商城</a>
+        &gt;
+        <a href="/Web/MemberOrder" title="我的购物车">我的订单</a>
+        &gt;
+        <span>订单详情</span>
+    </div>
+
+    <div class="leftCenterDIV">
+        @Html.Action("_MemberCenterPartial","WebPartial")       
+    </div>
+
+    
+    <div class="rightCenterDIV">
+        <h1 class="box-title">订单详情</h1>    
+        
+        <div class="OrderHead">
+            <div class="fl">
+                <span>订单号：@Model.OrderNumber</span>
+            </div>
+            <div class="fr">              
+                <a href="/Web/MemberOrder" class="btn btn-line-gray">返回上页</a>
+                @if (Model.OrderStatusId == 1)
+                {
+                    <a class="btn btn-line-gray J_CancelOrder" data-OrderId="@Model.OrderId" href="javascript:;" >取消订单</a> 
+                    
+                    using (Html.BeginForm("MemberPayOrder", "Web", FormMethod.Post, new { id = "submitCheckout", style = "display: inline;", target = "_blank" }))
+                    {
+                        @Html.AntiForgeryToken()
+                 
+                        @Html.Hidden("OrderIds", Model.OrderNumber + "；"); 
+                        <button type="submit" class="btn btn-primary" style="width:120px;height:30px;">立即支付</button>                                                                                                              
+                    }
+
+                }
+                else if (Model.OrderStatusId == 2)
+                {
+                    <a class="btn btn-line-gray J_CancelOrder" data-OrderId="@Model.OrderId" href="javascript:;">取消订单</a>    
+                }
+                else if (Model.OrderStatusId == 3)
+                {
+                    <a class="btn btn-primary J_ReceivingGoods" data-OrderId="@Model.OrderId" href="javascript:;">确认收货</a>    
+                }
+                else if (Model.OrderStatusId == 4)
+                {
+                    <a class="btn btn-primary J_ReturnGoods" data-OrderId="@Model.OrderId" href="javascript:;">申请退货</a>    
+                }
+                else if (Model.OrderStatusId == 5)
+                {
+                    <a class="btn  btn-primary" href="/Web/ProductDetail/@Model.ProId">继续购买</a> 
+                }
+                     
+            </div>
+            
+            <div style="clear:both"></div>
+        </div>
+
+        <div class="OrderDetail">
+            <div class="order-summary">
+                <div class="order-status">
+                    @Model.OrderStatus.OrderStatusIdName
+                </div>
+                <div class="order-desc">下单24小时未支付订单将被关闭，出货后7天自动确认收货，收货7天后不可退货</div>                
+            </div>
+
+            <div class="order-progress">
+                <ol class="progress-list">
+                    <li class="step step-first step-active">
+                        <div class="progress"><span class="text">下单</span></div>
+                        <div class="info">@DateTime.Parse(Model.OrderTime).ToString("yyyy-MM-dd HH:mm:ss")</div>
+                    </li>
+                    @if (Model.OrderPayTime == null)
+                    { 
+                        <li class="step">
+                            <div class="progress"><span class="text">付款</span></div>
+                            <div class="info"></div>
+                        </li>  
+                    }
+                    else
+                    {
+                        <li class="step step-first step-active">
+                            <div class="progress"><span class="text">付款</span></div>
+                            <div class="info">@DateTime.Parse(Model.OrderPayTime).ToString("yyyy-MM-dd HH:mm:ss")</div>
+                        </li>       
+                    }
+
+                    @if (Model.OrderSendTime == null)
+                    { 
+                         <li class="step">
+                             <div class="progress"><span class="text">出库</span></div>
+                            <div class="info"></div>
+                        </li>  
+                    }
+                    else
+                    {
+                        <li class="step step-first step-active">
+                            <div class="progress"><span class="text">出库</span></div>
+                            <div class="info">@DateTime.Parse(Model.OrderSendTime).ToString("yyyy-MM-dd HH:mm:ss")</div>
+                        </li>       
+                    }
+
+                     @if (Model.OrderSuccessTime == null)
+                     { 
+                         <li class="step">
+                             <div class="progress"><span class="text">交易成功</span></div>
+                            <div class="info"></div>
+                        </li>  
+                     }
+                     else
+                     {
+                        <li class="step step-first step-active">
+                            <div class="progress"><span class="text">交易成功</span></div>
+                            <div class="info">@DateTime.Parse(Model.OrderSuccessTime).ToString("yyyy-MM-dd HH:mm:ss")</div>
+                        </li>       
+                     }
+                                     
+                </ol>
+            </div>
+
+
+            <div class="order-goods">
+                <div class="title">
+                    <div class="fl"><span>商品信息</span></div>                   
+                    <div style="clear:both"></div>
+                </div>
+                <div class="info">
+                    <ul class="Ultitle">
+                        <li style="width:120px;text-align:center;">商品封面</li>
+                        <li style="width:500px">商品名称</li>
+                        <li style="width:200px">小计</li>
+                    </ul> 
+                    <ul>
+                        <li style="width:120px;text-align:center;"><img src="~/Images/web/productImg/@Model.OrderProCoverImage" width="80" height="80"/></li>
+                        <li style="width:500px">@Model.OrderProName @Model.ColorName</li>
+                        <li style="width:200px">@Model.OrderPrice × @Model.OrderCount</li>
+                    </ul>  
+                     <div style="clear:both"></div> 
+                </div>
+            </div>
+            
+            <div class="order-address">
+                <div class="title">
+                    <div class="fl"><span>收货信息</span></div>
+                    @if (Model.OrderStatusId == 1 || Model.OrderStatusId == 2)
+                    {                        
+                        <div class="fr"><a href="javascript:;" class="btn btn-line-gray" id="J_EditAddress">修改地址</a></div>
+                        
+                    }
+                   
+                    <div style="clear:both"></div>
+                </div>
+                <div class="info">
+                    <ul>
+                        @{ string[] detail = Model.AddressDetails.ToString().Split(' ');
+                           string name = detail[0];
+                           string phone = detail[1];
+                           string dz = Model.AddressDetails.ToString().Replace(name, "").Replace(phone, "");
+                            }
+                        <li>
+                            姓　　名：
+                            <span class="val">@name </span>
+                        </li>
+                        <li>
+                            联系电话：
+                            <span class="val">@phone</span>
+                        </li>
+                        <li>
+                            收货地址：
+                            <span class="val">@dz</span>
+                        </li>
+                    
+                    </ul>
+
+                    <div id="EditAddressDiv" class="OpenDiv">
+                        <div class="editor-field">
+                            @Html.TextBox("AddressName", name, new { placeholder = "姓　　名" })                               
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBox("AddressPhone", phone, new { placeholder = "手机号码" })       
+                        </div>
+
+                        <div class="editor-field">
+                            @Html.TextArea("AddressDetail", dz.Trim(), new { placeholder = "详细地址" })
+                        </div>
+
+                        <p style="text-align:left;width:100%;margin-top:20px;">
+                            <input type="button" value="保　存" class="btn btn-primary" id="J_SubmitEditAddress"/>&nbsp;&nbsp;&nbsp;
+                            <input type="button" value="取　消" class="btn btn-line-gray" id="J_CancelEditAddress"/>
+                        </p>
+                    </div>
+                </div>
+                 <div style="clear:both"></div> 
+            </div>
+
+
+            
+            <div class="goodsCountDiv">
+                <span class="name">商品总数：</span><span class="value">@Model.OrderCount 件</span> <br />
+                <span class="name">金额合计：</span><span class="value">@(Model.OrderCount * Model.OrderPrice) 元</span><br />
+                <span class="name">运费：</span><span class="value">0元</span><br />
+                <span class="name">实付金额：</span><span class="value price">@(Model.OrderCount * Model.OrderPrice) 元</span><br />
+            </div>
+            
+
+           
+            <div style="clear:both"></div>
+        </div>
+
+        
+        <div style="clear:both"></div>
+    </div>
+
+    <div style="clear:both"></div>
+</div>
+
+
+
+
+@section scripts{
+    @Scripts.Render("~/Scripts/web/other.js")
+    <script src="~/Scripts/layer-v2.1/layer/layer.js"></script>
+
+    <script>        
+        $(".J_CancelOrder").click(function () {
+
+            var memberId =@Session["MemberId"] +"";
+            if (memberId == 0) {
+                layer.alert("请登录！\(^o^)/", { icon: 7, closeBtn: 0, btn: ["前往登录", "取消"] }, function () {
+                    window.location.href = "/Web/MemberLogin";
+                });
+                return;
+            }
+
+            //data - OrderId
+            var orderId = $(this).attr("data-OrderId");
+            layer.confirm('你确定要取消订单吗？', {
+                btn: ['确定', '取消'], //按钮
+                icon: 3
+            }, function (index) {
+
+                layer.close(index);
+                var loadding = layer.load(0, { shade: [0.1, '#000'] });
+
+                $.ajax({
+                    type: "Post",
+                    dataType: "text",
+                    url: '/WebPublic/CancelOrder',     //提交到一般处理程序请求数据   
+                    data: "orderId=" + orderId,           //提交参数              
+                    success: function (data) {
+                        layer.close(loadding);
+                        if (data == "True")
+                            layer.alert("取消订单成功！", { icon: 6 },
+                                function () {
+
+                                    window.location.reload();
+                                }
+                            );
+
+                        else {
+                            layer.alert(data, { icon: 5 });
+                        }
+                    },
+                    error: function (msg) {
+                        layer.close(loadding);
+                        layer.alert('系统错误，咋回事？', { icon: 5 });
+                    }
+                });
+
+            }, function () {
+
+            });
+        })
+
+        $(".J_ReceivingGoods").click(function () {
+
+            var memberId =@Session["MemberId"] +"";
+            if (memberId == 0) {
+                layer.alert("请登录！\(^o^)/", { icon: 7, closeBtn: 0, btn: ["前往登录", "取消"] }, function () {
+                    window.location.href = "/Web/MemberLogin";
+                });
+                return;
+            }
+
+
+            var orderId = $(this).attr("data-OrderId");
+
+            layer.confirm('你确定要确认收货吗？', {
+                btn: ['确定', '取消'], //按钮
+                icon: 3
+            }, function (index) {
+
+                layer.close(index);
+                var loadding = layer.load(0, { shade: [0.1, '#000'] });
+
+                $.ajax({
+                    type: "Post",
+                    dataType: "text",
+                    url: '/WebPublic/ReceivingGoods',     //提交到一般处理程序请求数据   
+                    data: "orderId=" + orderId,           //提交参数              
+                    success: function (data) {
+                        layer.close(loadding);
+                        if (data == "True")
+                            layer.alert("确认收货成功！", { icon: 6 },
+                                function () {
+                                    window.location.reload();
+                                }
+                            );
+                        else {
+                            layer.alert(data, { icon: 5 });
+                        }
+                    },
+                    error: function (msg) {
+                        layer.close(loadding);
+                        layer.alert('系统错误，咋回事？', { icon: 5 });
+                    }
+                });
+
+            }, function () {
+
+            });
+        })
+
+        $(".J_ReturnGoods").click(function () {
+
+            var memberId =@Session["MemberId"] +"";
+            if (memberId == 0) {
+                layer.alert("请登录！\(^o^)/", { icon: 7, closeBtn: 0, btn: ["前往登录", "取消"] }, function () {
+                    window.location.href = "/Web/MemberLogin";
+                });
+                return;
+            }
+
+            var orderId = $(this).attr("data-OrderId");
+
+            layer.confirm('你确定要申请退货吗？', {
+                btn: ['确定', '取消'], //按钮
+                icon: 3
+            }, function (index) {
+
+                layer.close(index);
+                var loadding = layer.load(0, { shade: [0.1, '#000'] });
+
+                $.ajax({
+                    type: "Post",
+                    dataType: "text",
+                    url: '/WebPublic/ReturnGoods',     //提交到一般处理程序请求数据   
+                    data: "orderId=" + orderId,           //提交参数              
+                    success: function (data) {
+                        layer.close(loadding);
+                        if (data == "True")
+                            layer.alert("申请退货成功！", { icon: 6 },
+                                function () {
+                                    window.location.reload();
+                                }
+                            );
+                        else {
+                            layer.alert(data, { icon: 5 });
+                        }
+                    },
+                    error: function (msg) {
+                        layer.close(loadding);
+                        layer.alert('系统错误，咋回事？', { icon: 5 });
+                    }
+                });
+
+            }, function () {
+
+            });
+        })
+
+
+        
+        var EditAddressDiv;
+        $("#J_EditAddress").click(function () {
+            EditAddressDiv = layer.open({
+                type: 1,
+                title: '修改地址',
+                closeBtn: 0,
+                area: ['360px', '310px'],
+                content: $("#EditAddressDiv").show()
+            })
+        });
+        $("#J_SubmitEditAddress").click(function () {
+
+            var memberId =@Session["MemberId"] +"";
+                if (memberId == 0) {
+                    layer.alert("请登录！\(^o^)/", { icon: 7, closeBtn: 0, btn: ["前往登录", "取消"] }, function () {
+                        window.location.href = "/Web/MemberLogin";
+                    });
+                    return;
+                }
+                
+                var addressName = $("#EditAddressDiv #AddressName").val().trim();
+                var addressPhone = $("#EditAddressDiv #AddressPhone").val().trim();
+                var addressDetail = $("#EditAddressDiv #AddressDetail").val().trim();
+                
+                if ((addressName == "" || addressPhone == "" )|| addressDetail == "") {
+                    layer.alert("请填写完整信息！", { icon: 5 });
+                    return false;
+                }
+
+                layer.confirm('你确定要修改吗？', {
+                    btn: ['确定', '再想想'], //按钮
+                    icon: 3,
+                    closeBtn: 0
+                }, function (index) {
+                    var loadding = layer.load(0, { shade: [0.1, '#000'] });
+
+                    $.ajax({
+                        type: "Post",
+                        dataType: "text",
+                        url: '/WebPublic/OrderEditAddress',     //提交到一般处理程序请求数据   
+                        data: "OrderId=@Model.OrderId" + "&addressName=" + addressName + "&addressPhone=" + addressPhone + "&addressDetail=" + addressDetail,           //提交参数              
+                        success: function (data) {
+                            layer.close(loadding);
+                            if (data == "True")
+                                layer.alert("修改成功了！\(^o^)/", { icon: 6 },
+                                    function () {
+                                        window.location.reload();
+                                    }
+                                );
+                            else {
+                                layer.alert(data, { icon: 5 });
+                            }
+                        },
+                        error: function (msg) {
+                            layer.close(loadding);
+                            layer.alert('系统错误，咋回事？', { icon: 5 });
+                        }
+                    });
+                });
+            });
+        $("#J_CancelEditAddress").click(function () {
+            layer.close(EditAddressDiv);
+        });
+    </script>
+
+}

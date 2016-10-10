@@ -1,0 +1,183 @@
+﻿body {
+    background-color:#F0F0F0;
+}
+
+.Nav {
+    margin-top:10px;
+    color:#333;
+    font-family:"Arial,Helvetica,sans-serif";
+}
+.Nav a {
+    color:#666;
+}
+
+.Filter {
+    background-color:#fff;
+    float:left;
+    width:1198px;
+    margin:10px 0px;
+    box-shadow:0 0 20px #ccc;
+    border-radius:5px;
+}
+.Filter .rowDiv {
+    border-bottom:1px dashed #eee;
+    padding:10px;
+    height:auto;
+}
+.Filter .rowDiv:last-child {
+    border-bottom:none;
+}
+.Filter .rowDiv .title {
+    float:left;
+    width:8%;
+    text-align:right;
+    color:#000;
+}
+.Filter .rowDiv ul {
+    width:90%;
+    margin:0px;
+    padding:0px;
+    float:left;
+}
+.Filter .rowDiv ul li{
+    margin:0px;
+    float:left;
+    padding:0px 10px 0px 10px;
+}
+.Filter .rowDiv li a {
+    color:#999;
+}
+.Filter .rowDiv li a.currentLink{
+    color:#e01d20;  
+}
+.Filter .rowDiv li a:hover {
+    color:#e01d20;
+   
+}
+
+
+.ProductList  {
+    height:auto;
+    width:1220px;
+    min-height:270px;
+    position:relative; 
+    float: left;
+    
+}
+.ProductList  .productUl {
+    margin:0px;       
+    padding:10px 0px 0px 0px;        
+    float: left;
+}
+.ProductList .productUl  li{
+    text-align:center;
+    float:left;
+    width:220px;
+    height:300px;
+    background-color:#fff;
+    margin:0px 22px 20px 0px;   
+    border:1px solid #eee;
+    overflow:hidden;
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+.ProductList .productUl li:hover {
+    box-shadow:0px 15px 20px rgba(0, 0, 0, 0.1);
+    transform:translate3d(0,-2px,0);
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+.ProductList .productUl a.img {
+    width:160px;
+    height:160px;
+    margin-top:20px;
+    margin-left:30px;
+    font-size: 0px;        
+    display: block;     
+    font-size: 0px;
+    /*background-color:#efefef;*/
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}       
+
+.ProductList .productUl a.title {
+    color:#222;       
+    display: block;   
+    font-size:14px;
+    height:20px;
+    line-height:20px;
+    margin:5px 10px; 
+    overflow: hidden;
+}
+.ProductList .productUl .intro {
+    color:#999;       
+    display: block;   
+    font-size:12px;
+    height:20px;
+    line-height:20px;
+    margin:5px 10px; 
+    overflow: hidden;
+}
+.ProductList .productUl .price {
+    color:#ff6a00;
+    display: block;   
+    font-size:14px;
+    height:20px;
+    line-height:20px;  
+    margin:0px 10px 10px 10px; 
+    overflow: hidden;
+}
+.ProductList .productUl .cart {
+    padding:5px 30px;
+    background-color:#e63547;
+    color:#fff;
+    transition:background-color 0.3s;
+}
+.ProductList .productUl .cart:hover {    
+    background-color:#ff6a00;
+    
+}
+
+
+.flip {
+    width:1200px;
+    
+    margin:10px 0px;
+    padding:10px 0px; 
+}
+.flip .flipPaging {
+	padding: 0px;
+	margin: 0px;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+}
+.flipPaging span{
+	font-family: Tahoma, Verdana;
+    margin:0px 5px;
+    padding:2px 8px;
+	}
+.flipPaging  span.current {
+    border: #e63547 1px solid; 
+    font-weight: bold; 
+    color: #fff;
+    margin:0px;
+    background-color: #e63547 ;
+}
+.flipPaging  span.disabled {
+    border: #d5d5d5 1px solid;      
+    color: #999;  
+    text-decoration: none;
+}
+.flipPaging a {
+    border: #d5d5d5 1px solid;
+    padding:2px 8px; 
+    color: #e63547;
+    margin:0px 5px;
+    text-decoration: none;
+}
+.flipPaging a:hover {
+    border-color:#CB1717;
+    background-color:#F7D2D5;
+}

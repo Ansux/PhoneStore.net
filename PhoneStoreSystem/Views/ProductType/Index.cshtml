@@ -1,0 +1,54 @@
+﻿@model IEnumerable<PhoneStoreSystem.Models.ProductType>
+
+@{
+    ViewBag.Title = "产品分类管理";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<span class="createLink">@Html.ActionLink("添加分类", "Create")</span>
+
+
+<table class="table_div" style="width:400px;text-align:center;" >
+    <tr>
+        <th style="width:15%;">
+            @Html.DisplayNameFor(model => model.TypeId)
+        </th>
+        <th style="width:50%;">
+            @Html.DisplayNameFor(model => model.TypeName)
+        </th>
+        <th style="width:35%"></th>
+    </tr>
+@if (Model.Count() == 0) { 
+    <tr>
+        <td colspan="3">暂无数据，请添加！</td>
+    </tr>
+}else{
+    foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeName)
+            </td>
+            <td>
+                @Html.ActionLink("编辑分类", "Edit", new { id=item.TypeId })
+            </td>
+        </tr>
+    }
+}
+</table>
+
+
+
+@section scripts {
+   <script>
+       jQuery(function ($) {
+           $("#proType").addClass("selected");
+           $("#main_container").fadeIn("slow");
+       });
+
+
+   </script>
+}

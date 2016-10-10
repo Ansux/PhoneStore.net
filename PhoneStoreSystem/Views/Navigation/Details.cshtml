@@ -1,0 +1,42 @@
+﻿@model PhoneStoreSystem.Models.Navigation
+
+@{
+    ViewBag.Title = "详细菜单";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<p>
+    <span class="createLink">@Html.ActionLink("编 辑", "Edit", new { id=Model.NavId })</span>
+       
+    &nbsp;&nbsp;
+    <span class="createLink">@Html.ActionLink("返回上一页", "Index")</span>
+</p>
+
+<fieldset class="create_edit_div">
+    <legend>导航菜单</legend>
+    <div class="display-label">
+         @Html.LabelFor(model => model.NavName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NavName)
+    </div>
+
+    <div class="display-label">
+         @Html.LabelFor(model => model.NavUrl)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NavUrl)
+    </div>
+</fieldset>
+
+
+@section scripts {
+    
+   <script>
+       jQuery(function ($) {
+           $("#navSet").addClass("selected");
+           $("#main_container").fadeIn("slow");
+       });
+   </script>
+}

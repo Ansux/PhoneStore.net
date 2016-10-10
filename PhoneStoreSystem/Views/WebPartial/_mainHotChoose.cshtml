@@ -1,0 +1,31 @@
+﻿@model IEnumerable<PhoneStoreSystem.Models.ProductInfo>
+
+<ol>  
+    @foreach (var proInfo in Model) { 
+       <li>
+            <a class="lazyImg_wfScroll" href="/Web/ProductDetail/@proInfo.ProId"  data-img-type="/Images/web/productImg/@proInfo.ProCoverImage"> 
+
+            </a>
+                   
+            @Html.ActionLink(proInfo.ProName, "ProductDetail", "Web", new { id = proInfo.ProId }, new { @class="titleName", title=proInfo.ProName})
+                  
+            <span class="intro">@proInfo.ProFeature</span>
+            <span class="price">@proInfo.ProPrice 元</span>
+        </li>      
+    }   
+
+    <!--重复--> 
+    @foreach (var proInfo in Model) { 
+       <li>
+            <a class="lazyImg_wfScroll" href="/Web/ProductDetail/@proInfo.ProId"  data-img-type="/Images/web/productImg/@proInfo.ProCoverImage"> 
+
+            </a>
+                   
+            @Html.ActionLink(proInfo.ProName, "ProductDetail", "Web", new { id = proInfo.ProId }, new { @class="titleName", title=proInfo.ProName})
+                  
+            <span class="intro">@proInfo.ProFeature</span>
+            <span class="price">@proInfo.ProPrice 元</span>
+        </li>      
+    } 
+                
+</ol>

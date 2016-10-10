@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="description" content="小怪兽手机商城" />
+        <meta name="keywords" content="小怪兽手机商城" />
+        <title>@ViewBag.Title - 小怪兽手机商城</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/web/css")
+        @Scripts.Render("~/bundles/modernizr")
+        
+        @RenderSection("css", required: false)
+
+
+        <!--[if IE]>
+         @Scripts.Render("~/Scripts/admin/html5.js")	
+	    <![endif]-->
+    </head>
+    <body>
+        <header>
+            <div class="shortcut">
+                <div class="inner">
+                    <span class="shortcut_left">小怪兽手机商城-ZZK.com</span>
+                    <ul class="shortcut_right">
+                        <li>
+                            @if (Session["MemberId"] == null)
+                            {
+                                <a href="/Web/MemberLogin" >登录</a>
+                                <span>&nbsp; &nbsp;</span>
+                                <a href="/Web/MemberRegister">注册</a>
+                            }
+                            else
+                            {
+                                <a href="/Web/MemberCenter" >@Session["MemberName"]</a>
+                                <span>&nbsp; &nbsp;</span>
+                                
+                                using (Html.BeginForm("LogOff", "Web", FormMethod.Post, new { id = "logoutForm",style="display: inline;"}))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <a href="javascript:document.getElementById('logoutForm').submit()">注销</a>
+                                }
+                            }
+                        </li>
+                        <li><span style="color:#8c8c8c;">|</span></li>
+                        <li><a href="#" onclick="SetHome(this,window.location,&quot;浏览器不支持此功能，请手动设置！&quot;);" style="cursor:pointer;" title="设为首页">设为首页</a>&nbsp;&nbsp;<a href="#" onclick="addFavorite(&quot;浏览器不支持此功能，请手动设置！&quot;);" style="cursor:pointer;" title="收藏本站">收藏本站</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+
+    	    <div class="inner headtop">
+        	    <a href="/Web/Index"><img class="logo" src="~/Images/web/logo_img.png" alt="ZZK手机专卖商城" title="ZZK手机专卖商城"></a>
+        	    
+                <form class="search" action="/Web/ProductSearch" method="get"> 
+                    <input type="search" class="search_txt" name="keywords" value="@ViewBag.keywords" placeholder="输入商品名称、商品特色" autocomplete="off"/>
+                    <input type="submit" class="search_btn" value="搜 索"/>
+                    <div class="hotSearch">热门搜索：HTC &nbsp; M9&nbsp;  M8&nbsp;  M7&nbsp;  Iphone100 </div>
+                </form>
+        	    
+                <div class="btn">
+                    <a href="/Web/MemberCenter" >我的中心</a><span style="color:#8c8c8c;">|</span><a href="/Web/MemberCart">我的购物车</a>
+                </div>
+            </div>
+            
+            <nav>
+                 <div class="inner">
+                    <div class="category">
+                        <div class="sideNav">全部商品</div>
+                        @Html.Action("_sideNavPartial", "WebPartial")                         
+                    </div>
+                                         
+                    
+                    @Html.Action("_NavPartial", "WebPartial")                                       
+                    
+                 </div>
+
+                <div style="clear:both;"></div>                  
+            </nav>
+            <div style="clear:both;"></div>
+        </header>
+
+       
+         
+        @RenderBody()
+            
+        
+
+        <div class="footerInfo" style="background-color:#fff;padding:30px 0px;">
+            <!--
+            <div class="inner">
+                <img src="~/Images/web/20151113003939684.png"/>
+            </div>
+            -->
+            <div class="inner">
+                <img src="~/Images/web/20151115205857.png" width="1200" height="89"/>
+            </div>
+
+            <div class="inner friendlik">	
+                <span class="title"> 友情链接:</span>
+                <ul class="list-none">
+                    <li><a href="http://" target="_blank" title="">百度一下</a></li>
+                    <li><a href="http://" target="_blank" title="">宏达HTC</a></li>
+                    <li><a href="http://" target="_blank" title="">索尼Sony</a></li>
+                    <li><a href="http://" target="_blank" title="">摩托罗拉Moto</a></li>
+                    <li><a href="http://" target="_blank" title="">诺基亚Nokia</a></li>
+                </ul>           
+            </div>
+        </div>
+
+        <footer>
+            <div class="foot-nav ">
+        	    <a href="#" title="友情链接">友情链接</a><span>|</span><a href="#" title="会员中心">会员中心</a><span>|</span><a href="#" title="站内搜索">站内搜索</a><span>|</span><a href="#" title="网站地图">网站地图</a><span>|</span><a href="#" title="网站管理">网站管理</a>
+            </div>
+
+            <div class="foot-text"> 
+            
+                <p>电话 :123456789 邮箱 540323699@qq.com 网站: www.ZZK.com</p>
+
+                <span>&copy;@DateTime.Now.Year 陪时间荡秋千-ZZK  &nbsp;&nbsp;版权所有</span>  
+    	    </div>
+        </footer>
+
+        
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/Scripts/web/content.js")
+        <script>
+            jQuery(function ($) {
+                $(".nav[title='@ViewBag.Title']").addClass("navdown");
+
+                @RenderSection("jquerys", required: false)
+
+            });
+        </script>
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

@@ -1,0 +1,38 @@
+﻿@model PhoneStoreSystem.Models.ProductType
+
+
+@{
+    ViewBag.Title = "删除分类( *此操作会级联删除关联的新闻信息)";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h3>你确定要删除这条信息吗？<span style="color:red">( *此操作会级联删除关联的新闻信息)</span></h3>
+<br />
+<span class="createLink">@Html.ActionLink("返回上一页", "Index")</span>
+
+<fieldset class="create_edit_div" style="width:300px;">
+    <legend>类型信息</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TypeName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TypeName)
+    </div>
+
+    @using (Html.BeginForm()) {
+        <p  style="text-align:center;width:100%">
+            <input type="submit" value="删 除" class="btn"/> 
+        </p>
+    }
+</fieldset>
+
+@section Scripts {
+   
+    <script>
+        jQuery(function ($) {
+            $("#proType").addClass("selected");
+            $("#main_container").fadeIn("slow");
+        });
+
+   </script>
+}

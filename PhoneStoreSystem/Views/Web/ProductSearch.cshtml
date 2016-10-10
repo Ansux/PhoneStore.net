@@ -1,0 +1,84 @@
+﻿@model IEnumerable<PhoneStoreSystem.Models.ProductInfo>
+@using System.Data
+
+@{
+    ViewBag.Title = "商品检索";
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+
+<link href="@Url.Content("~/Content/web/ProductSearch.css")" rel="stylesheet" type="text/css" />
+
+
+<div class="inner">
+
+    <div class="Nav">
+        <a href="/Web/index" title="首页">首页</a>
+        &gt;
+        @ViewBag.Title
+    </div>
+   
+    <div class="mainBox" >
+
+        <div class="proList" >  
+            <div style="height: 30px;padding: 5px 0px; border-bottom:1px solid #f0f0f0;">
+                <span class="titleName">
+                    检索列表<span style="font-size:12px;color:#999;font-weight:normal">（最多检索20条记录）</span>
+                </span>
+
+            </div>
+            @{
+               
+                if(ViewBag.listCount == 0){
+                    <div style="font-size:20px;color:#999;text-align:center;line-height:150px;">没有检索到任何数据！</div>
+                }else{
+                    DataTable dt=(DataTable)ViewData["searchData"];
+                    
+                    for (int i=0; i <dt.Rows.Count;i++ )
+                    {                                                             
+                        int id =int.Parse(dt.Rows[i]["ProId"].ToString());                     
+                        string rtime = dt.Rows[i]["ProReleaseDate"].ToString();
+                        string stime = dt.Rows[i]["ProSaleDate"].ToString();
+                        string imageStr = dt.Rows[i]["ProCoverImage"].ToString();
+                        string feature = dt.Rows[i]["ProFeature"].ToString();
+                        string price = dt.Rows[i]["ProPrice"].ToString();
+                        
+                        string name = dt.Rows[i]["ProName"].ToString();
+
+                        
+                        <ul class="SearchUl" data-url="/Web/ProductDetail/@id">               
+                            <li class="left" >
+                                <img src="/Images/web/productImg/@imageStr" width="100" height="100"/>
+                            </li>
+                            <li class="right" >
+                                <span class="title" >@Html.Raw(name)</span>
+                                <br />
+                                <span>价　　格：</span><span class="price">￥@price</span>                                                          
+                                <br />  
+                                <span>上架时间：</span><span class="time">@stime</span>   
+                                    <br />
+                                <span style="display:block;float:left;">特　　色：</span><span class="feature">@Html.Raw(feature)</span>                                                                        
+                            </li>                                             
+                        </ul>
+                    }       
+                }
+            }         
+        </div>
+        <div class="clear"></div>
+   
+         
+    </div>
+    <div style="clear:both"></div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/layer-v2.1/layer/layer.js"></script>
+    @Scripts.Render("~/Scripts/web/other.js")
+  
+    <script>
+        $(".SearchUl").click(function(){
+            window.location.href = $(this).attr("data-url");
+        });
+    </script>
+}
+
+    

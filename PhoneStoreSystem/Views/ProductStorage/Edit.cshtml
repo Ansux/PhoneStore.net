@@ -1,0 +1,116 @@
+﻿@model PhoneStoreSystem.Models.ProductStorage
+
+@{
+    ViewBag.Title = "编辑信息";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<span class="createLink" style="width:120px;padding:0px;">@Html.ActionLink("返回上一页", "Index")</span>
+
+@using (Html.BeginForm("Edit", "ProductStorage", FormMethod.Post, new { enctype = "multipart/form-data", id = "formUpdateMain" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+   
+    <fieldset class="create_edit_div">
+        <legend>库存信息</legend>
+            <span style="color:red">@ViewBag.ErrorMessage</span>
+           <span style="color:red">@ViewBag.UploadImageError</span>
+
+            @Html.HiddenFor(model=>model.StorageId)    
+
+            <div class="editor-label">
+                产品型号
+            </div>
+            <div class="editor-field">
+                @Html.HiddenFor(model=>model.ProId)   
+                @Html.DisplayTextFor(model=>model.ProductInfo.ProName)
+            </div>
+
+            <div class="editor-label">
+                颜色
+            </div>
+            <div class="editor-field">
+                @Html.HiddenFor(model=>model.ColorId)   
+                @Html.DisplayTextFor(model=>model.ProductColor.ColorName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProImage,labelText:"修改图片")
+            </div>
+            <div class="editor-field">   
+                @Html.HiddenFor(model => model.ProImage)
+            
+                <input type="file" name="ProImage1" id="ProImage1" />
+                <input type="button" name="btnFileImage" value="上 传 " id="btnFileImage"  class="btn" style=" font-size: 12px;padding:  5px 10px;"/>
+                <span id="uploadMesssge" style="color:red"></span>
+                <br />
+                 <span style="color:blue;font-size:12px; line-height:16px;">*推荐图片比例1:1（500*500），支持的格式：（jpg/jpeg/png/gif）</span>
+                <br />
+                <img id="uploadImg" src="/Images/web/storageImg/@ViewBag.ProductImage" width="300" height="300" />
+           
+            </div>
+
+            <div class="editor-label">
+                库存
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.StorageNumber,"", new { style = "width:50px;  height: 20px;" }) 
+          
+            </div>
+           
+            <p style="text-align:center;width:100%">
+               <input type="submit" value="保 存" class="btn" />&nbsp;&nbsp;&nbsp;
+               <input type="reset" value="重 置" class="btn" />
+            </p>
+
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/MyAjaxForm.js")
+    
+    <script>
+        jQuery(function ($) {
+            $("#proStorage").addClass("selected");
+
+            $("#main_container").fadeIn("slow");
+
+
+            //异步实现图片上传
+            $("#btnFileImage").click(function () {
+                if ($("#ProImage1").val() != "") {
+
+                    // $("#load_div").fadeIn(0);
+                    //$("#load_div").css({ "filter": "alpha(opacity:70)", "opacity": "0.7" });
+                    var index = layer.load(2, { shade: [0.1, '#fff'] });
+
+                    $("#formUpdateMain").ajaxSubmit({
+                        url: '/ProductStorage/FileImgUpload',
+                        type: 'post',
+                        success: function (imgData) {
+                            if (imgData != "false") {
+                                $("#uploadImg").attr("src", imgData);
+                                $("#uploadMesssge").html("上传图片成功！");
+                            } else {
+                                $("#uploadMesssge").html("上传失败，文件格式不正确或文件超过2M限制！");
+                            }
+                            layer.close(index);
+                        },
+                        error: function (msg) {
+                            console.log(msg);
+                            $("#uploadMesssge").html("上传图片失败，请联系管理员！" + msg.statusText + "");
+                            //$("#load_div").fadeOut(250);
+                            layer.close(index);
+                        }
+                    });
+                }
+            });
+
+        });
+
+    </script>
+}

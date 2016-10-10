@@ -1,0 +1,371 @@
+﻿@model IEnumerable<PhoneStoreSystem.Models.Order>
+@{
+    ViewBag.Title = "我的订单";
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+@section css {
+    @Styles.Render("~/Content/web/MemberOrder.css")
+    @Styles.Render("~/Content/web/_MemberCenterStyle.css")
+}
+<div class="inner">
+
+    <div class="Nav">
+        <a href="/Web/index" title="首页">首页</a>
+        &gt;          
+        <a href="/Web/MemberCenter" title="我的商城">我的商城</a>
+        &gt;
+        <span>我的订单</span>
+    </div>
+
+    <div class="leftCenterDIV">
+        @Html.Action("_MemberCenterPartial", "WebPartial")       
+    </div>
+
+    <div class="rightCenterDIV">      
+        <div class="user-order">
+            <div class="box-title">
+                <h1 class="title">我的订单</h1>                
+                <ul class="filter-list">
+                    <li class="currentLi" data-orderStatusId="-1"><a href="/Web/MemberOrder?orderStatusId=-1">全部订单</a></li>
+                    <li data-orderStatusId="1"><a href="/Web/MemberOrder?orderStatusId=1">待支付</a></li>
+                    <li data-orderStatusId="2"><a href="/Web/MemberOrder?orderStatusId=2">未发货</a></li>
+                    <li data-orderStatusId="3"><a href="/Web/MemberOrder?orderStatusId=3">待收货</a></li>
+                    <li data-orderStatusId="4"><a href="/Web/MemberOrder?orderStatusId=4">已成交</a></li>
+                    <li data-orderStatusId="5"><a href="/Web/MemberOrder?orderStatusId=5">已取消</a></li>
+                    <li data-orderStatusId="7"><a href="/Web/MemberOrder?orderStatusId=7">已退货</a></li>
+                </ul>
+                <form class="search-form" action="/Web/MemberOrder" method="get">
+                    <label for="search" class="hide">站内搜索</label>
+                    <input class="search-text" type="search" name="keywords" value="@ViewBag.Keywords" autocomplete="off" placeholder="输入商品名称、订单号">
+                    <input type="submit" class="search-btn" value="搜索">
+                </form>
+                
+                <div style="clear:both"></div>
+            </div>
+
+            <div class="box-content">
+                <div class="orderList">
+                    @if (ViewBag.listCount == 0)
+                    {
+                        <p class="empty">当前没有交易的订单。。</p>
+                    }
+                    else
+                    {
+                        foreach (var item in Model)
+                        { 
+                            <div class="order-item">
+                                <div class="order-status">@item.OrderStatus.OrderStatusIdName</div>
+                                <table class="order-detail-table"> 
+                                    <thead>
+                                        <tr>
+                                            <th class="col-main">                                        
+                                                <span class="caption-info">@DateTime.Parse(item.OrderTime).ToString("yyyy年MM月dd日 HH:mm:ss")
+                                                    <span class="sep">
+                                                    |</span>@(item.AddressDetails.ToString().Split(' ')[0])
+                                                    <span class="sep">
+                                                    |</span>订单号：@item.OrderNumber
+                                                        <span class="sep">
+                                                    |</span>支付通在线支付
+                                                </span>
+
+                                            </th> 
+                                            <th class="col-sub"> 
+                                                    <span class="caption-price">订单金额：<span class="num">@(item.OrderPrice * item.OrderCount)</span>元 </span>
+                                            </th> 
+                                        </tr>                                
+                                    </thead>
+
+                                    <tbody>
+                                        <tr> 
+                                            <td class="order-items">                                       
+                                                <div class="figure">   
+                                                    <a href="#"> 
+                                                        <img src="/Images/web/productImg/@item.OrderProCoverImage" width="80" height="80" alt="@item.OrderProName"> 
+                                                    </a>   
+                                                </div> 
+                                                <p class="name"> 
+                                                    <a href="/Web/ProductDetail/@item.ProId">@item.OrderProName @item.ColorName</a> 
+                                                </p> 
+                                                <p class="price">@item.OrderPrice 元 × @item.OrderCount</p>                            
+                                            </td> 
+                                            <td class="order-actions">    
+                                                @if(item.OrderStatusId==1){
+                                                    using (Html.BeginForm("MemberPayOrder", "Web", FormMethod.Post, new { id = "submitCheckout", style = "display: inline;", target = "_blank" }))
+                                                    {
+                                                        @Html.AntiForgeryToken()
+                 
+                                                        @Html.Hidden("OrderIds",item.OrderNumber+"；"); 
+                                                        <button type="submit" class="btn btn-primary" style="width:120px;height:30px;">立即支付</button>                                                        
+                                                      
+                                                    }                                                   
+                                                }else if(item.OrderStatusId == 2){
+                                                    <a class="btn btn-line-gray J_CancelOrder" data-OrderId="@item.OrderId" href="javascript:;">取消订单</a>    
+                                                }
+                                                else if (item.OrderStatusId == 3)
+                                                {
+                                                    <a class="btn btn-primary J_ReceivingGoods"  data-OrderId="@item.OrderId" href="javascript:;">确认收货</a>    
+                                                }
+                                                else if (item.OrderStatusId == 4)
+                                                {
+                                                    <a class="btn btn-primary J_ReturnGoods"  data-OrderId="@item.OrderId" href="javascript:;">申请退货</a>    
+                                                }
+                                                else if (item.OrderStatusId == 5)
+                                                {
+                                                    <a class="btn  btn-primary" href="/Web/ProductDetail/@item.ProId">继续购买</a> 
+                                                }
+                                                  
+                                                <a class="btn btn-line-gray" href="/Web/MemberOrderDetail/@item.OrderId">订单详情</a>    
+                                            </td> 
+
+                                        </tr> 
+                                    </tbody>
+                                </table>      
+                            </div>
+                        }
+                    }
+                   
+                </div>
+
+                <div style="clear:both"></div>
+
+                @if (ViewBag.listCount != 0)
+                {
+                    <div class="flip">
+                        <div class="flipPaging">
+                        
+               
+                            @for (int i = ((ViewBag.pageIndex - 1) / 10 + 1); i <= ViewBag.pageCount; i++)
+                            {
+                                if (i > ((ViewBag.pageIndex - 1) / 10 + 11))
+                                {
+                                    break;
+                                }
+                                if (i == 1)
+                                {
+                                    if (ViewBag.pageIndex == 1)
+                                    {
+                                        <span class="disabled">« 上一页</span>
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("« 上一页", "MemberOrder", "Web", new
+                                   {
+                                       pageIndex = (ViewBag.pageIndex - 1),
+                                       pageSize = ViewBag.pageSize,
+                                       proTypeId = ViewBag.OrderStatusId,
+                                       keywords=ViewBag.Keywords
+                                   }, new { @class = "current" })
+                                    }
+                                }
+
+                                if (i == ViewBag.pageIndex)
+                                {
+                                    <span class="current">@i</span>
+                                }
+                                else
+                                {                   
+                                    @Html.ActionLink(i.ToString(), "MemberOrder", "Web", new
+                               {
+                                   pageIndex = i,
+                                   pageSize = ViewBag.pageSize,
+                                   proTypeId = ViewBag.OrderStatusId,
+                                   keywords=ViewBag.Keywords
+                               }, new { @class = "current" })
+                    
+                                }
+
+                                if (i == ViewBag.pageCount)
+                                {
+                                    if (ViewBag.pageCount == 1 || ViewBag.pageIndex == ViewBag.pageCount)
+                                    { 
+                                        <span class="disabled">下一页 »</span>
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("下一页 »", "MemberOrder", "Web", new
+                                   {
+                                       pageIndex = (ViewBag.pageIndex + 1),
+                                       pageSize = ViewBag.pageSize,
+                                       proTypeId = ViewBag.OrderStatusId,
+                                       keywords=ViewBag.Keywords
+                                   }, new { @class = "current" })
+                                    }
+                                }
+                            }
+    
+                            <div style="clear:both"></div>        
+                        </div>                    
+                    </div>
+                }
+                
+                    
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+
+    <div style="clear:both"></div>
+</div>
+
+
+
+
+@section scripts{
+    @Scripts.Render("~/Scripts/web/other.js")
+    <script src="~/Scripts/layer-v2.1/layer/layer.js"></script>
+   
+    <script>     
+
+        $(".filter-list li.currentLi").removeClass("currentLi");
+        $(".filter-list li[data-orderStatusId=@ViewBag.OrderStatusId]").addClass("currentLi");
+
+
+        $(".J_CancelOrder").click(function () {
+
+            var memberId =@Session["MemberId"] +"";
+            if (memberId == 0) {
+                layer.alert("请登录！\(^o^)/", { icon: 7, closeBtn: 0, btn: ["前往登录", "取消"] }, function () {
+                    window.location.href = "/Web/MemberLogin";
+                });
+                return;
+            }
+
+            //data - OrderId
+            var orderId = $(this).attr("data-OrderId");
+            layer.confirm('你确定要取消订单吗？', {
+                btn: ['确定', '取消'], //按钮
+                icon:3
+            }, function (index) {
+               
+                layer.close(index);
+                var loadding = layer.load(0, { shade: [0.1,'#000'] });
+                
+                $.ajax({
+                    type: "Post",
+                    dataType: "text",
+                    url: '/WebPublic/CancelOrder',     //提交到一般处理程序请求数据   
+                    data: "orderId=" + orderId,           //提交参数              
+                    success: function (data) {
+                        layer.close(loadding);
+                        if (data == "True")
+                            layer.alert("取消订单成功！", { icon: 6 },
+                                function () {
+                                    
+                                    window.location.reload();
+                                }
+                            );
+
+                        else {
+                            layer.alert(data, { icon: 5 });
+                        }
+                    },
+                    error: function (msg) {
+                        layer.close(loadding);
+                        layer.alert('系统错误，咋回事？', { icon: 5 });
+                    }
+                });
+                
+            }, function () {
+
+            });
+        })
+
+        $(".J_ReceivingGoods").click(function () {
+
+            var memberId =@Session["MemberId"] +"";
+            if (memberId == 0) {
+                layer.alert("请登录！\(^o^)/", { icon: 7, closeBtn: 0, btn: ["前往登录", "取消"] }, function () {
+                    window.location.href = "/Web/MemberLogin";
+                });
+                return;
+            }
+
+            var orderId = $(this).attr("data-OrderId");
+
+            layer.confirm('你确定要确认收货吗？', {
+                btn: ['确定', '取消'], //按钮
+                icon: 3
+            }, function (index) {
+
+                layer.close(index);
+                var loadding = layer.load(0, { shade: [0.1, '#000'] });
+
+                $.ajax({
+                    type: "Post",
+                    dataType: "text",
+                    url: '/WebPublic/ReceivingGoods',     //提交到一般处理程序请求数据   
+                    data: "orderId=" + orderId,           //提交参数              
+                    success: function (data) {
+                        layer.close(loadding);
+                        if (data == "True")
+                            layer.alert("确认收货成功！", { icon: 6 },
+                                function () {
+                                    window.location.reload();
+                                }
+                            );
+                        else {
+                            layer.alert(data, { icon: 5 });
+                        }
+                    },
+                    error: function (msg) {
+                        layer.close(loadding);
+                        layer.alert('系统错误，咋回事？', { icon: 5 });
+                    }
+                });
+
+            }, function () {
+
+            });
+        })
+
+        $(".J_ReturnGoods").click(function () {
+
+            var memberId =@Session["MemberId"] +"";
+            if (memberId == 0) {
+                layer.alert("请登录！\(^o^)/", { icon: 7, closeBtn: 0, btn: ["前往登录", "取消"] }, function () {
+                    window.location.href = "/Web/MemberLogin";
+                });
+                return;
+            }
+
+            var orderId = $(this).attr("data-OrderId");
+
+            layer.confirm('你确定要申请退货吗？', {
+                btn: ['确定', '取消'], //按钮
+                icon: 3
+            }, function (index) {
+
+                layer.close(index);
+                var loadding = layer.load(0, { shade: [0.1, '#000'] });
+
+                $.ajax({
+                    type: "Post",
+                    dataType: "text",
+                    url: '/WebPublic/ReturnGoods',     //提交到一般处理程序请求数据   
+                    data: "orderId=" + orderId,           //提交参数              
+                    success: function (data) {
+                        layer.close(loadding);
+                        if (data == "True")
+                            layer.alert("申请退货成功！", { icon: 6 },
+                                function () {
+                                    window.location.reload();
+                                }
+                            );
+                        else {
+                            layer.alert(data, { icon: 5 });
+                        }
+                    },
+                    error: function (msg) {
+                        layer.close(loadding);
+                        layer.alert('系统错误，咋回事？', { icon: 5 });
+                    }
+                });
+
+            }, function () {
+
+            });
+        })
+
+    </script>
+
+}

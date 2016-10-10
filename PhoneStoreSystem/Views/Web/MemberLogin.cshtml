@@ -1,0 +1,191 @@
+﻿@model PhoneStoreSystem.Models.MemberLoginModel
+
+@{
+    Layout = null;
+    ViewBag.Title = "MemberLogin";  
+}
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+<style type="text/css">
+    body {
+        margin:0px;
+        background-color:#f5f5f5;
+    }
+header{ width:100%;margin:0px;padding:0px; border-top:2px solid #e63547}
+.header-top{ width:900px; margin:0 auto; height:120px;}
+.head-logo{ float:left; }
+.head-nav{ float:right; margin-top:25px;}
+.head-nav span{ color:#e63547;}
+
+.contain{ width:100%; background-color:#EE2945; overflow:hidden;}
+.con-mg{ margin:0 auto; width:900px;height:432px;background:url(/Images/web/loginBg.jpg) no-repeat left; background-size:cover;}
+    form {
+        position:relative;
+    }
+.from_logo{ padding:0px 18px; text-align:left; background:#FFF; border-radius:10px; margin:70px 0; float:right; height:280px; width:300px;}
+.from_logo h2{ height:30px; line-height:30px; font-weight:normal; font-size:22px;}
+.from_logo h2 span{ float:right; font-size:16px; color:#900;}
+.from_logo a {
+    color:#e63547;
+    text-decoration:none;
+    font-size:14px;    
+}  
+.from_logo a:hover{
+    color:#f05f23;
+  
+} 
+.mg30{ border:1px solid #CCC; width:300px; margin:18px 0 10px 0;position:relative}
+.mg30 input{ line-height:30px; height:30px; width:290px; border:0px;padding:5px;}
+
+.inp-but{ text-align:center; margin:10px 0px;}
+
+.rad{ text-align:right;}
+.rad span{}
+.rad input{ line-height:10px; height:10px; width:16px;}
+
+.btn {
+    width: 300px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+    margin-left: 0px;
+    vertical-align: top;
+    display: inline-block;
+    text-align:center;
+    border:1px solid #eee;
+    cursor:pointer;
+    color:#fff;
+}
+.btn-primary {
+    background: #e63547;
+    border-color: #e63547; 
+    color:#fff;
+    transition:background-color 0.3s;
+}
+.btn-primary:hover {
+    background-color: #ff6700;
+}
+.field-validation-error {
+  color: #e80c4d;
+  /* float: left; */
+  
+  position: absolute;
+  top: 12px;
+  right: 0px;
+  font-size:12px;
+   
+}
+.validation-summary-errors {
+color: #e80c4d;
+position: absolute;
+  left: 0px;
+  z-index: 999;
+    bottom: 55px;
+    font-size:14px;
+}
+    .validation-summary-errors ul {
+         list-style:none;
+         margin:0px;
+         padding:0px;
+    }
+    
+    footer {
+        width: 100%;
+        clear: both;
+        background: #f5f5f5;
+        position: relative;       
+        min-width: 1000px;
+        color:#666;
+        font-size:12px;
+       
+    }
+    footer a{
+        color:#666;
+        margin:0px 15px;
+        text-decoration:none;
+    }
+    .foot-nav {
+        text-align: center;
+        height: 35px;
+        line-height: 44px;       
+    }   
+    .foot-nav span {
+        font-size: 10px;
+        margin: 0px 8px;
+    }
+    .foot-text {
+        text-align: center;
+        padding: 0px 0px 5px;     
+    }    
+
+ 
+</style>
+     @Scripts.Render("~/bundles/jquery")
+     @Scripts.Render("~/bundles/jqueryval")
+</head>
+
+<body>
+    <header>
+    	<div class="header-top">
+        	<div class="head-logo">
+                <a href="/Web/Index">
+            	<img src="/Images/web/logo_img.png" alt="logo" width="200" height="120">
+                </a>
+            </div>
+          
+        </div>
+    </header>
+    <div class="contain">
+    	<div class="con-mg">
+            <div class="from_logo">
+               <h2>会员登录<span><a href="/Web/MemberRegister">立即注册>></a></span></h2>
+                @using (Html.BeginForm()) {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <div class="inp-name mg30">
+               	    <!--<label class="lab-name">bbbbbbb</label>-->
+                         @Html.TextBoxFor(model => model.MemberName, new { @class="use-name",placeholder="用户名"})
+                         @Html.ValidationMessageFor(model => model.MemberName)
+                    </div>
+                   
+
+                    <div class="inp-name mg30">
+               	    <!--<label class="lab-name">bbbbbbb</label>-->
+                         @Html.PasswordFor(model => model.MemberPassword, new { @class="use-name",placeholder="密码"})
+                         @Html.ValidationMessageFor(model => model.MemberPassword)
+                    </div>
+                  
+                        
+                    <div class="inp-but rad">
+                        <a href="#" style="color:#666">忘记密码？</a>             
+                    </div>
+
+                    <p>
+                        <input type="submit" class="btn btn-primary" value="登　　录" />
+                    </p>
+                   
+                }
+             </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="foot-nav ">
+            <a href="#" title="友情链接">友情链接</a><span>|</span><a href="#" title="会员中心">会员中心</a><span>|</span><a href="#" title="站内搜索">站内搜索</a><span>|</span><a href="#" title="网站地图">网站地图</a><span>|</span><a href="#" title="网站管理">网站管理</a>
+        </div>
+
+        <div class="foot-text"> 
+            
+            <p>电话 :123456789 邮箱 540323699@qq.com 网站: www.ZZK.com</p>
+
+            <span>&copy;@DateTime.Now.Year 陪时间荡秋千-ZZK  &nbsp;版权所有</span>  
+        </div>
+    </footer>
+</body>
+</html>

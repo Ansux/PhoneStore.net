@@ -1,0 +1,197 @@
+﻿@model IEnumerable<PhoneStoreSystem.Models.ProductInfo>
+@{
+    ViewBag.Title = "产品列表";
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+
+@section css {
+    @Styles.Render("~/Content/web/ProductList.css")
+}
+<div class="inner">
+
+    <div class="Nav">
+        <a href="/Web/index" title="首页">首页</a>
+        &gt;
+        <span>手机列表</span>
+    </div>    
+
+
+    <div class="Filter">        
+                   
+        <div class="rowDiv">
+            <span class="title">商品分类：</span>
+            
+            <ul class="proType"> 
+
+                <li><a class="currentLink" href="/Web/ProductList?pageIndex=@ViewBag.pageIndex&pageSize=@ViewBag.pageSize&proTypeId=-1&proPriceId=@ViewBag.proPriceId&proOrderByType=@ViewBag.proOrderByType&proOrderBy=@ViewBag.proOrderBy" data-id="-1" >全部</a></li>
+                @foreach (PhoneStoreSystem.Models.ProductType productType in ViewBag.proTypeList)
+                {                   
+                    <li><a href="/Web/ProductList?pageIndex=@ViewBag.pageIndex&pageSize=@ViewBag.pageSize&proTypeId=@productType.TypeId&proPriceId=@ViewBag.proPriceId&proOrderByType=@ViewBag.proOrderByType&proOrderBy=@ViewBag.proOrderBy" data-id="@productType.TypeId">@productType.TypeName</a></li>
+                    
+                }
+                
+                  
+            </ul>
+            <div style="clear:both"></div>
+        </div>        
+        <div class="rowDiv">
+            <span class="title">价格范围：</span>
+            <ul class="proPrice">
+                <li><a class="currentLink" href="/Web/ProductList?pageIndex=@ViewBag.pageIndex&pageSize=@ViewBag.pageSize&proTypeId=@ViewBag.proTypeId&proPriceId=-1&proOrderByType=@ViewBag.proOrderByType&proOrderBy=@ViewBag.proOrderBy" data-id="-1">全部</a></li>
+                @for (int i = 0; i < 6; i++) { 
+                    if(i==5){
+                        <li><a href="/Web/ProductList?pageIndex=@ViewBag.pageIndex&pageSize=@ViewBag.pageSize&proTypeId=@ViewBag.proTypeId&proPriceId=@(i*1000)&proOrderByType=@ViewBag.proOrderByType&proOrderBy=@ViewBag.proOrderBy" data-id="@(i*1000)">@(i*1000)以上</a></li>   
+                    }else{                          
+                        <li><a href="/Web/ProductList?pageIndex=@ViewBag.pageIndex&pageSize=@ViewBag.pageSize&proTypeId=@ViewBag.proTypeId&proPriceId=@(i*1000)&proOrderByType=@ViewBag.proOrderByType&proOrderBy=@ViewBag.proOrderBy" data-id="@(i*1000)">@(i*1000)～@((i+1)*1000-1)</a></li>
+                    }
+                }                                  
+            </ul>
+            <div style="clear:both"></div>
+        </div>      
+       
+        <div class="rowDiv">
+            <span class="title">排序方式：</span>
+            <ul class="proOrderByType">
+                <li><a  class="currentLink" href="/Web/ProductList?pageIndex=@ViewBag.pageIndex&pageSize=@ViewBag.pageSize&proTypeId=@ViewBag.proTypeId&proPriceId=@ViewBag.proPriceId&proOrderByType=0&proOrderBy=@ViewBag.proOrderBy" data-id="0">降序 ↓</a></li>
+                <li><a href="/Web/ProductList?pageIndex=@ViewBag.pageIndex&pageSize=@ViewBag.pageSize&proTypeId=@ViewBag.proTypeId&proPriceId=@ViewBag.proPriceId&proOrderByType=1&proOrderBy=@ViewBag.proOrderBy" data-id="1">升序 ↑</a></li>
+            </ul>
+            <div style="clear:both"></div>
+        </div>
+
+        <div class="rowDiv">
+            <span class="title">排序筛选：</span>
+            <ul class="proOrderBy">
+                <li><a class="currentLink" href="/Web/ProductList?pageIndex=@ViewBag.pageIndex&pageSize=@ViewBag.pageSize&proTypeId=@ViewBag.proTypeId&proPriceId=@ViewBag.proPriceId&proOrderByType=@ViewBag.proOrderByType&proOrderBy=-1" data-id="-1">默认</a></li>
+                <li><a href="/Web/ProductList?pageIndex=@ViewBag.pageIndex&pageSize=@ViewBag.pageSize&proTypeId=@ViewBag.proTypeId&proPriceId=@ViewBag.proPriceId&proOrderByType=@ViewBag.proOrderByType&proOrderBy=1" data-id="1">发布时间</a></li>
+                <li><a href="/Web/ProductList?pageIndex=@ViewBag.pageIndex&pageSize=@ViewBag.pageSize&proTypeId=@ViewBag.proTypeId&proPriceId=@ViewBag.proPriceId&proOrderByType=@ViewBag.proOrderByType&proOrderBy=2" data-id="2">上架时间</a></li>
+                <li><a href="/Web/ProductList?pageIndex=@ViewBag.pageIndex&pageSize=@ViewBag.pageSize&proTypeId=@ViewBag.proTypeId&proPriceId=@ViewBag.proPriceId&proOrderByType=@ViewBag.proOrderByType&proOrderBy=3" data-id="3">销售量</a></li>
+                <li><a href="/Web/ProductList?pageIndex=@ViewBag.pageIndex&pageSize=@ViewBag.pageSize&proTypeId=@ViewBag.proTypeId&proPriceId=@ViewBag.proPriceId&proOrderByType=@ViewBag.proOrderByType&proOrderBy=4" data-id="4">浏览数</a></li>    
+                <li><a href="/Web/ProductList?pageIndex=@ViewBag.pageIndex&pageSize=@ViewBag.pageSize&proTypeId=@ViewBag.proTypeId&proPriceId=@ViewBag.proPriceId&proOrderByType=@ViewBag.proOrderByType&proOrderBy=5" data-id="5">价格</a></li>                                              
+            </ul>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+    <div class="ProductList">   
+             
+        <ul class="productUl">
+            @{
+                if (ViewBag.listCount == 0)
+                {
+                    <li style="width:1200px;height:200px;line-height:200px;color:#808080;font-size:20px;"><p>暂无数据！</p></li>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        string name = Html.DisplayFor(modelItem => item.ProName).ToString();
+                        <li>
+                            <a href="/Web/ProductDetail/@item.ProId" title="@name" target="_self" class="img" data-img-type="/Images/web/productImg/@item.ProCoverImage">                           
+                            </a>                      
+                            <a class="title" href="/Web/ProductDetail/@item.ProId">@name</a>  
+                            <span class="intro">@item.ProFeature</span>                     
+                            <span class="price">@item.ProPrice 元</span>
+                            <a class="cart" href="/Web/ProductDetail/@item.ProId" onclick="">查看详情</a>
+                        </li>                                             
+                    }
+                }
+            }         
+        </ul>
+        <div style="clear:both"></div>
+        
+        <div class="flip">
+            <div class="flipPaging">
+                        
+               
+                @for (int i = ((ViewBag.pageIndex - 1) / 10 + 1); i <= ViewBag.pageCount; i++)
+                {
+                    if (i > ((ViewBag.pageIndex - 1) / 10 + 11))
+                    {
+                        break;
+                    }
+                    if (i == 1) {
+                        if (ViewBag.pageIndex == 1)
+                        {
+                            <span class="disabled">« 上一页</span>
+                        }else{
+                            @Html.ActionLink("« 上一页", "ProductList", "Web", new { pageIndex = (ViewBag.pageIndex-1), 
+                            pageSize = ViewBag.pageSize, proTypeId=ViewBag.proTypeId,proPriceId=ViewBag.proPriceId,
+                            proOrderByType=ViewBag.proOrderByType,proOrderBy=ViewBag.proOrderBy }, new { @class="current"})
+                        }
+                    }
+
+                    if (i == ViewBag.pageIndex)
+                    {
+                        <span class="current">@i</span>
+                    }else
+                    {                   
+                        @Html.ActionLink(i.ToString(), "ProductList", "Web", new { pageIndex = i, 
+                            pageSize = ViewBag.pageSize, proTypeId=ViewBag.proTypeId,proPriceId=ViewBag.proPriceId,
+                            proOrderByType=ViewBag.proOrderByType,proOrderBy=ViewBag.proOrderBy }, new { @class="current"})
+                    
+                    }
+
+                    if (i == ViewBag.pageCount)
+                    {
+                        if (ViewBag.pageCount == 1 || ViewBag.pageIndex == ViewBag.pageCount)
+                        { 
+                            <span class="disabled">下一页 »</span>
+                        }
+                        else
+                        {
+                            @Html.ActionLink("下一页 »", "ProductList", "Web", new { pageIndex = (ViewBag.pageIndex+1), 
+                            pageSize = ViewBag.pageSize, proTypeId=ViewBag.proTypeId,proPriceId=ViewBag.proPriceId,
+                            proOrderByType=ViewBag.proOrderByType,proOrderBy=ViewBag.proOrderBy }, new { @class="current"})
+                        }
+                    }
+                }
+    
+                <div style="clear:both"></div>        
+            </div>
+        </div>
+
+    </div>
+
+    <div style="clear:both"></div>
+</div>
+
+
+
+
+@section scripts{
+    @Scripts.Render("~/Scripts/web/other.js")
+    <script>   
+        
+        lazyImgLoad($(".productUl:visible a.img"), 100, 1/*1-10*/, "backImg");
+        
+        
+        var proTypeId =@ViewBag.proTypeId +"";         
+        if (proTypeId != -1) {           
+            $(".proType li a.currentLink").removeClass("currentLink");
+            $(".proType li a[data-id='" + proTypeId + "']").addClass("currentLink");
+        }
+
+        var proPriceId =@ViewBag.proPriceId +"";
+        if (proPriceId != -1) {
+            $(".proPrice li a.currentLink").removeClass("currentLink");
+            $(".proPrice li a[data-id='" + proPriceId + "']").addClass("currentLink");
+        }
+
+        var proOrderByType =@ViewBag.proOrderByType +"";
+        if (proOrderByType != -1) {
+            $(".proOrderByType li a.currentLink").removeClass("currentLink");
+            $(".proOrderByType li a[data-id='" + proOrderByType + "']").addClass("currentLink");
+        }
+
+        var proOrderBy =@ViewBag.proOrderBy +"";      
+        if (proOrderBy != -1) {
+            $(".proOrderBy li a.currentLink").removeClass("currentLink");
+            $(".proOrderBy li a[data-id='" + proOrderBy + "']").addClass("currentLink");
+        }
+
+        
+    </script>
+
+        
+
+}

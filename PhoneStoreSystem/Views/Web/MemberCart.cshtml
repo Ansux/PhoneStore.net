@@ -1,0 +1,248 @@
+﻿@model IEnumerable<PhoneStoreSystem.Models.Cart>
+
+@{
+    ViewBag.Title = "购物车";
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+@section css {   
+    @Styles.Render("~/Content/web/MemberCart.css")
+    @Styles.Render("~/Content/web/_MemberCenterStyle.css")
+}
+<div class="inner">
+    <!-- 当再次点击同一件物品加入购物车时，进行判断，然后数量+1 -->
+    <div class="Nav">
+        <a href="/Web/index" title="首页">首页</a>
+        &gt;          
+        <a href="/Web/MemberCenter" title="我的商城">我的商城</a>
+        &gt;
+        <span>购物车</span>
+    </div>
+
+    <div class="leftCenterDIV">
+        @Html.Action("_MemberCenterPartial", "WebPartial")       
+    </div>
+
+    <div class="rightCenterDIV">
+        <h1 class="box-title">我的购物车</h1>      
+        <div class="goodCart">
+            @if (ViewBag.CartCount == 0)
+            {
+                <div class="cart-empty">
+                    <h2>您的购物车还是空的！</h2>                               
+                    <a href="/Web/ProductList" class="btn btn-primary btn-shoping">马上去购物</a>
+                </div>
+            }
+            else
+            {
+                <div class="cart-head">
+                    <div class="col col-check">
+                        @Html.CheckBox("IsCheckAll", new { @class = "checkInput" }) 全选
+
+                    </div>
+                    <div class="col col-img">&nbsp;</div>
+                    <div class="col col-name">商品名称</div>
+                    <div class="col col-price">单价</div>
+                    <div class="col col-num">数量</div>
+                    <div class="col col-total">小计</div>
+                    <div class="col col-action">操作</div>
+
+                </div>
+                <div class="cart-body">
+                    @foreach (var item in Model)
+                    {                        
+                        <div class="cart-itemRow">
+                            <div class="col col-check row-check">
+                                @Html.CheckBox("IsCheck", new { @class = "checkInput IsCheck" ,text=item.CartId })
+                            </div>  
+                            <div class="col col-img">                       
+                                <img alt="" src="/Images/web/productImg/@item.ProductInfo.ProCoverImage" width="80" height="80">                      
+                            </div>
+                            <div class="col col-name">                      
+                                <h3 class="name">  <a href="/Web/ProductDetail/@item.ProId" target="_blank">@item.ProductInfo.ProName - @item.ProductColor.ColorName</a>  </h3>   
+                                <p class="desc"> 
+                                    <span>颜色：</span> @item.ProductColor.ColorName
+                                </p>                                             
+                                <p class="desc"> 请您在 <span style="color:#e63547">@item.CartTime.AddHours(2).ToString("yyyy-MM-dd HH:mm")</span> 前下单 </p>                     
+                            </div>
+                            <div class="col col-price"><span class="priceSpan">@item.ProductInfo.ProPrice</span> 元</div>
+                            <div class="col col-num">
+                                <div class="change-goods-num">                    
+                                    <a href="javascript:void(0)" class="minus">-</a> 
+                                    <input type="text" name="GoodsNumber" value="@item.CartCount" data-num="1" data-max-num="10"  data-cartId="@item.CartId" autocomplete="off" readonly="true" class="goods-num J_goodsNum GoodsNumber"> 
+                                    <a href="javascript:void(0)" class="plus">+</a>
+                                </div>  
+                            </div>
+                            <div class="col col-total"><span class="totalSpan">@(item.ProductInfo.ProPrice*item.CartCount)</span>元</div>
+                            <div class="col col-action"><a href="javascript:;" class="removeBtn" data-cartId="@item.CartId" >移除</a></div>
+
+                            <div style="clear:both"></div>
+                        </div>                       
+                    }                                                      
+                </div>
+            }
+            
+        </div>
+
+        @if (ViewBag.CartCount != 0)
+        {
+            <div class="cart-bar" id="cartBar">
+                <div class="section-left">
+                    <a href="#" class="back-shopping">继续购物</a>
+                    <span class="cart-total">共 <i id="cartTotalNum">@ViewBag.CartCount</i> 件商品，已选择 <i id="selTotalNum">0</i> 件</span>                    
+                </div>
+               
+                <span class="total-price">
+                    合计（运费0元）：<em id="cartTotalPrice">0.00</em>元
+                </span>               
+                @using (Html.BeginForm("MemberCheckOrder", "Web", FormMethod.Post, new { id = "submitCheckout" ,style = "display: inline;"}))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("CartsInfo")
+                    <a href="javascript:;" class="btn btn-primary" id="goCheckout">去结算</a>      
+                }
+                     
+            </div>
+        }
+
+    </div>
+
+    <div style="clear:both"></div>
+</div>
+
+
+
+
+@section scripts{
+    @Scripts.Render("~/Scripts/web/other.js")
+    <script src="~/Scripts/layer-v2.1/layer/layer.js"></script>
+    <script>     
+
+        $("#IsCheckAll").click(function () {
+            if ($("#IsCheckAll")[0].checked == true) {
+                for (var i = 0; i < $(".IsCheck").length; i++) 
+                    $(".IsCheck")[i].checked = true;                
+
+                $("#selTotalNum").html($(".IsCheck").length);
+                cartTotalPrice();
+            } else {
+                for (var i = 0; i < $(".IsCheck").length; i++)
+                    $(".IsCheck")[i].checked = false;
+
+                $("#selTotalNum").html(0);
+                cartTotalPrice();
+            }
+        })
+        $(".IsCheck").click(function () {
+            $("#selTotalNum").html($(".IsCheck:checked").length);
+            cartTotalPrice();
+        })      
+
+
+        $(".change-goods-num .minus").click(function () {         
+            var $me = $(this);
+            var num = $me.next(".GoodsNumber").val()*1;
+            if (num > 1) {
+                $.get("/WebPublic/ChangeCartCount",
+                    { cartId: $me.next(".GoodsNumber").attr("data-cartId"), cartCount: num - 1 },
+                    function (data) {
+                        if (data == "True"){     
+                            
+                            $me.next(".GoodsNumber").val(--num);
+
+                            var price = $me.parent().parent().prev(".col-price").find(".priceSpan").html() * 1;
+            
+                            $me.parent().parent().next(".col-total").find(".totalSpan").html((num * price).toFixed(2));
+
+                            cartTotalPrice();
+                        }                       
+                        else {
+                            layer.msg(data, { time: 800, icon: 5 });
+                        }
+                    }
+                )
+            }
+        })
+        $(".change-goods-num .plus").click(function () {
+            var $me = $(this);
+            var num = $me.prev(".GoodsNumber").val() * 1;
+            var maxNum = $me.prev(".GoodsNumber").attr("data-max-num")*1;
+
+            if (num < maxNum) {
+                $.get("/WebPublic/ChangeCartCount",
+                    { cartId: $me.prev(".GoodsNumber").attr("data-cartId"), cartCount: num + 1 },
+                    function (data) {
+                        if (data == "True") {
+
+                            $me.prev(".GoodsNumber").val(++num);
+
+                            var price = $me.parent().parent().prev(".col-price").find(".priceSpan").html() * 1;
+
+                            $me.parent().parent().next(".col-total").find(".totalSpan").html((num * price).toFixed(2));
+
+                            cartTotalPrice();
+                        }
+                        else {
+                            layer.msg(data, { time: 800, icon: 5 });
+                        }
+                    }
+                )
+            }                 
+        })
+        function cartTotalPrice() {
+            var s = 0;
+            for (var i = 0; i < $(".IsCheck:checked").length; i++) {
+                s += $(".IsCheck:checked:eq(" + i + ")").parent().nextAll(".col-total").find(".totalSpan").html() * 1;
+            }
+            $("#cartTotalPrice").html(s.toFixed(2));
+        }
+
+
+        $(".removeBtn").click(function () {
+            var cartId = $(this).attr("data-cartId");
+            var t = $(this);
+
+            layer.confirm('你确定要移除它吗？', {
+                btn: ['确定', '取消'] //按钮
+            }, function () {
+                
+                $.ajax({
+                    type: "Post",
+                    dataType: "text",
+                    url: '/WebPublic/RemoveCart',     //提交到一般处理程序请求数据   
+                    data: "cartId=" + cartId,           //提交参数              
+                    success: function (data) {
+                        if (data == "True")                         
+                            t.parent().parent(".cart-itemRow").remove();
+                        else {
+                            layer.alert(data, { icon: 5 });
+                        }
+                    },
+                    error: function (msg) {
+                        layer.alert('移除失败，咋回事？', { icon: 5 });
+                    }
+                });
+                layer.msg('移除成功！', { time:500,icon: 1 });
+            }, function () {
+
+            });    
+        });
+
+
+        $("#goCheckout").click(function () {
+            if ($(".IsCheck:checked").length > 0) {
+                var carts = "";
+                for (var i = 0; i < $(".IsCheck:checked").length; i++) {
+                    var $check = $(".IsCheck:checked:eq(" + i + ")");
+                    carts += $check.attr("text")+",";
+                }
+                $("#submitCheckout").find("#CartsInfo").val( carts);
+                $("#submitCheckout").submit();         
+
+            } else {                
+                layer.msg('请先选择购物车商品！', { icon: 5, time: 1000 });
+            }
+        });
+        
+    </script>
+
+}

@@ -1,0 +1,87 @@
+﻿@model PhoneStoreSystem.Models.Member
+
+@{
+    ViewBag.Title = "个人中心";
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+@section css {   
+    @Styles.Render("~/Content/web/MemberCenter.css")
+    @Styles.Render("~/Content/web/_MemberCenterStyle.css")
+}
+<div class="inner">
+
+    <div class="Nav">
+        <a href="/Web/index" title="首页">首页</a>
+        &gt;          
+        <a href="/Web/MemberCenter" title="我的商城">我的商城</a>
+        &gt;
+        <span>个人中心</span>
+    </div>
+
+    <div class="leftCenterDIV">
+        @Html.Action("_MemberCenterPartial","WebPartial")       
+    </div>
+
+    <div class="rightCenterDIV">      
+        <div class="userInfo">
+            <div class="user-card">
+                <h2 class="username">@Model.MemberName</h2>
+                <p class="tip">您好，欢迎使用，祝您永远快乐！</p>              
+                <a class="link" href="/Web/MemberEditInfo/@Model.MemberId">修改个人信息 &gt;</a>
+                <img class="avatar" src="/Images/web/memberImg/@Model.MemberPhoto" width="150" height="150">
+            </div>
+
+
+            <div class="user-actions">
+                <ul class="action-list">
+                    <li>真实姓名：<span class="val">@Model.MemberRealName</span></li>
+                    <li>手机号码：<span class="val">@Model.MemberPhone</span></li>
+                    <li>邮　　箱：<span class="val">@Model.MemberEmail</span></li>
+                </ul>
+            </div>
+            
+            <div style="clear:both"></div>
+        </div>
+
+        <div class="userOrderInfo">
+            <ul class="info-list">
+                <li>
+                    <h3>待支付的订单：<span class="num">@ViewBag.NoPayNum</span></h3>
+                    <a href="/Web/MemberOrder?orderStatusId=1">查看待支付订单 &gt;</a>
+                    <img src="/Images/web/portal-icon-1.png" alt="">
+                </li>
+                <li>
+                    <h3>待收货的订单：<span class="num">@ViewBag.NoReceivingNum</span></h3>
+                    <a href="/Web/MemberOrder?orderStatusId=3">查看待收货订单 &gt;  </a>
+                    <img src="/Images/web/portal-icon-2.png" alt="">
+                </li>             
+                <li>
+                    <h3>已成交商品数：<span class="num">@ViewBag.SuccessNum</span></h3>
+                    <a href="/Web/MemberOrder?orderStatusId=4">查看已成交商品 &gt;  </a>
+                    <img src="/Images/web/portal-icon-4.png" alt="">
+                </li>
+                <li>
+                    <h3>已退货商品数：<span class="num">@ViewBag.ReturnNum</span></h3>
+                    <a href="/Web/MemberOrder?orderStatusId=7">查看已退货商品 &gt;  </a>
+                    <img src="/Images/web/portal-icon-3.png" alt="">
+                </li>
+            </ul> 
+            <div style="clear:both"></div>  
+        </div>
+    </div>
+
+    <div style="clear:both"></div>
+</div>
+
+
+
+
+@section scripts{
+    @Scripts.Render("~/Scripts/web/other.js")
+    <script>     
+
+               
+
+    </script>
+
+}

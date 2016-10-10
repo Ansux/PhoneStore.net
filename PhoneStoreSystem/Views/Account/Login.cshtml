@@ -1,0 +1,57 @@
+﻿@model PhoneStoreSystem.Models.LoginModel
+@{
+    Layout = "";    
+}
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="utf-8" />
+        <title>登录-小怪兽手机商城</title> 
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+  
+        @Styles.Render("~/Content/admin/login.css")
+        @Styles.Render("~/Content/admin/ui.css")
+
+        @Scripts.Render("~/bundles/modernizr")
+       
+    <!--[if IE]>
+         @Scripts.Render("~/Scripts/admin/html5.js")	
+	<![endif]-->
+    </head>
+    <body>
+        <section id="loginForm" class="content">
+            
+            @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <legend></legend>
+                    <ul>
+                        <li class="inputLi">
+                            
+                            @Html.TextBoxFor(m => m.UserName)
+                            @Html.ValidationMessageFor(m => m.UserName)
+                        </li>
+                        <li class="inputLi">
+                         
+                            @Html.PasswordFor(m => m.Password)
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </li>                       
+                    </ul>
+                    <input type="submit" class="loginBtn" value="登录" />&nbsp;
+                    <input type="reset" class="loginBtn" value="重置" />&nbsp;&nbsp;
+                 
+                </fieldset>
+            }
+        </section>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryval")
+    </body>
+</html>
+
+

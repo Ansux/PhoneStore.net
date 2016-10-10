@@ -1,0 +1,61 @@
+﻿.leftCenterDIV .MyPay {
+    background-color: #e63547;
+    color: #fff;
+}
+
+.rightCenterDIV .box-title {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 68px;
+    color: #757575;
+}
+
+
+
+.create_edit_div {
+    width:100%;
+    border:1px solid #e0e0e0 ;
+    border-radius:5px;
+    margin:10px 0px;
+    padding:20px 10px ;
+}
+.create_edit_div legend {
+    font-size:20px;
+    color:#e63547;
+    font-weight:bold;
+}
+.create_edit_div .btn {
+    width: 118px !important;
+    height: 28px !important;
+    font-size: 12px !important;
+    line-height: 28px !important;
+    margin-left:0px !important;
+
+}
+/*help帮助器的类*/
+.create_edit_div .editor-label {
+    font-size:14px;
+    color:#666;
+}
+.create_edit_div .editor-field {
+    margin-top:2px;
+    margin-bottom:10px;
+    font-size:16px;
+    color:#000;
+}
+.create_edit_div .editor-field input[type='text'] {
+    height:25px;
+    width:300px;
+    padding:2px;
+}
+.create_edit_div .editor-field textarea {
+    height:150px;
+    width:800px;
+    padding:2px;
+}
+.create_edit_div .editor-field input[type='password'] {
+    height:30px;
+    width:300px;
+    padding:2px; 
+}

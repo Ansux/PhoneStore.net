@@ -1,0 +1,329 @@
+﻿    @charset "utf-8";
+    /*共用型组件初始化*/
+ 
+    body,h1,h2,h3,h4,h5,h6,dl,dt,li,dd,th,td,p,pre,form,input,button,textarea,hr{margin:0;padding:0;}
+
+    img{border:0;}
+    button,input,select,textarea{font-size:100%;}
+    ul,ol{ padding-left:40px;list-style:none;}
+    .clear{ clear:both; }
+    .list-none{ list-style:none; padding:0px; margin:0px;}
+    a{color: #333;text-decoration: none;}
+    a:hover{color:red;}
+    .floatLeft{float:left;}
+    .floatRight{float:right;}
+    html, body {
+        font: 12px/1.8 "Microsoft YaHei",Tahoma,Verdana,"Simsun";
+        color: #333;
+        margin: 0px;
+        padding: 0px;
+        background-color:#fff;
+    }
+    .inner{
+	    width:1200px;
+	    margin:0px auto;
+	    position:relative;
+	    }
+
+    .fl {
+        float:left;
+    }
+    .fr {
+        float:right;
+    }
+    /*html5*/
+    article,aside,dialog,footer,header,section,footer,nav,figure,menu{display:block}
+
+    header{
+	    min-width:1200px;
+	    width:100%;
+	    z-index:999;
+	    right:0px;
+	    left:0px;
+        height:auto;
+        background-color:#fff;
+    }
+
+    .shortcut {
+        height: 29px;
+        line-height: 29px;
+        font-family: arial,"微软雅黑";
+        background-color: #fafafa;
+        border-bottom: 1px solid #ededed;
+        position: relative;
+        z-index: 421;   
+    }
+    .shortcut .shortcut_left {
+        float:left;
+        color:#8c8c8c;
+    }
+    .shortcut .shortcut_right {
+        padding:0px;
+        margin:0px;
+        float:right;
+    }
+    .shortcut .shortcut_right li {
+        float:left;
+        padding:0px 5px;
+    }
+
+    .headtop {
+        height:120px;
+        z-index: 999999;
+       
+    }
+    .headtop .logo {
+        width:200px;
+        height:120px;
+        float:left;
+    }
+    .headtop .search {
+        float:left;
+        width:385px;
+        margin-left:150px;
+        padding:1px 1px 1px 2px;
+        background-color:#b71e1e;
+        margin-top:40px;
+        transition:background 0.5s;
+        position:relative;
+        height:30px;
+    }
+    .headtop .search .search_txt {
+        width:300px;
+        height:28px;
+        border:none;
+        margin:0px;
+        padding:0px 10px; 
+        outline:none;
+        transition:outline 0.5s;
+    }
+    /*
+    .headtop .search .search_txt:focus {
+        outline:#ff6a00 2px solid;
+       
+    }*/
+    .headtop .search .search_btn {
+        margin:0px;
+        padding:0px;    
+        width:80px;
+        height:28px;
+        background:none;
+        border:none;  
+        color:#fff;
+        font-size:14px;
+        cursor:pointer;      
+    }
+    .headtop .search:hover{
+        background:#ff6a00;
+        
+    }
+    .headtop .hotSearch {
+        color:#999;
+        position:absolute;
+        bottom:-25px;
+    }
+
+    .headtop .btn {
+        border:1px solid #cfcfcf;
+        width:160px;
+        height:20px;
+        float:left;
+        margin-top:40px;
+        margin-left:10px;
+        padding:5px 0px;
+    }
+    .headtop .btn a {
+        color:#000;
+        padding:0px 12px;
+    }
+    .headtop .btn a:hover {
+        color:red;
+    }
+
+    header nav {
+        height:auto;
+        font-family: arial,"微软雅黑";
+        background-color: #ca141d;     
+        position: relative;
+        z-index: 421;   
+    }
+    header nav ul.mainNavUl{
+       float:left;
+       margin:0px;
+       padding:0px;
+       
+       line-height: 40px;
+    }
+    header nav li{
+       float:left;
+    }
+    header nav ul.mainNavUl li a{
+       display:block;
+       font-size:16px;
+       height:40px;
+       line-height:40px;
+       padding:0px 30px;  
+       color:#fff;
+       transition:all 0.5s;   
+    }  
+    header nav ul.mainNavUl li a.currentLink {
+        background-color:#9b1a1a;
+    }
+    header nav ul.mainNavUl li a:hover {
+        color:#fff;
+        background-color:#ff6a00;
+    }
+
+    header nav .category {
+        position: relative;
+        float:left;      
+        padding:0px 116px 0 20px; 
+        background-color:#e63547;  
+        font-size:16px;
+        height:39px;
+        line-height:38px;
+        color:#fff;
+        border-bottom: 1px solid #f86675;
+    }
+    header nav .sideNav_div {
+        display:none;
+        position:absolute;
+        height:400px;
+        width:200px;
+        overflow: hidden;
+        background-color:#e63547;
+        top:40px;
+        left:0px;
+      
+    }
+    header nav .sideNav_div .title {
+        float:left;
+        display:block;
+        color:#fff;    
+        font-size:16px;
+        padding-left:20px;
+        padding-top:10px;
+        line-height:20px;
+    }
+    header nav .sideNav_div ul {
+        width:100%;
+        float:left;
+        padding:0px;
+        margin:0px;   
+        height:20px;
+        overflow:hidden;
+        margin-bottom:5px;
+    }
+    header nav .sideNav_div li:first-child {
+         padding:3px 0px 0px 20px;    
+    }
+    header nav .sideNav_div li {
+        float:left;       
+        margin: 0px;
+        padding:3px 0px 0px 10px;
+        line-height:12px;
+    }
+    header nav .sideNav_div a {
+        color:#ffb7ba;       
+        font-size:12px;     
+    }
+    header nav .sideNav_div a:hover {
+        
+        text-decoration:underline;     
+    }
+
+   
+    
+
+    .AdDiv {
+        margin:10px auto;
+    }
+    .AdDiv img{
+        width:1200px;
+        height:160px;
+    }
+
+    .friendlik {
+        width:1180px;
+        margin-top: 10px;
+        padding: 5px 10px;
+        height: 25px;
+        line-height: 25px;
+        box-shadow: 0px 0px 10px #ccc;
+        border-radius: 3px;
+    }
+    .friendlik .title {
+        display: block;
+        color: #333;
+        float: left;
+        font-weight: bold;
+    }
+    .friendlik ul {
+        float: left;
+        margin-left: 10px;
+    }
+    .friendlik li {
+        float: left;
+        display: inline;
+        margin-right: 10px;
+    }
+
+
+
+
+    footer {
+        width: 100%;
+        clear: both;
+        background: #f5f5f5;
+        position: relative;       
+        min-width: 1000px;
+        color:#333;
+       
+    }
+    footer a{
+        color:#333;
+        margin:0px 15px;
+    }
+    .foot-nav {
+        text-align: center;
+        height: 35px;
+        line-height: 44px;       
+    }   
+    .foot-nav span {
+        font-size: 10px;
+        margin: 0px 8px;
+    }
+    .foot-text {
+        text-align: center;
+        padding: 0px 0px 5px;     
+    }    
+
+
+
+    
+/**validation css*/
+.field-validation-error {
+    color: #e80c4d;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #e80c4d;
+    
+    font-size: 1.1em;
+}
+
+.validation-summary-valid {
+    display: none;
+}

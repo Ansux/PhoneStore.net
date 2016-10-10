@@ -1,0 +1,61 @@
+
+* { margin: 0; padding: 0; }
+body { background:#035a95;}
+img {border:0;}
+body,html {}
+.content{
+    position:relative;
+    background:url(../../Images/admin/login_bj.png) no-repeat;
+    width:1040px;
+    height:614px;
+    margin:0 auto;
+    margin-top:100px;
+    /*
+    margin-top:100px;
+    padding-top:290px;
+    padding-left:450px;
+    margin-left:350px;*/
+}
+
+.content form {
+    position:absolute;
+    bottom:160px;
+    right:80px;
+    height:200px;
+    width:240px;
+}
+
+.content form fieldset {
+    position:absolute;
+    bottom:33px;
+    border:none;
+}
+.content form ul{
+    padding:0px;
+    margin:0px;
+}
+.content form .inputLi {
+    height:40px;
+}
+.content form .inputLi input{
+    border: 1px solid #0a8c95;
+    height:30px;
+    padding:0px 5px;
+}
+input.loginBtn {
+    margin-top:10px;
+    width:60px;
+    height:30px;
+    border-radius:5px;
+    background-color:#fff;
+    border:1px solid #3091d2;
+    color:#333;
+    transition:all 0.5s;
+    cursor:pointer;
+}
+input.loginBtn:hover {
+    background-color:#3091d2;
+    border:1px solid #b8d7fe;
+    color:#fff;
+}
+

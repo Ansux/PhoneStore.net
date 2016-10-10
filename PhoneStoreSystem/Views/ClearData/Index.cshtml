@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "数据清理";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Index", "ClearData", FormMethod.Post, new { id="ClearDataForm"}))
+{
+
+    <fieldset class="create_edit_div" style="width:300px;">
+        <legend>@ViewBag.Title</legend>
+       
+        <span style="color:red">@ViewBag.dataMessage</span>
+
+        <p style="color:#000;font-size:16px;">
+            临时图片： @ViewBag.UploadCount 张 <br />
+            产品封面图片： @ViewBag.ProductCount 张 <br />
+            产品款式图片 @ViewBag.StorageCount 张 <br />
+            会员头像图片： @ViewBag.MemberCount 张 <br />
+            幻灯片图片： @ViewBag.SlidesCount 张 <br />
+            <span style="color:red">主要用于删除系统中的无用图片</span>
+        </p>
+    
+        <p style="text-align:center;width:100%;margin-top:10px;">
+             
+            <input type="button" value="清　理" class="btn" />&nbsp;&nbsp;<br />    
+        </p>
+    </fieldset>
+}
+
+
+@section scripts {
+    <script src="~/Scripts/layer-v2.1/layer/layer.js"></script>
+   <script>
+       jQuery(function ($) {
+           $('input[type=button]').click(function () {
+               var index = layer.load(0, { shade: [0.1, '#fff'] });
+               setTimeout(function () { $("#ClearDataForm").submit(); }, 200);
+             
+           });
+
+           $("#clearData").addClass("selected");
+           $("#main_container").fadeIn("slow");
+       });
+
+   </script>
+}

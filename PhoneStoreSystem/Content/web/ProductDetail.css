@@ -1,0 +1,302 @@
+﻿body {
+    background-color:#F0F0F0;
+}
+
+.Nav {
+    margin-top:10px;
+    color:#333;
+    font-family:"Arial,Helvetica,sans-serif";
+}
+.Nav a {
+    color:#666;
+}
+
+.ProductInfo {
+    
+    border-radius:0px;
+    margin:10px 0px 10px 0px;
+    background-color:#fff;  
+    float:left;  
+ 
+}
+.ProductInfo #ProImg {
+    margin:30px;
+    width:450px;
+    height:450px; 
+    overflow:hidden;   
+    position:relative;
+    float:left;
+}
+.ProductInfo #ProImg ul{
+	margin: 0px;
+	padding: 0px;
+    height:100%;
+}   
+.ProductInfo #ProImg li{  /*ul:first-child 表示一个ul标签*/	   
+	width:100%;
+	height:100%; 
+    position:absolute;
+    background: 50% 50% no-repeat;
+    background-size:cover;
+}
+
+
+.ProductInfo .ProParam {
+    padding:10px;
+    margin-left:10px;
+    float:left;
+    width:650px;
+    min-height:500px;
+}
+.ProductInfo .ProParam ul {
+    margin:0px;
+    padding:0px;
+    float:left;
+}
+.ProductInfo .ProParam li {
+    float:left;
+    width:650px;
+    line-height:50px;
+    border-bottom:1px dashed #ccc;
+}
+.ProductInfo .ProParam li span {
+    color:#373737;
+    font-size:15px;
+    float:left;
+    width:80px;
+}
+.ProductInfo .ProParam li div {
+    width:550px;
+    float:left;
+    font-size:15px;
+    color:#666;
+}
+.ProductInfo .ProParam li.title {   
+   
+    color:#000;
+    font-size:30px;
+    line-height:100px;
+}
+.ProductInfo .ProParam li .feature {
+    margin-top:10px;
+    line-height:30px;  
+}
+.ProductInfo .ProParam li .price {
+    font-size:20px;
+    color:#c82c2c;
+}
+.ProductInfo .ProParam ul.color {
+    width:550px;
+    float:left;
+    font-size:15px;   
+    color:#666;
+    margin:0px;
+    padding:0px;
+}
+.ProductInfo .ProParam ul.color li {
+    text-align:center;    
+    width:50px;
+    line-height:30px;
+    float:left;
+    border:1px solid #c82c2c;
+    padding:0px 5px;
+    margin-right:10px;
+    margin-top:10px;
+    cursor:pointer;
+    transition:all 0.3s;
+}
+.ProductInfo .ProParam ul.color .currentLi {
+    background-color:#c82c2c;
+    color:#fff;  
+}
+.ProductInfo .ProParam ul.color li:hover {
+    background-color:#c82c2c;
+    color:#fff;
+}
+.ProductInfo .ProParam li:last-child {
+    margin-top:20px;
+    border-bottom:none;
+}
+.ProductInfo .ProParam a.buy {
+    padding:10px 20px;
+    background-color:#e05050;
+    font-size:20px;
+    color:#fff;
+    margin-right:20px;
+    transition:background-color 0.3s;
+}
+.ProductInfo .ProParam a.buy:hover {
+    background-color:#c82c2c;
+}
+.ProductInfo .ProParam a.addCart {
+    padding:10px 20px;
+    background-color:#ea9252;
+    font-size:20px;
+    color:#fff;
+    margin-right:20px;
+    transition:background-color 0.3s;
+}
+.ProductInfo .ProParam a.addCart:hover {
+    background-color:#ff6a00;
+}
+
+.ProductList {
+    float:left;
+    width:240px;
+    min-height:200px;
+    border-radius:0px;
+    background-color:#fff;  
+    float:left;  
+    margin:5px 0px 20px 0px;
+    padding:10px 0px 0px 0px;
+     
+}
+.ProductList .titleDiv {
+    height:30px;
+    padding-left:10px;
+    border-bottom:1px solid #eee;
+}
+.ProductList .title {
+    display:block;
+    color:#000;
+    font-size:18px;
+    line-height:1.1;
+    font-weight:700;
+    float:left;       
+    padding:0px 0px 1px 5px;       
+    border-left: 4px solid #c82c2c;
+    padding-left: 7px;
+}
+.ProductList .content {
+    min-height:200px;  
+    float:left;
+}
+.ProductList .content ul {
+    float:left;
+    margin:0px;
+    padding:0px;
+    width:100%;
+}
+.ProductList .content li {
+    float:left;
+    width:220px;    
+    padding:10px;
+    border-bottom:1px dashed #e5e5e5;
+    transition:background-color 0.2s;
+}
+.ProductList .content li:last-child {
+        border-bottom:none;
+}
+.ProductList .content li:hover {
+    background-color:#f8f8f8;
+}
+.ProductList li img{
+    float:left;   
+}
+.ProductList li nr{
+    float:left;   
+}
+.ProductList .content li span {
+    display:block;
+    width:160px;
+    line-height:25px;
+    margin-left:10px;
+}
+.ProductList .content .name {
+    color:#666;
+    font-size:16px;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
+}
+.ProductList .content .price {
+    color:#e63547;
+    font-size:12px;
+}
+
+.ProductContent {
+    height:auto;
+    position:relative;  
+    margin:5px 10px 20px 10px;     
+    padding:10px;
+    float:left;
+    width:920px;
+    border-radius:0px; 
+    background-color:#fff;  
+    float:left;  
+   
+
+}
+.ProductContent .titleDiv {
+    height:30px;
+    padding:0px;
+    margin-left:10px;
+    border-bottom:1px solid #eee;
+}
+.ProductContent .title {
+    display:block;
+    color:#000;
+    font-size:18px;
+    line-height:1.1;
+    font-weight:700;
+    float:left;       
+    padding:0px 0px 1px 5px;       
+    border-left: 4px solid #c82c2c;
+    padding-left: 7px;
+}
+.ProductContent .content {
+    min-height:200px;  
+    padding:10px;
+}
+.ProductContent img {
+        vertical-align: middle
+}
+ 
+
+.buyNumber {
+    float:left;
+    width: 150px !important;
+    text-align: center;
+    color: #424242;
+    margin-top:5px;
+}
+.buyNumber .change-goods-num {
+    width: 148px !important;
+    height: 38px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+    background-color: #fff;
+    position: relative;
+    zoom: 1;
+}
+.buyNumber a {
+    float: left;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    color: #757575;
+    font-size: 22px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.buyNumber a:hover {
+    background-color:#efefef;   
+}
+.buyNumber input {
+    float: left;
+    width: 72px;
+    height: 38px;
+    line-height: 38px;
+    padding: 0;
+    border-width: 0;
+    color: #424242;
+    font-size: 16px;
+    text-align: center;
+    outline: none;
+}
+
+#addCartSuccess {
+    width:200px;
+    height:200px;
+    box-shadow:0 0 10px #666;
+}

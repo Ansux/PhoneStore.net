@@ -1,0 +1,212 @@
+﻿.leftCenterDIV .MyOrder {
+    background-color: #e63547;
+    color: #fff;
+}
+
+.rightCenterDIV .box-title {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 68px;
+    color: #757575;
+}
+
+.rightCenterDIV .btn {    
+    margin-left:0px !important;
+    width:100px !important;
+    height:30px !important;
+    line-height:30px !important;
+    font-size:14px !important;
+}
+
+.OrderHead {
+    font-size:16px;
+    border-bottom:1px solid #e5e5e5;
+    padding-bottom:10px;
+}
+
+.OrderDetail {
+    padding:10px 0px;
+}
+.order-summary .order-status{
+    font-size:20px;
+    color:#e63547;
+}
+.order-summary .order-desc {
+    padding-top:5px;
+    font-size:14px;
+    color:#999;
+}
+
+.order-progress {
+    height: 65px;
+    margin: 15px 0px;
+}
+.order-progress .progress-list {
+    width: 880px;
+    height: 20px;
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+    border-radius: 20px;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    color: #424242;
+    background-color: #eee;
+}
+.progress-list .step {
+    float: left;
+    width: 220px;
+    height: 20px;
+}
+.progress-list .step-active {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #83c44e;
+    color: #fff;
+}
+.progress-list .step-first {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.progress-list .step .info {
+    margin-top: 15px;
+    color: #757575;
+}
+
+.order-goods {
+
+}
+.order-goods .title {
+    font-size:18px;
+ 
+    padding-bottom:10px;
+}
+.order-goods .info {
+    border:1px solid #e5e5e5;
+}
+.order-goods .info ul{
+    margin:0px;
+    padding:10px 0; 
+    float:left;
+    width:100%;
+    text-align:left;
+}
+.order-goods .info ul li {
+    float:left;
+    font-size:14px;
+    line-height:80px;
+    height:80px;
+}
+.order-goods .info ul.Ultitle{   
+    background-color:#eee;    
+}
+.order-goods .info ul.Ultitle li {
+   font-size:12px;   
+   line-height:20px;
+   height:20px;
+     
+}
+
+
+.order-address {
+    margin-top:50px;
+    padding-bottom:20px;
+    border-bottom:1px solid #e5e5e5;
+}
+.order-address .title {
+    font-size:18px;
+    border-bottom:1px solid #e5e5e5;
+    padding-bottom:10px;
+}
+.order-address .info {
+    
+}
+.order-address .info ul {
+    margin:0px;
+    padding:0px;
+    width:100%;
+}
+.order-address .info ul li {
+    width: 750px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 40px;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.goodsCountDiv {
+    float: right;
+    min-width: 40%;
+    text-align: right;
+    font-size: 14px;
+    line-height:40px;
+    padding-top:10px;
+}
+.goodsCountDiv .name {
+    min-width: 20%;
+    width:50%;
+    max-width:50%;
+    color: #666;
+    float: left;
+}
+.goodsCountDiv .value {
+    min-width:50%;
+    max-width: 80%;
+    width:50%;
+    height:40px;
+    color: #e63547;
+    float: left;
+
+}
+.goodsCountDiv .price {
+    font-size:20px;
+}
+
+
+
+.OpenDiv{
+    width:320px; 
+    padding:10px 20px;
+    display:none;
+}
+
+.OpenDiv .btn {
+    width: 150px !important;
+    height: 30px !important;
+    font-size: 12px !important;
+    line-height: 20px !important;
+    margin-left:0px !important;
+
+}
+/*help帮助器的类*/
+.OpenDiv .editor-label {
+    font-size:16px;
+    color:#e63547;
+}
+.OpenDiv .editor-field {
+    margin-top:2px;
+    margin-bottom:10px;
+    font-size:12px;
+    color:#000;
+    padding:5px 0px;
+    position: relative;
+}
+.OpenDiv .editor-field input[type='text'] {
+    height:25px;
+    width:300px;
+    padding:5px;
+}
+.OpenDiv .editor-field input[type='password'] {
+    height:25px;
+    width:300px;
+    padding:5px;
+}
+
+.OpenDiv .editor-field textarea {
+    height:40px;
+    width:300px;  
+    padding:5px;
+}

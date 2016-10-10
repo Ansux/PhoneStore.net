@@ -1,0 +1,374 @@
+﻿@model PhoneStoreSystem.Models.ProductInfo
+
+@{
+    ViewBag.Title = "添加信息";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<span class="createLink" style="width:120px;padding:0px;">@Html.ActionLink("返回上一页", "Index")</span>
+
+@using (Html.BeginForm("Create", "ProductInfo", FormMethod.Post, new { enctype = "multipart/form-data", id = "formUpdateMain" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset class="create_edit_div">
+        <legend>产品信息</legend>
+        <span style="color:red">@ViewBag.ErrorMessage</span>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TypeId)
+        </div>        
+        <div class="editor-field">
+            @Html.DropDownList("TypeId")
+            @Html.ValidationMessageFor(model => model.TypeId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProName)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.ProName, new { style="width:150px;"})
+            @Html.ValidationMessageFor(model => model.ProName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProFeature)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProFeature)
+            @Html.ValidationMessageFor(model => model.ProFeature)
+        </div>
+
+         <div class="editor-label">
+            @Html.LabelFor(model => model.ProCoverImage)
+        </div>
+        <div class="editor-field">    
+            @Html.TextBoxFor(model => model.ProCoverImage, new { type="file", style="  border: 1px solid #eee;"})
+            @Html.ValidationMessageFor(model => model.ProCoverImage)
+
+            <input type="button" name="btnFileImage" value="上 传 " style=" font-size: 12px;padding:  5px 10px;" id="btnFileImage"  class="btn"/>
+            <span id="uploadMesssge" style="color:red"></span>
+            <br />
+            <span style="color:blue;font-size:12px; line-height:16px;">*推荐图片比例1:1（500*500），支持的格式：（jpg/jpeg/png/gif）</span>
+            <br />
+            <!--如果页面中引用了img元素，而这个元素的src=“#”或src=“”，就会出现一个action执行两次的情况-->
+            <img id="uploadImg" src="/Images/web/white.gif" width="300" height="300" style="border:1px solid #dedede"/>
+        </div>
+
+        <div class="editor-label">
+            款式 
+        </div>
+        <div class="editor-field" style="border:1px solid #ddd;min-height:100px;width:40%;height:auto;">
+            <input type="button" name="addStyle" id="addStyle" value="添加款式 " class="btn" style=" font-size: 12px;padding:  5px;"/>
+            <table class="table_small_div" border="0"  id="StyleList">
+                <tr>
+                    <th style="width:45%;">封面图片</th>
+                    <th style="width:20%;">颜色</th>
+                    <th style="width:20%;">库存</th>
+                    <th style="width:15%;"></th>
+                </tr>
+                
+            </table>
+
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProIntroduce)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.ProIntroduce, new { style="width: 100%; height: 300px; font-size:14px; visibility: hidden;",runat="server"})
+            @Html.ValidationMessageFor(model => model.ProIntroduce)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProReleaseDate)
+        </div>
+        <div class="editor-field">         
+            @Html.TextBox("ProReleaseDate",Convert.ToDateTime(DateTime.Now).ToString("yyyy-MM-dd"), new { @class="Wdate",onFocus="new WdatePicker()", style="width:150px;"}) 
+            @Html.ValidationMessageFor(model => model.ProReleaseDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProPrice)
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("ProPrice",0, new { style="width:100px;"}) 
+            @Html.ValidationMessageFor(model => model.ProPrice)
+        </div>
+
+         <div>
+             @Html.HiddenFor(model => model.ProAuthor, new { @Value = Session["UserName"].ToString() })
+             @Html.HiddenFor(model => model.ProReadNumber, new { @Value = 0 })
+             @Html.HiddenFor(model => model.ProSales, new { @Value = 0 })
+             @Html.HiddenFor(model => model.ProIsSale, new { @Value = true })
+             @Html.HiddenFor(model => model.ProSaleDate, new { @Value = DateTime.Now })
+        </div>
+
+       
+       
+       <p style="text-align:center;width:100%">
+           <input type="submit" value="保 存" class="btn" />&nbsp;&nbsp;&nbsp;
+           <input type="reset" value="重 置" class="btn" />
+        </p>
+    </fieldset>
+}
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { enctype = "multipart/form-data", id = "formAddStyle" }))
+{
+    @Html.ValidationSummary(true)
+
+    <div id="addStyle_div">
+        <div class="addStyle_div_Mask"></div>
+        <div class="addStyle_div_Content">
+            <span class="title">添加款式  <span id="addStyleMesssge" style="color:red"></span> </span>
+
+            <div class="editor-label">
+                颜色
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("ColorId", null, new { style="margin:0px;  height: 30px;"})
+            </div>
+
+            <div class="editor-label">
+                封面图片(500*500)
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("ProImage", new{},new { type="file", style="width: 90%;  border: 1px solid #eee;"}) 
+          
+            </div>
+
+            <div class="editor-label">
+                库存
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("StorageNumber",0, new { style="width:50px;  height: 20px;"}) 
+          
+            </div>
+
+            <p style="text-align:center;width:100%">
+               <input type="button" id="addStyle_div_submitBtn" value="确 定" class="btn" />&nbsp;&nbsp;&nbsp;
+               <input type="button" id="addStyle_div_closeBtn" value="关 闭" class="btn" />
+            </p>
+        </div>
+   
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/My97DatePicker/WdatePicker.js")
+    @Scripts.Render("~/Scripts/MyAjaxForm.js", "~/kindeditor-4.1.3/kindeditor.js", "~/kindeditor-4.1.3/lang/zh_CN.js", "~/kindeditor-4.1.3/plugins/code/prettify.js","~/Scripts/jquery.pagination.js")
+    
+    <script>
+      
+        jQuery(function ($) {
+            $("#proInfo").addClass("selected");
+
+            innerStyleData();
+
+
+            $("#main_container").fadeIn("slow");
+
+
+            $("input[type=submit]").click(function () {
+                //$("#load_div").fadeIn(0);
+                //$("#load_div").css({ "filter": "alpha(opacity:70)", "opacity": "0.7" });
+
+                var index = layer.load(2, { shade: [0.1, '#fff'] });
+
+                // field - validation - error 取消蒙板
+                setTimeout(function () {
+                    if ($(".field-validation-error").length > 0) {
+                        //$("#load_div").fadeOut(250);
+                        layer.close(index);
+                    }
+                }, 200);
+            });
+
+
+            $("#addStyle").click(function(){
+                $("#addStyle_div").fadeIn("slow");
+            });
+
+
+            //添加款式
+            $("#addStyle_div_submitBtn").click(function () {
+
+                //异步上传          
+                if ($("#ProImage").val() != "") {
+
+                    var index = layer.load(2, { shade: [0.1, '#fff'] });
+                    //$("#load_div").fadeIn(0);
+                    //$("#load_div").css({ "filter": "alpha(opacity:70)", "opacity": "0.7" });
+
+                    $("#formAddStyle").ajaxSubmit({
+                        url: '/ProductInfo/AddStyle_FileImg',
+                        type: 'post',
+                        success: function (imgData) {
+                            //$("#uploadImg").attr("src", $("#ProImage").val());
+                            //console.log(imgData);
+                            //$("#load_div").fadeOut(250);
+                            layer.close(index);
+
+                            if (imgData == "true") {
+                                innerStyleData();
+
+                                $("#addStyle_div").fadeOut("slow");
+
+                                $("#ColorId").val(1);
+                                $("#ProImage").val("");
+                                $("#StorageNumber").val(0);
+                                $("#addStyleMesssge").text("");
+                                
+                            } else if (imgData == "false_ColorError") {
+                                $("#addStyleMesssge").text("已存在该颜色了！");
+                            } else {
+                                $("#addStyleMesssge").text("上传失败，怪我咯！");
+                            }
+                        },
+                        error: function (msg) {
+                            $("#addStyleMesssge").text("添加失败，请检查数据！");
+                            //$("#load_div").fadeOut(250);
+                            layer.close(index);
+                        }
+                    });
+                } else {
+                    $("#addStyleMesssge").text("请完善表格数据！");
+                }
+             });
+
+            $("#addStyle_div_closeBtn").click(function () {
+                $("#addStyle_div").fadeOut("slow");
+                $("#ColorId").val(1);
+                $("#ProImage").val("");
+                $("#StorageNumber").val(0);
+                $("#addStyleMesssge").text("");
+            });
+
+
+           
+            //显示款式列表
+            function innerStyleData() {
+                $.ajax({
+                    type: "POST",
+                    dataType: "text",
+                    url: '/ProductInfo/GetProductStorages',      //提交到一般处理程序请求数据   
+                    success: function (data) {
+                        //console.log(eval(data));
+                        var str = "";
+
+                        //result=eval("("+result+")");
+                        $.each(eval(data), function (index, item) {
+                            //console.log(item);
+                            str += "<tr><td><img src='/Images/web/storageImg/" + item.ProImage + "'width='100%' height='100px'/>" +
+                                    "</td><td>" + item.ColorName +
+                                    "</td><td>" + item.StorageNumber +
+                                    "</td><td>" +
+                                    "<input type='button' value='移除' itemId=" + item.id + " class='btn removeProductStorage' />" + 
+                                    "</td></tr>";
+                        });
+                        if (str == "") {
+                            str = "<tr><td colspan='4'>暂无款式哦，马上去添加吧！</td></tr>";
+                        }
+                        $("#StyleList tr:gt(0)").remove();
+
+                        $("#StyleList").append(str);
+
+
+                        $(".removeProductStorage").click(function () {
+         
+                            $.ajax({
+                                type: "POST",
+                                dataType: "text",
+                                url: '/ProductInfo/removeProductStorage',
+                                data: "id=" + $(this).attr("itemid"),
+                                success: function (data) {
+                                    innerStyleData();
+                                }
+                            });
+                        });
+                    },
+                    error: function (msg) {
+                        console.log(msg);
+                        str = "<tr><td colspan='4'>请求数据失败！" + msg + "</td></tr>";
+
+                        $("#List tr:gt(0)").remove();
+
+                        $("#List").append(str);
+
+                    }
+                });
+            }
+
+            //异步实现图片上传
+            $("#btnFileImage").click(function () {
+                if ($("#ProCoverImage").val() != "") {
+
+                    var index = layer.load(2, { shade: [0.1, '#fff'] });
+                    //$("#load_div").fadeIn(0);
+                    //$("#load_div").css({ "filter": "alpha(opacity:70)", "opacity": "0.7" });
+
+                    $("#formUpdateMain").ajaxSubmit({
+                        url: '/ProductInfo/FileImgUpload',
+                        type: 'post',
+                        success: function (imgData) {
+                            if (imgData != "false") {
+                                $("#uploadImg").attr("src", imgData);
+                                $("#uploadMesssge").html("上传图片成功！");
+                            } else {
+                                $("#uploadMesssge").html("上传失败，文件格式不正确或文件超过2M限制！");
+                            }
+                            layer.close(index);
+                            //$("#load_div").fadeOut(250);
+                        },
+                        error: function (msg) {
+                            console.log(msg);
+                            $("#uploadMesssge").html("上传图片失败，请联系管理员！" + msg.statusText + "");
+                            //$("#load_div").fadeOut(250);
+                            layer.close(index);
+                        }
+                    });
+                }
+            });
+
+        });
+
+       
+
+        
+
+     
+
+
+        //首先实现富文本编辑器的实现
+        KindEditor.ready(function (K) {
+            window.editorUpdate = K.create('#ProIntroduce', {
+                cssPath: '../../kindeditor-4.1.3/plugins/code/prettify.css',
+                uploadJson: '../../kindeditor-4.1.3/asp.net/upload_json.ashx',
+                fileManagerJson: '../../kindeditor-4.1.3/asp.net/file_manager_json.ashx',
+                allowFileManager: true,
+                afterCreate: function () {
+                    var self = this;
+                    K.ctrl(document, 13, function () {
+                        self.sync();
+                        K('form[name="ProIntroduce"]')[0].submit();
+                    });
+                    K.ctrl(self.edit.doc, 13, function () {
+                        self.sync();
+                        K('form[name="ProIntroduce"]')[0].submit();
+                    });
+                }
+            });
+            prettyPrint();
+            //获取添加文本框内容
+            function getEditorAddData() {
+                return editorUpdate.html();     //使用上面定义的window.editorAdd的方法的HTML代码   韩迎龙注释
+            }
+            //给富文本框赋值
+            function setEditorUpdateData(data) {
+                editorUpdate.html(data);   //富文本框的使用方法:window.editorUpdate   韩迎龙注释
+            }
+        });
+    </script>
+    }
+

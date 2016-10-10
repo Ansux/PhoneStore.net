@@ -1,0 +1,72 @@
+﻿@model PhoneStoreSystem.Models.Member
+
+@{
+    ViewBag.Title = "详细信息";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<p>
+<span class="createLink">@Html.ActionLink("编 辑", "Edit", new { id=Model.MemberId })</span>
+       
+        &nbsp;&nbsp;
+<span class="createLink" style="width:120px;padding:0px;">@Html.ActionLink("返回上一页", "Index")</span>
+
+</p>
+
+<fieldset class="create_edit_div">
+        <legend>会员信息</legend>
+
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MemberName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MemberName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MemberPassword)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MemberPassword)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MemberRealName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MemberRealName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MemberPhone)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MemberPhone)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MemberRegisterTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MemberRegisterTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MemberPhoto)
+    </div>
+    <div class="display-field">
+            <img id="uploadImg" src="/Images/web/memberImg/@ViewBag.ImagUrl" width="300" height="300" />
+    </div>
+
+</fieldset>
+
+@section scripts {
+   <script>
+       jQuery(function ($) {
+           $("#proInfo").addClass("selected");
+           $("#main_container").fadeIn("slow");
+       });
+
+       </script>
+   }

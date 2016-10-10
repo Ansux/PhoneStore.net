@@ -1,0 +1,9 @@
+﻿@model IEnumerable<PhoneStoreSystem.Models.Navigation>
+
+
+<ul class="mainNavUl">    <!--openDIV()--> 
+    <li><a href="/Web/Index" class="currentLink">首页</a></li>
+    @foreach (var item in Model) {       
+        <li><a href="@item.NavUrl" >@item.NavName</a></li>       
+    }
+</ul>

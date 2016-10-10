@@ -1,0 +1,190 @@
+﻿@model IEnumerable<PhoneStoreSystem.Models.ProductInfo>
+
+@{
+    
+    ViewBag.Title = "产品信息管理";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<span class="createLink">@Html.ActionLink("添加信息", "Create")</span>
+
+
+@using(Html.BeginForm("Index","ProductInfo",FormMethod.Get)){
+    <p class="searchDiv">
+        
+        上架时间：@Html.TextBox("SaleDateStart", "1993-10-06", new { @class="Wdate",onFocus="new WdatePicker()"}) -
+        @Html.TextBox("SaleDateEnd",Convert.ToDateTime(DateTime.Now).ToString("yyyy-MM-dd"), new { @class="Wdate",onFocus="new WdatePicker()"})
+        &nbsp;&nbsp;
+        是否上架：@Html.DropDownList("ProIsSales") &nbsp;&nbsp;
+
+        <br />
+        产品类型：@Html.DropDownList("ProductTypes", "全 部") &nbsp;&nbsp;
+        
+        发布者：
+        @*if (((SelectList)ViewBag.ProAuthors as SelectList).Count() == 1)
+        {
+            @Html.DropDownList("ProAuthors") 
+        }else{*@
+            @Html.DropDownList("ProAuthors", "全 部")
+        
+         &nbsp;&nbsp;
+        产品名称： @Html.TextBox("ProName")
+       
+      <input type="submit" value="筛 选" class="btn"/>
+
+     </p>
+}
+
+
+<table class="table_div" border="0"  id="List">
+    <tr>
+        <th style="width:15%;">产品型号</th>
+        <th style="width:10%;">产品封面</th>
+        <th style="width:20%;">产品特色</th>
+        <th style="width:11%;">发布日期</th>
+        <th style="width:15%;">上架日期</th>
+        <th style="width:9%;">单价</th>
+        <th style="width:20%;"></th>
+    </tr>
+  
+</table>
+<div id="Pagination" class="right scott"></div>
+
+<link href="~/Content/pagination.css" rel="stylesheet" type="text/css" />
+
+<span id="listCount" style="display:none">@ViewBag.listCount</span>
+<span id="pageIndex" style="display:none">@ViewBag.pageIndex</span>
+
+<!--
+<span id="proAuthor" style="display:none">@ViewBag.proAuthor</span>
+<span id="proName" style="display:none">@ViewBag.proName</span>
+<span id="typeId" style="display:none">@ViewBag.typeId</span>
+<span id="startDate" style="display:none">@ViewBag.startDate</span>
+<span id="endDate" style="display:none">@ViewBag.endDate</span>
+-->
+
+
+
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/jquery.pagination.js")
+    @Scripts.Render("~/My97DatePicker/WdatePicker.js")
+ 
+    <script>
+        jQuery(function ($) {
+            
+            //$("#load_div").show();
+            var index = layer.load(2, { shade: [0.1, '#fff'] });
+
+            $("#proInfo").addClass("selected");
+            
+
+            var listCount = $("#listCount").html();
+            var pageIndex = $("#pageIndex").html();
+  
+            setTimeout(function () { InitTable(pageIndex ); $("#main_container").show(0); }, 300)
+
+            var pageSize = 10; //每页显示多少条信息
+
+            if (pageIndex == "") {
+                if (sessionStorage["productInfoIndex"] != null && sessionStorage["productInfoIndex"] != "undefined" && sessionStorage["productInfoIndex"] != "") {
+                    pageIndex = sessionStorage["productInfoIndex"];
+                } else
+                    pageIndex = 0;
+            }
+
+            pageIndex = pageIndex * 1;
+
+            //Load事件，初始化表格数据，页面索引为0（第一页）
+            //分页，PageCount是总条目数，这是必选参数，其它参数都是可选
+            $("#Pagination").pagination(listCount, {
+                callback: PageCallback,  //PageCallback() 为翻页调用次函数。
+                prev_text: "« 上一页",
+                next_text: "下一页 »",
+                items_per_page: pageSize,
+                num_edge_entries: 2,       //两侧首尾分页条目数
+                num_display_entries: 6,    //连续分页主体部分分页条目数
+                current_page: pageIndex   //当前页索引
+            });
+            //翻页调用   
+            function PageCallback(index, jq) {
+                InitTable(index);
+            }
+            //请求数据   
+            function InitTable(pageIndex) {
+               
+                $.ajax({
+                    type: "POST",
+                    dataType: "text",
+                    url: '/ProductInfo/GetPageList',      //提交到一般处理程序请求数据   
+                    data: "pageIndex=" + pageIndex + "&pageSize=" + pageSize + "&ProductTypes=@ViewBag.typeId&ProAuthors=@ViewBag.proAuthor&ProName=@ViewBag.proName&ProIsSales=@ViewBag.proIsSale&SaleDateStart=@ViewBag.startDate&SaleDateEnd=@ViewBag.endDate",           //提交两个参数：pageIndex(页面索引)，pageSize(显示条数)                   
+                    success: function (data) {
+                        var str = "";
+
+                        $.each(eval(data), function (index, item) {
+
+                            var releaseDate = eval('new ' + (item.ProReleaseDate.replace(/\//g, '')));
+                            releaseDate = releaseDate.getFullYear() + "-" + (releaseDate.getMonth() + 1) + "-" + releaseDate.getDate();
+
+                            var saleDate = eval('new ' + (item.ProSaleDate.replace(/\//g, '')));
+                            saleDate = saleDate.getFullYear() + "-" + (saleDate.getMonth() + 1) + "-" + saleDate.getDate() + " " + saleDate.getHours() + ":" + saleDate.getMinutes();
+                            /*
+                            var abstract = item.NewsAbstract.toString();
+                            if (abstract.length > 30) {
+                                abstract = abstract.substr(0, 30) + "...";
+                            }
+                            */
+                            str += "<tr><td>" + item.ProName +
+                                    "</td><td><img src='/Images/web/productImg/" + item.ProCoverImage + "'width='90' height='90'/>" +
+                                    "</td><td>" + item.ProFeature +
+                                    "</td><td>" + releaseDate +
+                                    "</td><td>" + saleDate +
+                                    "</td><td>" + item.ProPrice +
+                                    "元</td><td>" +
+                                    "<a href='/ProductInfo/Edit/" + item.ProId + "'>编辑</a>  " +
+                                    "<a href='/ProductInfo/Details/" + item.ProId + "'>详情</a>  ";
+                                    
+                         
+                            if (item.ProIsSale == true) {
+                                str += "<a href='javascript:;' onclick=\"layer.confirm('你确定要下架它吗？',{btn:['确定','取消'],closeBtn:0,icon:3},function(){ window.location.href='/ProductInfo/Delete/" + item.ProId + "'})\">下架</a>";
+
+                            } else if (item.ProIsSale == false) {
+                                str += "<a href='javascript:;' style='background-color:#FFFEC0;color:#008DDA;' onclick=\"layer.confirm('你确定要上架吗？',{btn:['确定','取消'],closeBtn:0,icon:3},function(){ window.location.href='/ProductInfo/Reshelf/" + item.ProId + "'})\">上架</a>";
+
+                            }
+                            str+="</td></tr>";
+
+                        });
+                        if (str == "") {
+                            str = "<tr><td colspan='7'>暂无数据，请添加！</td></tr>";
+                            $("#Pagination").hide();
+                        }
+                        $("#List tr:gt(0)").remove();
+                  
+                        $("#List").append(str);
+                        //$("#load_div").fadeOut(250);
+                        layer.close(index);
+                    },
+                    error: function (msg) {
+                        console.log(msg);
+                        str = "<tr><td colspan='7'>请求数据失败！"+msg+"</td></tr>";
+                    
+                        $("#List tr:gt(0)").remove();
+
+                        $("#List").append(str);
+                        //$("#load_div").fadeOut(250);
+                        layer.close(index);
+                    }
+                });
+
+                sessionStorage["productInfoIndex"] = pageIndex%9999;
+
+            }
+            
+        });
+    </script>
+}
+

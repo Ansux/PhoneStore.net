@@ -1,0 +1,18 @@
+﻿
+
+ <ul>
+    <li><a href="/Web/MemberCenter" class="MyCenter">我的个人中心</a></li>
+    <li><a href="/Web/MemberOrder" class="MyOrder">我的订单</a></li>
+    <li><a href="/Web/MemberCart" class="MyCart">我的购物车</a></li>
+    <li><a href="/Web/MemberAddress"  class="MyAddress">收货地址管理</a></li>
+    <li><a href="/Web/MemberPay"  class="MyPay">我的支付通</a></li>
+    <li><a href="/Web/MemberInfo"  class="MyInfo">个人资料</a></li>
+    <li><a href="/Web/MemberEditPwd" class="EditPwd">修改密码</a></li>
+    <li>
+        @using (Html.BeginForm("LogOff", "Web", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()">注销</a>
+        }
+    </li>
+</ul>

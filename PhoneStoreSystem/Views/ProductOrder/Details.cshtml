@@ -1,0 +1,125 @@
+﻿@model PhoneStoreSystem.Models.Order
+@{
+    ViewBag.Title = "详细信息";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<p>
+
+<span class="createLink" style="width:120px;padding:0px;">@Html.ActionLink("返回上一页", "Index")</span>
+
+</p>
+
+<fieldset class="create_edit_div">
+    <legend>产品信息</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderTime)
+    </div>   
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderPayTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderPayTime) &nbsp;
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderSendTime) 
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderSendTime) &nbsp;
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderSuccessTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderSuccessTime) &nbsp;
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderPrice)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderPrice)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderCount)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderCount)
+    </div>
+
+    
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderProName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderProName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderProIntroduce)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderProIntroduce)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderProCoverImage)
+    </div>
+    <div class="display-field">
+            <img id="uploadImg" src="/Images/web/productImg/@ViewBag.ImagUrl" width="300" height="300" />
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ColorName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ColorName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderStatus.OrderStatusIdName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderStatus.OrderStatusIdName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Member.MemberName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Member.MemberName)
+    </div>
+</fieldset>
+
+
+
+@section scripts {
+   <script>
+       jQuery(function ($) {
+           $("#proOrder").addClass("selected");
+           $("#main_container").fadeIn("slow");
+       });
+    </script>
+}

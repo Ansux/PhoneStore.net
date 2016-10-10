@@ -1,0 +1,57 @@
+﻿@model PhoneStoreSystem.Models.UserInfo
+
+@{
+    ViewBag.Title = "个人信息";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<p>
+     <span class="createLink">@Html.ActionLink("编 辑", "EditMyInfo", new { id=Model.UserId })</span>
+    &nbsp;&nbsp;
+
+     <span class="createLink">@Html.ActionLink("修改密码", "AlterPassword", new { id=Model.UserId })</span>
+</p>
+
+<fieldset class="create_edit_div">
+    <legend>个人信息</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RealName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RealName) &nbsp;
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserEmail)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserEmail)&nbsp;
+    </div>
+
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RoleInfo.RoleName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RoleInfo.RoleName)
+    </div>
+</fieldset>
+
+
+@section scripts {
+   <script>
+       jQuery(function ($) {
+           $("#myInfo").addClass("selected");
+           $("#main_container").fadeIn("slow");
+       });
+
+   </script>
+}

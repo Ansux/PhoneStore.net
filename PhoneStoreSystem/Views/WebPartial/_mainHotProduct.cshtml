@@ -1,0 +1,61 @@
+﻿@model IEnumerable<PhoneStoreSystem.Models.ProductInfo>
+
+<div class="titleDiv">
+    <span class="titleName">
+        热门产品
+    </span>
+    <ul class="productType">
+        <li class="currentLi" data-li-num="0">所有品牌</li>
+        @{
+            int i = 1;
+            foreach (PhoneStoreSystem.Models.ProductType x in ViewBag.ProType)
+            { 
+                 <li data-li-num="@i">@x.TypeName</li>
+                i++;
+            }
+        }       
+        <li><a href="/Web/ProductList?proOrderBy=4">查看全部>></a></li>
+    </ul>
+    <div style="clear:both;"></div> 
+</div>
+<div class="productDiv">
+    <ul class="productUl">
+    @foreach (var proAll in Model) { 
+        <li class="productLi">
+            <a href="/Web/ProductDetail/@proAll.ProId" title="@proAll.ProName" target="_self" class="img" data-img-type="/Images/web/productImg/@proAll.ProCoverImage">
+                            
+            </a>                      
+            <a class="title" href="/Web/ProductDetail/@proAll.ProId">@proAll.ProName</a>                       
+            <span class="price">@proAll.ProPrice 元</span>
+            <div class="hideIntroDiv">@proAll.ProFeature</div>
+        </li>           
+    }           
+    </ul>
+
+    @foreach (IQueryable<PhoneStoreSystem.Models.ProductInfo> pros in ViewBag.ProInfo) { 
+        <ul class="productUl" style="display:none">   
+            
+        @foreach (var pro in pros)
+        {         
+            <li class="productLi">
+                <a href="/Web/ProductDetail/@pro.ProId" title="@pro.ProName" target="_self" class="img" data-img-type="/Images/web/productImg/@pro.ProCoverImage">
+                            
+                </a>                      
+                <a class="title" href="/Web/ProductDetail/@pro.ProId">@pro.ProName</a>                       
+                <span class="price">@pro.ProPrice 元</span>
+                <div class="hideIntroDiv">@pro.ProFeature</div>
+            </li>                          
+        }  
+             
+        @{
+            if (pros.Count() == 0)
+            { 
+                <p style="font-size:20px;text-align:center;color:#999;line-height:250px;">暂无该类型商品...</p>
+            }
+        }
+          
+        </ul>      
+    }
+     
+    <div style="clear:both;"></div> 
+</div>

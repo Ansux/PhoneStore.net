@@ -1,0 +1,49 @@
+﻿@model PhoneStoreSystem.Models.Slide
+
+@{
+    ViewBag.Title = "删除幻灯片";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>你确定要删除这条信息吗？</h3>
+<br />
+<span class="createLink"><a href="avascript:void(0)" onclick="javascript:history.back();">返回上一页</a></span>
+
+
+<fieldset class="create_edit_div">
+    <legend>幻灯片信息</legend>
+
+    <div class="display-label">
+         @Html.LabelFor(model => model.SidImgUrl)
+    </div>
+    <div class="display-field">
+        <img src="/Images/web/slideImg/@ViewBag.ImagUrl" width="750" height="300" />
+    </div>
+
+    <div class="display-label">
+         @Html.LabelFor(model => model.SidUrl)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SidUrl)
+    </div>
+
+    
+
+     @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        <p  style="text-align:center;width:100%">
+            <input type="submit" value="删 除" class="btn"/> 
+        </p>
+    }
+
+</fieldset>
+
+@section scripts {
+   <script>
+       jQuery(function ($) {
+           $("#slideSet").addClass("selected");
+           $("#main_container").fadeIn("slow");
+       });
+
+   </script>
+}

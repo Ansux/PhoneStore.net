@@ -1,0 +1,104 @@
+﻿@model PhoneStoreSystem.Models.Order
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Order</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderPrice)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderPrice)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderCount)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderCount)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderSendTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderSendTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderProName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderProName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderProIntroduce)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderProIntroduce)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderProCoverImage)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderProCoverImage)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ColorName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ColorName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderStatus.OrderStatusIdName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderStatus.OrderStatusIdName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Member.MemberName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Member.MemberName)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

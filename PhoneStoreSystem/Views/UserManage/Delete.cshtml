@@ -1,0 +1,70 @@
+﻿@model PhoneStoreSystem.Models.UserInfo
+
+
+@{
+    ViewBag.Title = "删除用户";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>你确定要删除这条信息吗？</h3>
+<br />
+<span class="createLink">@Html.ActionLink("返回上一页", "Index")</span>
+
+<fieldset class="create_edit_div">
+    <legend>用户信息</legend>
+   
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PassWord)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PassWord)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RoleInfo.RoleName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RoleInfo.RoleName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RealName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RealName) &nbsp;
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserEmail)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserEmail)&nbsp;
+    </div>
+
+     @using (Html.BeginForm()) {
+         @Html.AntiForgeryToken()
+         @Html.ValidationSummary(true)
+        <p  style="text-align:center;width:100%">
+            <input type="submit" value="删 除" class="btn"/> 
+        </p>
+    }
+</fieldset>
+
+
+
+@section scripts {
+   <script>
+       jQuery(function ($) {
+           $("#userManage").addClass("selected");
+           $("#main_container").fadeIn("slow");
+       });
+
+   </script>
+}

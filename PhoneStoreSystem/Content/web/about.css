@@ -1,0 +1,38 @@
+﻿
+.mapImg{
+	width:40%;
+	float:right;
+    height:430px;
+}
+
+.mainBox {
+	float: left;
+	background: #FFF;
+	overflow: hidden;
+	width:auto;
+   
+}
+
+.mainBox .contactDiv{
+	padding: 15px 10px 0px 10px;
+}
+.contactDiv .conSpan{
+    font-size:16px;
+	color: rgb(68, 68, 68);
+	font-family: Simsun; 
+	margin-left: 40px;
+	padding:3px 0px;
+	}
+.newspaper {
+    font-size:14px;
+    color:#666;
+    -moz-column-count: 3; /* Firefox */
+    -webkit-column-count: 3; /* Safari and Chrome */
+    column-count: 3;
+    -moz-column-gap: 40px; /* Firefox */
+    -webkit-column-gap: 40px; /* Safari and Chrome */
+    column-gap: 40px;
+    -moz-column-rule: 1px dashed #ddd; /* Firefox */
+    -webkit-column-rule: 1px  dashed #ddd;/* Safari and Chrome */
+    column-rule: 1px dashed #ddd;
+}

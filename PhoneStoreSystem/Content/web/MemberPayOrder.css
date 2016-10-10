@@ -1,0 +1,100 @@
+﻿.leftCenterDIV .MyOrder {
+    background-color: #e63547;
+    color: #fff;
+}
+
+.rightCenterDIV .box-title {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 68px;
+    color: #757575;
+}
+
+
+.orderInfo {
+    padding-left: 120px;
+    position:relative;
+}
+.orderInfo .icon-right {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    position: absolute;
+    top: 0px;
+    left: 10px;
+    font-size: 80px;
+    color: #83c44e;
+    text-align: center;
+    border: 2px solid #83c44e;
+    border-radius: 42px;
+    overflow: hidden;
+    _zoom: 1;
+    font-family:"Verdana";
+    
+}
+
+.orderTitle {
+    padding-top:10px;
+    position: relative;
+}
+.orderTitle .title{
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: normal;
+  line-height: 36px;
+}
+.orderTitle .hint {
+  color: #616161;
+  margin-bottom: 5px;
+  line-height: 2;
+}
+.orderTitle .total {
+  margin-bottom: 10px;
+  color: #757575;
+}
+.orderTitle .money {
+  color: #e63547;
+  font-size: 20px;
+}
+
+.orderDetail {
+    width:100%;
+    float:left;
+    margin-top:20px;
+    padding:10px 0px;
+    border-top:1px solid #eee;
+}
+
+.orderDetail ul {
+    margin:0px;
+    padding:0px;
+    float:left;
+}
+.orderDetail ul li {
+    width:750px;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    line-height:40px;
+    font-size:14px;
+    overflow:hidden;    
+}
+.orderDetail ul li .val {
+    color:#e63547;
+}
+
+.payForm {
+    box-shadow:0 0 10px #e5e5e5;
+    border-radius:10px;
+    margin-left:120px;
+    padding:30px;
+    float:left;
+    font-size:20px;
+    line-height:50px;
+}
+.payForm .btn {
+    margin-left:0px !important;
+    width:100px !important;
+    height:30px !important;
+    line-height:30px !important;
+}

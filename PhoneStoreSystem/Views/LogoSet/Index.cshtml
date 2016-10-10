@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Log设置";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<span style="color:red" id="editMesssge"></span>
+
+@using (Html.BeginForm("Index", "LogoSet", FormMethod.Post, new { enctype = "multipart/form-data", 
+    id = "formUpdateMain" }))
+{
+    <fieldset class="create_edit_div">
+        <legend>Logo信息</legend>
+        <span style="color:red">@ViewBag.StatusMessage</span>
+
+        <div class="display-label">
+                 @Html.DisplayText("当前LOGO")
+        </div>
+        <div class="display-field" style="width:200px;height:120px;">
+            <img id="uploadImg" src="/Images/web/@ViewBag.ImagUrl" width="200" height="120" />
+        </div>
+
+        <div class="editor-label">
+                @Html.Label("修改图片")
+        </div>
+        <div class="editor-field">
+            
+            <input type="file" name="InfoLitimg1" id="InfoLitimg1" />
+           
+            <br />
+            <span style="color:green;font-size:12px; line-height:16px;">*推荐图片比例(200*120)</span>
+
+        </div>
+        <input type="button" name="btnFileImage" value="上传并修改 " id="btnFileImage"  class="btn"/>
+    </fieldset>
+ }
+@section scripts {
+    
+   @Scripts.Render("~/Scripts/MyAjaxForm.js")
+   
+    
+   <script>
+       jQuery(function ($) {         
+           $("#logoSet").addClass("selected");
+           $("#main_container").fadeIn("slow");
+         
+           //异步实现对数据库的图片的修改作用
+           $("#btnFileImage").click(function () {
+               if ($("#InfoLitimg1").val() != "") {            
+                   var index = layer.load(2, { shade: [0.1, '#fff'] });
+
+                   $("#formUpdateMain").ajaxSubmit({
+                       url: '/LogoSet/FileImgUpload',
+                       type: 'post',
+                       success: function (imgData) {
+                           $("#uploadImg").attr("src", imgData);
+                           $("#editMesssge").html("修改logo图片成功！");
+                           layer.close(index);
+                       },
+                       error: function (msg) {
+                           console.log(msg);
+                           $("#editMesssge").html("请求数据失败，请联系管理员！" + msg.statusText + "");
+                           layer.close(index);
+                       }
+                   });
+               }
+           });
+       });     
+   </script>
+}

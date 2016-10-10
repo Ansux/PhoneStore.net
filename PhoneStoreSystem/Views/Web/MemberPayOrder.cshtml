@@ -1,0 +1,148 @@
+﻿@{
+    ViewBag.Title = "支付订单";
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+@section css {
+    @Styles.Render("~/Content/web/MemberPayOrder.css")
+    @Styles.Render("~/Content/web/_MemberCenterStyle.css")
+}
+<div class="inner">  
+    @ViewBag.Test
+    <div class="Nav">
+        <a href="/Web/index" title="首页">首页</a>
+        &gt;          
+        <a href="/Web/MemberCenter" title="我的商城">我的商城</a>
+        &gt;
+        <a href="/Web/MemberOrder" title="我的订单">我的订单</a>
+        &gt;
+        <span>支付订单</span>
+    </div>
+
+    
+    <div class="rightCenterDIV" style="width:1000px;padding-left:100px;padding-right:100px;">
+        <h1 class="box-title">支付订单</h1>    
+        
+        <div class="orderInfo">
+            <div class="orderTitle">
+                <div class="fl">
+                    <span class="title">您的订单已提交成功！付款咯～成功付款后，立即发货</span>
+                    <br />
+                    <span class="hint">请在24小时内完成支付, 超时后将取消订单</span>
+                </div>
+                <div class="fr">
+                    <span class="total">
+                        应付总额：<span class="money">@ViewBag.ProPriceCount 元</span>
+                    </span>
+                    <br />
+                    <a href="/Web/MemberOrder">返回我的订单 ></a>
+                </div>
+            </div>
+
+            <i class="iconfont icon-right">√</i>
+
+            <div class="orderDetail">
+                <ul>
+                    <li>
+                        订单号：
+                        <span class="val">@ViewBag.OrderIds</span>
+                    </li>
+                    <li>
+                        收货信息：
+                        <span class="val">@ViewBag.AddressDetail</span>
+                    </li>
+                    <li>
+                        商品名称：
+                        <span class="val">@ViewBag.ProNames</span>
+                    </li>
+                  
+                </ul>
+            </div>
+        </div>
+
+        <div class="payForm">
+
+            <div>
+                支付通账户：@ViewBag.PaymentUsername 
+            </div>
+            @Html.Label("支付密码：")
+            
+            @Html.Password("xxx", null, new { tautocomplete="off",style="display:none" })
+            @Html.TextBox("payPwd", null, new {  tautocomplete="off" ,type="password" })
+            <p style="text-align:center;width:100%;margin-top:20px;">
+                <!--<input type="button" name="btnUpdate" value="创建" id="btnUpdate" />-->
+                <input type="submit" value="确认付款" class="btn btn-primary" id="SubmitBtn" />&nbsp;&nbsp;                   
+            </p>
+        </div>
+       
+
+
+        <div style="clear:both"></div>
+    </div>
+
+    <div style="clear:both"></div>
+</div>
+
+
+
+
+@section scripts{
+    @Scripts.Render("~/Scripts/web/other.js")
+    <script src="~/Scripts/layer-v2.1/layer/layer.js"></script>
+
+    <script>        
+
+        $("#SubmitBtn").click(function () {
+
+            var memberId =@Session["MemberId"] +"";
+            if (memberId == 0) {
+                layer.alert("请登录！\(^o^)/", { icon: 7, closeBtn: 0, btn: ["前往登录", "取消"] }, function () {
+                    window.location.href = "/Web/MemberLogin";
+                });
+                return;
+            }
+
+
+            var pwd = $("#payPwd").val();
+            if (pwd != "") {
+                $.ajax({
+                    type: "Post",
+                    dataType: "text",
+                    url: '/WebPublic/SubmitPayOrder',     //提交到一般处理程序请求数据   
+                    data: "orderIds=@ViewBag.OrderIds&priceCount=@ViewBag.ProPriceCount&payUsername=" + @ViewBag.PaymentUsername +"&payPwd=" + pwd,           //提交参数              
+                    success: function (data) {
+                        if (data == "True") {
+                            layer.alert('支付成功！\(^o^)/', {
+                                btn: ['完成'], //按钮
+                                icon: 1,
+                                closeBtn:0
+                            }, function () {
+                                window.close();
+                            });
+                        } else if (data == "AlreadyPay") {
+                            layer.msg('对不起，支付页面已关闭！(┬＿┬)', { icon: 5, time: 1000 },
+                                function () {
+                                    window.close();
+                                }
+                            );
+                        } else if (data == "PwdError") {
+                            layer.msg('亲，您的密码错误了哦！(┬＿┬)', { icon: 5, time: 1000 });
+                        }
+                        else if (data == "NoPayPrice") {
+                            layer.msg('亲，您木有钱了，去充值吧！(┬＿┬)', { icon: 5, time: 1000 });
+                        }
+                        else if (data == "SystemError") {
+                            layer.msg('系统错误，怪我咯！(┬＿┬)', { icon: 5, time: 1000 });
+                        }
+                    },
+                    error: function (msg) {
+                        layer.msg('系统错误，怪我咯！(┬＿┬)', { icon: 5, time: 1000 });
+                    }
+                });
+            } else {
+                layer.msg('亲，请输入密码哦！(＞﹏＜)', { icon: 7, time: 1000 });
+            }
+                
+        });
+    </script>
+
+}

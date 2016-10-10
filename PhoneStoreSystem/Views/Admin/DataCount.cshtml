@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "数据统计";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<ul style="color:#4ebaf5;font-size:20px;border:1px solid #4ebaf5;margin:5px;padding:10px;">
+<li>产品型号类别：@ViewBag.ProductTypeCount 类</li>
+<li>上架产品数量：@ViewBag.ProductSaleCount 条</li>
+<li>下架产品数量：@ViewBag.ProductNoSaleCount 条</li>
+<li>产品销售数量：@ViewBag.ProductSalesCount 件</li>
+<li>产品库存数量：@ViewBag.ProductStorageCount 件</li>
+<li>订单数量：@ViewBag.OrdersCount 条</li>
+<li>网站会员：@ViewBag.MembersCount 人</li>
+<li>超级管理员：
+    
+    @foreach(var x in ViewBag.UserAdmin ){
+        <span>@x &nbsp; &nbsp;</span> 
+
+    }
+
+</li>
+    </ul>
+@section scripts {
+   <script>
+       jQuery(function ($) {
+           $("#dataCount").addClass("selected");
+           $("#main_container").fadeIn("slow");
+       });
+
+   </script>
+}

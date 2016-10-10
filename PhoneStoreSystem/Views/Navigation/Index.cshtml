@@ -1,0 +1,59 @@
+﻿@model IEnumerable<PhoneStoreSystem.Models.Navigation>
+
+@{
+    ViewBag.Title = "导航菜单设置";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<span class="createLink">@Html.ActionLink("添加菜单", "Create")</span>
+
+<table class="table_div">
+   
+    @{int i = 0;}
+@foreach (var item in Model) {
+    if(i==0){
+         <tr>
+        <th style="width:10%;">
+            @Html.LabelFor(modelItem=>item.NavId)
+        </th>
+        <th style="width:20%;">
+            @Html.LabelFor(modelItem => item.NavName)
+        </th>
+        <th style="width:50%;">
+            @Html.LabelFor(modelItem => item.NavUrl)
+        </th>
+        <th style="width:20%;"></th>
+    </tr>
+        i++;
+    }
+    
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NavId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NavName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NavUrl)
+        </td>
+        <td>
+            @Html.ActionLink("编辑", "Edit", new { id=item.NavId }) 
+            @Html.ActionLink("详情", "Details", new { id=item.NavId }) 
+            @Html.ActionLink("删除", "Delete", new { id=item.NavId })
+        </td>
+    </tr>
+}
+
+</table>
+
+@section scripts {
+    
+   <script>
+       jQuery(function ($) {     
+           $("#navSet").addClass("selected");
+           $("#main_container").fadeIn("slow");
+       });
+   </script>
+}

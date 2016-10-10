@@ -1,0 +1,379 @@
+﻿@charset "utf-8";
+
+    header nav .sideNav_div {
+        display: block;
+    }
+
+
+    .mainWebSlider {
+        background-color:#f5f5f5;
+    }
+    .mainWebSlider .left {
+        height:400px;
+        width:200px;
+        float:left;
+        background-color:#ff6a00;
+    }
+    .mainWebSlider .jdt {
+        float:left;
+        width:1000px;
+        height:400px;    
+        overflow:hidden;   
+        position:relative;
+        padding:0px;
+        background:#000; 
+    }        
+    .mainWebSlider .jdt ul{
+	    margin: 0px;
+	    padding: 0px;
+       
+    }
+    .mainWebSlider .jdt ul:first-child{
+	    margin: 0px;
+	    padding: 0px;
+        height:100%;
+    }   
+    .mainWebSlider .jdt ul:first-child li{  /*ul:first-child 表示一个ul标签*/	   
+	    width:100%;
+	    height:100%; 
+        position:absolute;
+        background: 50% 50% no-repeat;
+        background-size:cover;
+	}   
+    .mainWebSlider ul:first-child a {
+        width: 100%;
+        height: 100%;
+        display: block;
+        
+    } 
+
+    .mainWebSlider ul:last-child{
+	    margin: 0px;
+	    padding: 0px;
+	    position: absolute;
+	    bottom: 10px;
+        right:20px;
+	    z-index: 999;
+	    width:1000px;
+	    text-align:right;
+	 }   
+    .mainWebSlider ul:last-child li{
+	    display:inline-block;
+	    width:20px;
+	    height:20px;
+	    margin-left:10px;
+	    background:rgba(118, 118, 118, 0.51);
+	    border-radius:5px;
+	    cursor:pointer;
+        transition:background 0.5s;
+	}
+    .mainWebSlider ul:last-child li.currentYd{
+	    background:#df4c4c;
+	}
+    
+
+
+    .mainHotChoose {
+        width:1200px;
+        height:auto;
+        margin-top:20px;
+        padding: 10px 0px 5px 0px;
+        background-color: #fff;
+        border-radius:10px;
+        box-shadow:0 0 10px 5px #f5f5f5 ;
+        
+    }
+    .mainHotChoose .title{
+        color:#000;
+        font-size:18px;
+        line-height:1.1;
+        font-weight:700;
+        float:left;       
+        padding:0px 0px 1px 5px;       
+        border-left: 4px solid #c82c2c;
+        padding-left: 7px;
+    }
+     .mainHotChoose #leftScroll,#rightScroll {
+        color:#e63547;
+        font-size:18px;
+        line-height:18px;
+        padding:0px 10px;
+        background-color:#fefefe;
+        border:1px solid #ededed;
+        position:relative;
+        top:5px;
+        left: 1000px;
+        cursor:pointer;
+        border-radius:5px;
+        transition:all 0.5s;
+    }
+    .mainHotChoose #leftScroll:hover,#rightScroll:hover {
+        background-color:#e63547;
+        color:#fff;
+    }
+    
+    .mainHotChoose #wfScroll {
+        float: left;
+        width: 1180px;
+        height: 350px;
+        position: relative;
+        overflow: hidden;
+        margin: 0px 10px 0px 10px;
+    }   
+    #wfScroll  ol{
+	    list-style:none;
+	    position: relative;
+	    width: 2012em;
+	    height:auto;
+	    padding:0px;
+	    margin:15px 0px 0px 5px;
+       
+    }
+    #wfScroll ol li{      
+        border:1px solid #e5e5e5;
+        border-top:1px solid #e63547;
+
+        background-color:#fff; 
+	    float:left;
+        width:259px;
+        height: 280px;
+	    text-align:center;	   
+	    margin-right: 30px;
+	    position: relative;	   
+	    padding:30px 10px 5px 0px; 
+   
+         
+        -webkit-transition: all 0.2s linear;
+        transition: all 0.2s linear;       
+        -moz-transition:all 0.2s linear;	/* Firefox 4 */
+	    -o-transition:all 0.2s linear; 	/* Opera */	          
+	    }
+    #wfScroll li a.lazyImg_wfScroll {
+        width:200px;
+        height:200px;
+        display:block;
+        margin-left:30px;
+       
+        background-size:100% 100%;
+        background-position:50% 50%;
+       /* background: no-repeat #eee;
+        border: 1px solid #eee;*/
+        transition:background-size 0.3s;
+        -moz-transition: background-size 0.3s;	/* Firefox 4 */
+	    -webkit-transition: background-size 0.3s;	/* Safari 和 Chrome */
+	    -o-transition:background-size 0.3s;	/* Opera */	
+    }
+    #wfScroll li:hover {
+        
+        box-shadow:0px 15px 20px rgba(0, 0, 0, 0.1);
+        transform:translate3d(0,-2px,0);
+        -webkit-transition: all 0.2s linear;
+        transition: all 0.2s linear;
+        -moz-transition:all 0.2s linear;	/* Firefox 4 */
+	    -o-transition:all 0.2s linear; 	/* Opera */	     
+    }
+    #wfScroll li:hover a.lazyImg_wfScroll{
+	    background-size:120% 120%;	   
+    }
+    #wfScroll li .titleName {
+        display: block;   
+        font-size:14px;
+        height:20px;
+        line-height:20px; 
+        margin:0px 10px 5px 10px; 
+        overflow: hidden; 
+    }
+    #wfScroll li .intro {
+        color:#909090;
+        display: block;   
+        font-size:12px;
+        height:20px;
+        line-height:20px;  
+        margin:0px 10px 5px 10px; 
+        overflow: hidden;
+    }
+    #wfScroll li .price {
+        color:#e63547;
+        display: block;   
+        font-size:14px;
+        height:20px;
+        line-height:20px;  
+        margin:0px 10px 10px 10px; 
+        overflow: hidden;
+    }
+    
+    
+
+
+
+    .mainHotProduct {
+        height:auto;
+        margin:20px auto;
+        
+    }
+    .mainHotProduct .titleDiv {        
+        height:30px;
+        padding:0px;
+    }
+    .mainHotProduct .titleDiv .titleName {
+        color:#000;
+        font-size:18px;
+        line-height:1.1;
+        font-weight:700;
+        float:left;       
+        padding:0px 0px 1px 5px;       
+        border-left: 4px solid #c82c2c;
+        padding-left: 7px;     
+    }
+    .mainHotProduct .titleDiv .productType {
+        margin:0px; 
+        left:0px;
+        float:right;
+        position:relative;
+        padding-top:5px;
+    }
+    .mainHotProduct .titleDiv li {
+        float:left;
+        font-size:14px;
+        line-height:20px;
+        color:#8c8c8c;
+        margin:0px 10px;
+        border-bottom:1px solid #eee;
+        cursor:pointer;
+        transition:all 0.2s;
+    }
+    .mainHotProduct .titleDiv li:hover {
+        color:#e63547;
+        border-bottom:1px solid #e63547; 
+    }
+    .mainHotProduct .titleDiv li.currentLi {
+        color:#e63547;
+        border-bottom:1px solid #e63547; 
+    }
+
+    .mainHotProduct .productDiv {
+        height:auto;
+        width:100%;
+        min-height:262px;
+        position:relative; 
+    }
+    .mainHotProduct .productDiv .productUl {
+        margin:0px;       
+        padding:10px 0px 0px 0px;    
+        position: relative;
+         
+    }
+    .mainHotProduct .productUl  li{
+        text-align:center;
+        float:left;
+        width:188px;
+        height:240px;
+        background-color:#fff;
+        margin:0px 5px 10px 5px;   
+        border:1px solid #e5e5e5;
+        overflow:hidden;
+        -webkit-transition: all 0.2s linear;
+        transition: all 0.2s linear;
+    }
+    .mainHotProduct .productUl li:hover {
+        box-shadow:0px 15px 20px rgba(0, 0, 0, 0.25);
+        transform:translate3d(0,-2px,0);
+        -webkit-transition: all 0.2s linear;
+        transition: all 0.2s linear;
+    }
+    .mainHotProduct .productUl a.img {
+        width:160px;
+        height:160px;
+        margin-top:20px;
+        margin-left:15px;
+        font-size: 0px;        
+        display: block;     
+        font-size: 0px;
+        /*background-color:#efefef;*/
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+    }       
+
+    .mainHotProduct .productUl a.title {
+        color:#222;       
+        display: block;   
+        font-size:14px;
+        height:20px;
+        line-height:20px;
+        margin:5px 10px; 
+        overflow: hidden;
+    }
+    .mainHotProduct .productUl .price {
+        color:#e63547;
+        display: block;   
+        font-size:14px;
+        height:20px;
+        line-height:20px;  
+        margin:0px 10px 10px 10px; 
+        overflow: hidden;
+    }
+    .mainHotProduct .productUl .hideIntroDiv {   
+        text-align:left;
+        top:0px;
+        width:168px;
+        height:40px;
+        color:#fff;
+        padding:10px;
+        background:#f94c4c; 
+        position:relative;
+        opacity:0.3;
+        transition:all 0.3s;    
+        -moz-transition: all 0.3s;	/* Firefox 4 */
+        -webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+        -o-transition:all 0.3s;	/* Opera */
+    }
+    .mainHotProduct .productUl li:hover .hideIntroDiv {
+        opacity:1;
+        top:-55px;
+      
+    }
+
+
+    .mainHotProduct .productUl:first-child   li.productLi:first-child{        
+        width:380px;
+        height:492px;
+        margin-right:10px;
+    }
+    .mainHotProduct .productUl:first-child   li.productLi:first-child a{        
+        font-size:20px;
+        line-height:25px;
+        height:20px;
+    }
+    .mainHotProduct .productUl:first-child   li.productLi:first-child .price{        
+        font-size:14px;
+        line-height:25px;
+        height:20px;
+    }
+    .mainHotProduct .productUl:first-child   li.productLi:first-child a.img{        
+        width:350px;
+        height:350px;   
+        margin:20px 15px 10px 15px;
+    }
+    .mainHotProduct .productUl:first-child  li.productLi:first-child .hideIntroDiv {
+        width: 350px;
+        opacity:1;
+        height:60px;
+        font-size:16px;
+        line-height:60px;
+        padding:0px 15px 0px;
+        margin:0;
+        text-align:center;
+        background-color:#f5f5f5;
+        color:#e63547;
+        font-weight:600;
+        font-family:'华为行楷','楷体';
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+     
+    }
+     .mainHotProduct .productUl:first-child  li.productLi:first-child:hover  .hideIntroDiv {
+        
+        top:0px;     
+    }

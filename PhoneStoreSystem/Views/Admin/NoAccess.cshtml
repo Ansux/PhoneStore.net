@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "无权限";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h1 style="color:#4ebaf5">无权限! <br />对不起，您当前无法访问此操作！</h1>
+<br />
+<h2 style="color:#4ebaf5">您需要具备以下权限：@ViewBag.AllowRoles</h2>
+<br />
+<h3  style="color:#4ebaf5">您可以选择:</h3>
+<br />
+
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <span class="createLink">
+           <a href="javascript:document.getElementById('logoutForm').submit()" onclick="sessionStorage.clear()">更换用户</a>
+        </span>
+    }
+<br />
+<span class="createLink">
+    @Html.ActionLink("返回上一页", "Index", new { }, new
+        {
+            onclick = "history.back();location.reload();"
+        })
+        
+</span>
+
+@section scripts {
+ <script>
+       jQuery(function ($) {
+
+           $("#main_container").fadeIn("slow");
+       });
+
+   </script>
+  }
+
+

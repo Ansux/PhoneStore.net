@@ -1,0 +1,137 @@
+﻿@model IEnumerable<PhoneStoreSystem.Models.ProductStorage>
+
+@{
+    ViewBag.Title = "产品库存管理";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<span class="createLink">@Html.ActionLink("添加库存", "Create")</span>
+
+
+@using(Html.BeginForm("Index","ProductStorage",FormMethod.Get)){
+    <p class="searchDiv">        
+        产品类型：@Html.DropDownList("ProductTypes", "全 部") &nbsp;&nbsp;
+          
+        
+        产品颜色：@Html.DropDownList("ProductColors", "全 部") &nbsp;&nbsp;      
+         &nbsp;&nbsp;
+        产品名称： @Html.TextBox("ProName")
+       
+      <input type="submit" value="筛 选" class="btn"/>
+
+     </p>
+}
+
+<table class="table_div" border="0" style="width:600px;" id="List">
+    <tr>
+        <th style="width:30%;">产品型号</th>
+        <th style="width:20%;">款式图片</th>
+        <th style="width:15%;">颜色</th>
+        <th style="width:13%;">库存</th>
+        <th style="width:22%;"></th>
+    </tr>
+  
+</table>
+<div id="Pagination" class="right scott"></div>
+
+<link href="~/Content/pagination.css" rel="stylesheet" type="text/css" />
+
+<span id="listCount" style="display:none">@ViewBag.listCount</span>
+<span id="pageIndex" style="display:none">@ViewBag.pageIndex</span>
+
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/jquery.pagination.js")
+    @Scripts.Render("~/My97DatePicker/WdatePicker.js")
+ 
+    <script>
+        jQuery(function ($) {
+            //$("#load_div").show();
+            var index = layer.load(2, { shade: [0.1, '#fff'] });
+
+            $("#proStorage").addClass("selected");
+
+
+            var listCount = $("#listCount").html();
+            var pageIndex = $("#pageIndex").html();
+
+            setTimeout(function () { InitTable(pageIndex); $("#main_container").show(); }, 300)
+
+            var pageSize = 10; //每页显示多少条信息
+
+            if (pageIndex == "") {
+                if (sessionStorage["productStorageIndex"] != null && sessionStorage["productStorageIndex"] != "undefined" && sessionStorage["productStorageIndex"] != "") {
+                    pageIndex = sessionStorage["productStorageIndex"];
+                } else
+                    pageIndex = 0;
+            }
+            pageIndex = pageIndex * 1;
+
+            //Load事件，初始化表格数据，页面索引为0（第一页）
+            //分页，PageCount是总条目数，这是必选参数，其它参数都是可选
+            $("#Pagination").pagination(listCount, {
+                callback: PageCallback,  //PageCallback() 为翻页调用次函数。
+                prev_text: "« 上一页",
+                next_text: "下一页 »",
+                items_per_page: pageSize,
+                num_edge_entries: 2,       //两侧首尾分页条目数
+                num_display_entries: 6,    //连续分页主体部分分页条目数
+                current_page: pageIndex   //当前页索引
+            });
+            //翻页调用   
+            function PageCallback(index, jq) {
+                InitTable(index);
+            }
+            //请求数据   
+            function InitTable(pageIndex) {
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "text",
+                    url: '/ProductStorage/GetPageList',      //提交到一般处理程序请求数据   
+                    data: "pageIndex=" + pageIndex + "&pageSize=" + pageSize + "&ProductTypes=@ViewBag.typeId&ProductColors=@ViewBag.colorId&ProName=@ViewBag.proName",           //提交两个参数：pageIndex(页面索引)，pageSize(显示条数)                   
+                    success: function (data) {
+                        var str = "";
+
+                        //result=eval("("+result+")");
+                        $.each(eval(data), function (index, item) {
+                            //console.log(item);
+                            str += "<tr><td>" + item.ProductInfo.ProName +
+                                    "</td><td><img src='/Images/web/storageImg/" + item.ProImage + "'width='100px' height='100px'/>" +
+                                    "</td><td>" + item.ProductColor.ColorName +
+                                    "</td><td>" + item.StorageNumber +
+                                    "</td><td>" +
+                                    "<a href='/ProductStorage/Edit/" + item.StorageId + "'>编辑库存信息</a>  " +                              
+                                    "</td></tr>";
+                        });
+                        if (str == "") {
+                            str = "<tr><td colspan='5'>暂无款式哦，马上去添加吧！</td></tr>";
+                        }
+                        $("#List tr:gt(0)").remove();
+
+                        $("#List").append(str);
+                        //$("#load_div").fadeOut(250);
+                        layer.close(index);
+                    },
+                    error: function (msg) {
+                        console.log(msg);
+                        str = "<tr><td colspan='5'>请求数据失败！" + msg + "</td></tr>";
+
+                        $("#List tr:gt(0)").remove();
+
+                        $("#List").append(str);
+                        //$("#load_div").fadeOut(250);
+                        layer.close(index);
+                    }
+                });
+
+                sessionStorage["productStorageIndex"] = pageIndex % 9999;
+
+            }
+
+        });
+    </script>
+}
+

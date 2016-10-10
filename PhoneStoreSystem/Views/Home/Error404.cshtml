@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Error";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="utf-8" />
+        <title>错误404-小怪兽手机商城</title> 
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+
+        
+<style type="text/css">
+
+    * { margin: 0; padding: 0; }
+    body { background:#fff;}
+    img {border:0;}
+    body,html {}
+    .content{
+        position:relative;
+        background:url(../../Images/404.jpg) no-repeat;
+        width:1000px;
+        height:650px;
+        margin:0 auto;
+        margin-top:100px;
+        /*
+        margin-top:100px;
+        padding-top:290px;
+        padding-left:450px;
+        margin-left:350px;*/
+    }
+    .btn {
+        position:absolute;
+        text-align:center;
+        width:150px;
+        font-size:20px;
+        line-height:40px;
+        padding:0px 10px;
+        border-radius:10px;
+        background-color:#fff;
+        color:#666;
+        border:1px solid #999;
+        text-decoration:none;
+        bottom:200px;
+        right:200px;
+        transition:all 0.3s;
+    }
+
+    .btn:hover {
+        border-color:#ee6161;
+        background-color:#ee6161;
+        color:#fff;
+    }
+</style>
+
+
+
+  </head>
+
+    <body>
+       
+    <div class="content">  
+        @{  
+        
+            /*
+            var exception = ViewData.Model;  
+            var statusCode = exception == null ? 404 : 500;  
+            Response.StatusCode = statusCode;  
+            if (statusCode == 404)  
+            {  
+             
+            }  
+            else if (statusCode == 500)  
+            {  
+                <h3>500 程序异常</h3>  
+                <p>@exception.Message</p>  
+            }  
+             */
+            
+        } 
+        <a href="javascript:;" class="btn" style="right:400px;" onclick="window.history.go(-1)">回到上一页</a>
+        <a href="javascript:;" class="btn" onclick="window.location.reload(); ">刷新页面</a>
+        <p style="font-size: 12px; color: Gray;position:absolute;bottom:150px;left:300px;">请使用浏览器的后退功能已保证您填写的数据没有丢失！</p>  
+    </div>  
+    </body>
+</html>
+

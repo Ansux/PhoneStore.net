@@ -1,0 +1,36 @@
+﻿@model PhoneStoreSystem.Models.ProductType
+
+@{
+    ViewBag.Title = "详细分类";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<p>
+    <span class="createLink">@Html.ActionLink("编 辑", "Edit", new { id=Model.TypeId })</span>
+       
+    &nbsp;&nbsp;
+    <span class="createLink">@Html.ActionLink("返回上一页", "Index")</span>
+</p>
+
+<fieldset class="create_edit_div" style="width:300px;">
+    <legend>类型信息</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TypeName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TypeName)
+    </div>
+</fieldset>
+
+
+@section Scripts {
+  
+    <script>
+        jQuery(function ($) {
+            $("#proType").addClass("selected");
+            $("#main_container").fadeIn("slow");
+        });
+
+   </script>
+}

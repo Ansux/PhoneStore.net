@@ -1,0 +1,165 @@
+﻿@model IEnumerable<PhoneStoreSystem.Models.Order>
+
+@{
+    
+    ViewBag.Title = "产品订单管理";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using(Html.BeginForm("Index","ProductOrder",FormMethod.Get)){
+    <p class="searchDiv">
+        <!--
+        下单时间：@Html.TextBox("OrderDateStart", "1993-10-06", new { @class="Wdate",onFocus="new WdatePicker()"}) -
+        @Html.TextBox("OrderDateEnd",Convert.ToDateTime(DateTime.Now).ToString("yyyy-MM-dd"), new { @class="Wdate",onFocus="new WdatePicker()"})
+        <BR />
+            -->
+        订单状态：@Html.DropDownList("OrderStatus", "全 部") &nbsp;&nbsp;
+
+         &nbsp;&nbsp;
+        订单编号： @Html.TextBox("OrderNumber")
+       
+      <input type="submit" value="筛 选" class="btn"/>
+
+     </p>
+}
+
+
+<table class="table_div" border="0"  id="List" style="text-align:center">
+    <tr>
+        <th style="width:15%;">订单号</th>
+        <th style="width:10%;">产品封面</th>
+        <th style="width:12%;">产品名称</th>
+        <th style="width:10%;">单价/元</th>
+        <th style="width:9%;">数量</th>
+        <th style="width:20%;">下单时间</th>
+        <th style="width:10%;">状态</th>
+        <th style="width:14%;"></th>
+    </tr>
+  
+</table>
+<div id="Pagination" class="right scott"></div>
+
+<link href="~/Content/pagination.css" rel="stylesheet" type="text/css" />
+
+<span id="listCount" style="display:none">@ViewBag.listCount</span>
+<span id="pageIndex" style="display:none">@ViewBag.pageIndex</span>
+
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/jquery.pagination.js")
+    @Scripts.Render("~/My97DatePicker/WdatePicker.js")
+ 
+    <script>
+        jQuery(function ($) {
+            //$("#load_div").show();
+            var index = layer.load(2, { shade: [0.1, '#fff'] });
+
+            $("#proOrder").addClass("selected");
+
+
+            var listCount = $("#listCount").html();
+            var pageIndex = $("#pageIndex").html();
+
+            setTimeout(function () { InitTable(pageIndex); $("#main_container").show(0); }, 300)
+
+            var pageSize = 10; //每页显示多少条信息
+
+            if (pageIndex == "") {
+                if (sessionStorage["productOrderIndex"] != null && sessionStorage["productOrderIndex"] != "undefined" && sessionStorage["productOrderIndex"] != "") {
+                    pageIndex = sessionStorage["productOrderIndex"];
+                } else
+                    pageIndex = 0;
+            }
+            pageIndex = pageIndex * 1;
+
+            //Load事件，初始化表格数据，页面索引为0（第一页）
+            //分页，PageCount是总条目数，这是必选参数，其它参数都是可选
+            $("#Pagination").pagination(listCount, {
+                callback: PageCallback,  //PageCallback() 为翻页调用次函数。
+                prev_text: "« 上一页",
+                next_text: "下一页 »",
+                items_per_page: pageSize,
+                num_edge_entries: 2,       //两侧首尾分页条目数
+                num_display_entries: 6,    //连续分页主体部分分页条目数
+                current_page: pageIndex   //当前页索引
+            });
+            //翻页调用   
+            function PageCallback(index, jq) {
+                InitTable(index);
+            }
+            //请求数据   
+            function InitTable(pageIndex) {
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "text",
+                    url: '/ProductOrder/GetPageList',      //提交到一般处理程序请求数据   
+                    data: "pageIndex=" + pageIndex + "&pageSize=" + pageSize + "&OrderStatus=@ViewBag.statusId&OrderNumber=@ViewBag.orderNumber", //&OrderDateStart=@ViewBag.startDate&OrderDateEnd=@ViewBag.endDate",           //提交两个参数：pageIndex(页面索引)，pageSize(显示条数)                   
+                    success: function (data) {
+                        var str = "";
+
+                        $.each(eval(data), function (index, item) {
+                            /*
+                            var orderDate = eval('new ' + (item.OrderTime.replace(/\//g, '')));
+                            orderDate = orderDate.getFullYear() + "-" + (orderDate.getMonth() + 1) + "-" + orderDate.getDate() + " " + orderDate.getHours() + ":" + orderDate.getMinutes();
+                           */
+                           /*
+                            var abstract = item.NewsAbstract.toString();
+                            if (abstract.length > 30) {
+                                abstract = abstract.substr(0, 30) + "...";
+                            }
+                            */
+                            str += "<tr>";
+                            str += "<td>" + item.OrderNumber +
+                                    "</td><td><img src='/Images/web/productImg/" + item.OrderProCoverImage + "'width='90' height='90'/>" +
+                                    "</td><td>" + item.OrderProName +
+                                    "</td><td>" + item.OrderPrice +
+                                    "</td><td>" + item.OrderCount +
+                                    "</td><td>" + item.OrderTime.split(' ')[0] +" "+ item.OrderTime.split(' ')[2]+
+                                    "</td><td>" + item.OrderStatus.OrderStatusIdName +
+                                    "</td><td>";
+                                 
+
+                            if (item.OrderStatus.OrderStatusId == 2) {
+                                str += "<a href='javascript:;' style='display:block;margin:5px 0px;'  onclick=\"layer.confirm('你确定要发货吗？',{btn:['确定','取消'],closeBtn:0,icon:3},function(){ window.location.href='/ProductOrder/Send/" + item.OrderId + "'})\">确认发货</a>";
+                               
+                            } else if (item.OrderStatus.OrderStatusId == 6) {
+                                str += "<a href='javascript:;' style='display:block;margin:5px 0px;'  onclick=\"layer.confirm('你确定允许退货吗？',{btn:['确定','取消'],closeBtn:0,icon:3},function(){ window.location.href='/ProductOrder/AllowReturn/" + item.OrderId + "'})\">允许退货</a>";
+                               
+                            }
+                            str += "<a href='/ProductOrder/Details/" + item.OrderId + "' style='display:block;margin:5px 0px;'>订单详情</a> </td>";
+                            str += "</tr>";
+
+                        });
+                        if (str == "") {
+                            str = "<tr><td colspan='8'>暂无数据，请添加！</td></tr>";
+                            $("#Pagination").hide();
+                        }
+                        $("#List tr:gt(0)").remove();
+
+                        $("#List").append(str);
+                        //$("#load_div").fadeOut(250);
+                        layer.close(index);
+                    },
+                    error: function (msg) {
+                        //console.log(msg);
+                        str = "<tr><td colspan='8'>请求数据失败！" + msg + "</td></tr>";
+
+                        $("#List tr:gt(0)").remove();
+
+                        $("#List").append(str);
+                        //$("#load_div").fadeOut(250);
+                        layer.close(index);
+                    }
+                });
+
+                sessionStorage["productOrderIndex"] = pageIndex % 9999;
+
+            }
+
+        });
+    </script>
+}
+

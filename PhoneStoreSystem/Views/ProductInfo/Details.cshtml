@@ -1,0 +1,181 @@
+﻿@model PhoneStoreSystem.Models.ProductInfo
+
+@{
+    ViewBag.Title = "详细信息";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<p>
+<span class="createLink">@Html.ActionLink("编 辑", "Edit", new { id=Model.ProId })</span>
+       
+        &nbsp;&nbsp;
+<span class="createLink" style="width:120px;padding:0px;">@Html.ActionLink("返回上一页", "Index")</span>
+
+</p>
+
+<fieldset class="create_edit_div">
+        <legend>产品信息</legend>
+
+      
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.ProductType.TypeName)
+        </div>        
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ProductType.TypeName)          
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.ProName)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ProName)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.ProFeature)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ProFeature)
+       
+        </div>
+
+         <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProCoverImage)
+        </div>
+        <div class="display-field">
+             <img id="uploadImg" src="/Images/web/productImg/@ViewBag.ImagUrl" width="300" height="300" />
+        </div>
+
+        <div class="editor-label">
+            款式 
+        </div>
+        <div class="editor-field" style="border:1px solid #ddd;min-height:100px;width:30%;height:auto;">          
+            <table class="table_small_div" border="0"  id="StyleList">
+                <tr>
+                    <th style="width:60%;">封面图片</th>
+                    <th style="width:20%;">颜色</th>
+                    <th style="width:20%;">库存</th>                  
+                </tr>
+                
+            </table>
+
+        </div>
+
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.ProIntroduce)
+        </div>
+        <div class="display-field" style="font: 12px/1.5 'sans serif',tahoma,verdana,helvetica;">
+            @Html.Raw(Model.ProIntroduce)
+        </div>
+
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.ProReleaseDate)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ProReleaseDate)
+        </div>
+
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.ProSaleDate)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ProSaleDate)
+        </div>
+
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.ProPrice)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ProPrice)
+        </div>
+
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.ProSales)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ProSales)
+        </div>
+
+        
+
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.ProReadNumber)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ProReadNumber)
+        </div>
+
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.ProAuthor)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ProAuthor)
+        </div>
+
+
+        
+
+  </fieldset>
+
+@section scripts {
+   <script>
+       jQuery(function ($) {
+           $("#proInfo").addClass("selected");
+           $("#main_container").fadeIn("slow");
+
+           innerStyleData();
+
+           function innerStyleData() {
+               $.ajax({
+                   type: "POST",
+                   dataType: "text",
+                   url: '/ProductInfo/GetProductStorages',      //提交到一般处理程序请求数据   
+                   success: function (data) {
+                       //console.log(eval(data));
+                       var str = "";
+
+                       //result=eval("("+result+")");
+                       $.each(eval(data), function (index, item) {
+                           //console.log(item);
+                           str += "<tr><td><img src='/Images/web/storageImg/" + item.ProImage + "'width='100px' height='100px'/>" +
+                                   "</td><td>" + item.ColorName +
+                                   "</td><td>" + item.StorageNumber +
+                                   "</td>" +                                   
+                                   "</tr>";
+                       });
+                       if (str == "") {
+                           str = "<tr><td colspan='3'>暂无款式哦，马上去添加吧！</td></tr>";
+                       }
+                       $("#StyleList tr:gt(0)").remove();
+
+                       $("#StyleList").append(str);
+
+                       /*
+                       $(".removeProductStorage").click(function () {
+
+                           $.ajax({
+                               type: "POST",
+                               dataType: "text",
+                               url: '/ProductInfo/removeProductStorage',
+                               data: "id=" + $(this).attr("itemid"),
+                               success: function (data) {
+                                   innerStyleData();
+                               }
+                           });
+                       });*/
+                   },
+                   error: function (msg) {
+                       console.log(msg);
+                       str = "<tr><td colspan='3'>请求数据失败！" + msg + "</td></tr>";
+
+                       $("#List tr:gt(0)").remove();
+
+                       $("#List").append(str);
+
+                   }
+               });
+           }
+       });
+
+   </script>
+}

@@ -1,0 +1,44 @@
+﻿@model PhoneStoreSystem.Models.Slide
+
+@{
+    ViewBag.Title = "详细幻灯片";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<p>
+        <span class="createLink">@Html.ActionLink("编 辑", "Edit", new { id=Model.SidId })</span>
+       
+        &nbsp;&nbsp;
+         <span class="createLink">@Html.ActionLink("返回上一页", "Index")</span>
+    </p>
+
+
+<fieldset class="create_edit_div">
+    <legend>幻灯片信息</legend>
+
+    <div class="display-label">
+         @Html.LabelFor(model => model.SidImgUrl)
+    </div>
+    <div class="display-field">
+        <img src="/Images/web/slideImg/@ViewBag.ImagUrl" width="750" height="300" />
+    </div>
+
+    <div class="display-label">
+         @Html.LabelFor(model => model.SidUrl)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SidUrl)
+    </div>
+
+   
+</fieldset>
+
+@section scripts {
+   <script>
+       jQuery(function ($) {
+           $("#slideSet").addClass("selected");
+           $("#main_container").fadeIn("slow");
+       });
+
+   </script>
+}

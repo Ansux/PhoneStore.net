@@ -1,0 +1,22 @@
+﻿
+
+ 
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "主页";
+}
+
+<h1 style="color:#4ebaf5">欢迎使用本系统，在这里你可以完成商城的后台管理！</h1>
+
+
+@section scripts {
+   <script>
+       jQuery(function ($) {
+           $("#index").addClass("selected");
+           //$("#body_load_div").fadeIn(0);
+           $("#main_container").fadeIn("slow");
+          // setTimeout(function () { $("#body_load_div").fadeOut(500);  }, 250);
+       });
+
+   </script>
+}

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<PhoneStoreSystem.Models.Slide>
+
+@{
+    ViewBag.Title = "幻灯片设置";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<span class="createLink">@Html.ActionLink("添加幻灯片", "Create")</span>
+
+
+<table class="table_div">
+  
+
+     @{int i = 0;}
+@foreach (var item in Model) {
+    
+     if(i==0){
+         <tr>
+        <th style="width:10%;">
+            @Html.LabelFor(modelItem=>item.SidId)
+        </th>
+      
+        <th style="width:40%;">
+            @Html.LabelFor(modelItem => item.SidImgUrl)
+        </th>
+
+        <th style="width:30%;">
+            @Html.LabelFor(modelItem => item.SidUrl)
+        </th>      
+        <th style="width:20%;"></th>
+    </tr>
+        i++;
+    }
+    
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SidId)
+        </td>
+       
+        <td>
+             <img src="/Images/web/slideImg/@Html.DisplayFor(modelItem => item.SidImgUrl)" width="100%" height="100"/>
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.SidUrl)
+        </td>
+
+        <td>
+            @Html.ActionLink("编辑", "Edit", new { id=item.SidId }) 
+            @Html.ActionLink("详情", "Details", new { id=item.SidId }) 
+            @Html.ActionLink("删除", "Delete", new { id=item.SidId }) 
+        </td>
+    </tr>
+}
+</table>
+
+
+@section scripts {
+   <script>
+       jQuery(function ($) {
+           $("#slideSet").addClass("selected");
+           $("#main_container").fadeIn("slow");
+       });
+
+   </script>
+}

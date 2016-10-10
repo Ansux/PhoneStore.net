@@ -1,0 +1,36 @@
+﻿@model IEnumerable<PhoneStoreSystem.Models.Slide>
+
+<ul class="imgUl">
+    @{int t=0;}
+    @foreach (var item in Model)
+     {
+         if (t == 0)
+         {
+            <li class="li" style="background-image: url(/Images/web/slideImg/@item.SidImgUrl);">
+                <a href="@item.SidUrl"></a>              
+            </li> 
+         }
+         else { 
+            <li class="li" style="background-image: url(/Images/web/slideImg/@item.SidImgUrl);display:none;">
+                <a href="@item.SidUrl"></a>              
+            </li> 
+         }
+         t++;
+              
+     }   
+                                              
+</ul>
+                    
+<ul class="ydUl">  
+    @{
+        int i=0;
+        for(i=0;i<Model.Count();i++){
+            if(i==0){
+                <li class="yd currentYd"  data-tab-type="0"></li>      
+            }else{
+                <li class="yd"  data-tab-type="@i"></li>    
+            }                       
+        }    
+    }  
+                   
+</ul>

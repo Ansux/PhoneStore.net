@@ -1,0 +1,45 @@
+﻿@model PhoneStoreSystem.Models.ProductColor
+
+@{
+    ViewBag.Title = "添加颜色";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<span class="createLink">@Html.ActionLink("返回上一页", "Index")</span>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+    <fieldset class="create_edit_div" style="width:300px;">
+        <legend>类型信息</legend>
+        <span style="color:red">@ViewBag.pinfoCreateError</span>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ColorName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ColorName)
+            @Html.ValidationMessageFor(model => model.ColorName)
+        </div>
+
+        <p style="text-align:center;width:100%">
+           <!--<input type="button" name="btnUpdate" value="创建" id="btnUpdate" />-->
+           <input type="submit" value="提 交" class="btn" />&nbsp;&nbsp;
+           <input type="reset" value="重 置" class="btn" />
+        </p>
+    </fieldset>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        jQuery(function ($) {
+            $("#proColor").addClass("selected");
+            $("#main_container").fadeIn("slow");
+        });
+
+   </script>
+}

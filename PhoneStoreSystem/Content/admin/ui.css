@@ -1,0 +1,54 @@
+﻿@charset "utf-8";
+/*共用型组件初始化*/
+
+body{
+	line-height: 1.6;
+	font-family: "Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","\9ED1\4F53",Arial,sans-serif;
+	color: #222;
+	font-size: 14px;
+}
+body,h1,h2,h3,h4,h5,h6,dl,dt,li,dd,th,td,p,pre,form,input,button,textarea,hr{margin:0;padding:0;}
+
+img{border:0;
+     vertical-align: middle
+}
+
+button,input,select,textarea{font-size:100%;}
+ul,ol{ padding-left:40px;list-style:none;}
+.clear{ clear:both; }
+.list-none{ list-style:none; padding:0px; margin:0px;}
+a{color: #333;text-decoration: none;}
+a:hover{color:red;}
+.floatLeft{float:left;}
+.floatRight{float:right;}
+
+/*html5*/
+article,aside,dialog,footer,header,section,footer,nav,figure,menu{display:block}
+
+/**validation css*/
+.field-validation-error {
+    color: #e80c4d;
+    font-weight: bold;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #e80c4d;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.validation-summary-valid {
+    display: none;
+}

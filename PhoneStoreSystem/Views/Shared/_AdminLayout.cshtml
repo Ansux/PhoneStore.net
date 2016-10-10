@@ -1,0 +1,168 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - ZZK手机商城系统</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/admin/css")
+        @Scripts.Render("~/bundles/modernizr")
+
+        <!--[if IE]>
+         @Scripts.Render("~/Scripts/admin/html5.js")	
+	    <![endif]-->
+         
+    </head>
+    <body style="background-color: #e7e8eb;" >
+        
+        <div class="header">
+    	    <div class="head_box">
+        	    <div class="inlineDiv">
+            	    <img src="~/Images/admin/admin_logo.png" height="60" class="lg"/>
+                    <section class="floatRight">                
+                        <ul>
+                    	    <li>您好！<span style="color:#666;">@Session["UserName"]</span></li>
+						    <li style="border-right:1px solid #ddd;">@Html.ActionLink("关于我们", "About", "Admin")</li>
+                            <li>
+                                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <a href="javascript:document.getElementById('logoutForm').submit()"  onclick="sessionStorage.clear()">注销</a>
+                                }
+                            </li>
+                        </ul> 
+                    </section>
+                </div>
+            </div>             
+        </div><!--  end of header  -->
+
+        <div style="clear:both;"></div>
+      
+        <div class="inlineDiv">
+            <div id="body_load_div"><img  src="~/Images/load_img.gif" width="50" style="position: relative;top: 45%;left: 45%;"/></div>
+            <div class="contain">
+                <div class="leftDiv floatLeft">
+                    <dl class="menu" style="margin-top:15px;border-top:0px;">                    	 
+                        <dd class="menu_item" id="index">
+                    	    @Html.ActionLink("主页", "index", "Admin")
+                        </dd>
+                        <dd class="menu_item" id="about">
+                    	    @Html.ActionLink("关于我们", "About", "Admin")
+                        </dd>
+                        <dd class="menu_item" id="myInfo">
+                    	    @Html.ActionLink("个人信息", "MyInfo", "Admin")
+                        </dd>
+                          <dd class="menu_item" id="dataCount">
+                    	    @Html.ActionLink("统计", "DataCount", "Admin")
+                        </dd>
+                    </dl>
+            	    <dl class="menu">    
+                	    <dt class="menu_title">         
+                    	    <i class="icon_menu icon_function"></i>功能      
+                        </dt> 
+                         
+                        <dd class="menu_item" id="proInfo">
+                    	    @Html.ActionLink("产品信息管理", "index", "ProductInfo")
+                        </dd>
+
+                        <dd class="menu_item" id="proType">
+                    	    @Html.ActionLink("产品分类管理", "index", "ProductType")
+                        </dd>
+                        <dd class="menu_item" id="proColor">
+                    	    @Html.ActionLink("产品颜色管理", "index", "ProductColor")
+                        </dd>
+                        
+                        <dd class="menu_item" id="proStorage">
+                    	    @Html.ActionLink("产品库存管理", "Index", "ProductStorage")
+                        </dd>
+
+                        <dd class="menu_item" id="proOrder">
+                    	    @Html.ActionLink("产品订单管理", "Index", "ProductOrder")
+                        </dd>
+                        
+                      
+                    </dl>
+                
+                    <dl class="menu">    
+                	    <dt class="menu_title">            
+                    	    <i class="icon_menu icon_setup"></i>设置     
+                        </dt> 
+                       
+                        <dd class="menu_item" id="logoSet">
+                    	    @Html.ActionLink("LOGO设置", "index", "LogoSet")
+                        </dd>
+                        <dd class="menu_item" id="navSet">
+                    	    @Html.ActionLink("导航菜单设置", "index", "Navigation")
+                        </dd>
+                        <dd class="menu_item" id="slideSet">
+                    	    @Html.ActionLink("幻灯片设置", "index", "Slides")
+                        </dd>
+                    
+
+                    </dl>
+                
+                
+            	    <dl class="menu">    
+                	    <dt class="menu_title">            
+                    	    <i class="icon_menu icon_management"></i>其他   
+                        </dt> 
+
+                        <dd class="menu_item" id="proMember">
+                    	    @Html.ActionLink("网站会员管理", "Index", "ProductMember")
+                        </dd>
+
+                        <dd class="menu_item" id="userManage">
+                    	    @Html.ActionLink("用户管理", "index", "UserManage")
+                        </dd>
+
+                       
+                         <dd class="menu_item" id="clearData">
+                    	    @Html.ActionLink("数据清理", "index", "ClearData")
+                        </dd>
+                        <dd class="menu_item" id="backupRestore">
+                    	    @Html.ActionLink("数据备份还原", "index", "BackupRestore")
+                        </dd>
+                      
+                        <dd class="menu_item" id="exit">
+                    	    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <a href="javascript:document.getElementById('logoutForm').submit()"  onclick="sessionStorage.clear()">退出系统</a>
+                                }
+                        </dd>
+                    </dl>
+                </div>
+            
+            
+            
+                <div class="rightDiv floatLeft">
+                    <span class="main_title">@ViewBag.Title</span>
+           
+                    <div id="main_container" style="display:none">
+            		        @RenderBody()
+                            
+                    </div>
+                    <!--<div id="load_div"><img  src="~/Images/load_img.gif" width="50" style="position: relative;top: 45%;left: 45%;"/></div>-->
+                </div>
+          
+                <div class="clear"></div>
+            </div><!--  end of contian  -->
+        </div>
+
+	    <div style="clear:both;"></div>
+   
+        <div class="footer">   		
+             <span>&copy;@DateTime.Now.Year 陪时间荡秋千-ZZK&nbsp;&nbsp;版权所有</span>            
+        </div><!--   end of footer -->      
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jquery/admin")
+        @Scripts.Render("~/Scripts/layer-v2.1/layer/layer.js")     
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

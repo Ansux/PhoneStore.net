@@ -1,0 +1,107 @@
+﻿@model PhoneStoreSystem.Models.Member
+
+@{
+    ViewBag.Title = "修改个人资料";
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+@section css {   
+    @Styles.Render("~/Content/web/MemberInfo.css")
+    @Styles.Render("~/Content/web/_MemberCenterStyle.css")
+}
+
+<div class="inner">
+   
+    <div class="Nav">
+        <a href="/Web/index" title="首页">首页</a>
+        &gt;          
+        <a href="/Web/MemberCenter" title="我的商城">我的商城</a>
+        &gt;
+        <span>@ViewBag.Title</span>
+    </div>
+
+    <div class="leftCenterDIV">
+        @Html.Action("_MemberCenterPartial","WebPartial")       
+    </div>
+
+    
+    <div class="rightCenterDIV">
+        <h1 class="box-title">@ViewBag.Title</h1>    
+           
+        @using (Html.BeginForm("MemberEditInfo","Web",FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="create_edit_div">
+        
+                <span style="color:red">@ViewBag.StatusMessage</span>
+
+                @Html.HiddenFor(model => model.MemberId)
+                
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.MemberName)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.MemberName, new { @readonly=true,style="background-color:#f5f5f5;border:none"})                 
+                </div>
+               
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.MemberRealName)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.MemberRealName)
+                    @Html.ValidationMessageFor(model => model.MemberRealName)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.MemberPhone)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.MemberPhone)
+                    @Html.ValidationMessageFor(model => model.MemberPhone)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.MemberEmail)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.MemberEmail)
+                    @Html.ValidationMessageFor(model => model.MemberEmail)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.MemberBirthDate)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.MemberBirthDate,Model.MemberBirthDate.ToString("yyyy-MM-dd"),new { @class="Wdate",onFocus="new WdatePicker()"})
+                    @Html.ValidationMessageFor(model => model.MemberBirthDate)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.MemberSex)
+                </div>
+                <div class="editor-field">
+                    @Html.RadioButtonFor(model => model.MemberSex, true) 男
+                    &nbsp; &nbsp;
+                    @Html.RadioButtonFor(model => model.MemberSex, false) 女             
+                </div>
+               
+
+                  <p style="text-align:left;width:100%;margin-top:10px;">
+                    <input type="submit" value="保　存" class="btn btn-primary" />&nbsp;&nbsp;&nbsp;
+                    <input type="reset" value="重　置" class="btn btn-primary" />
+                </p>
+            </div>
+        }
+
+    </div>
+    <div style="clear:both"></div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/web/other.js")    
+    @Scripts.Render("~/My97DatePicker/WdatePicker.js")
+}

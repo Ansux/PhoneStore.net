@@ -1,0 +1,61 @@
+﻿@model PhoneStoreSystem.Models.ProductStorage
+
+@{
+    ViewBag.Title = "下架此款产品";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<span class="createLink">@Html.ActionLink("返回上一页", "Index")</span>
+
+    <fieldset class="create_edit_div">
+    <legend>款式信息</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StorageNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StorageNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProImage)
+    </div>
+    <div class="display-field">
+            <img id="uploadImg" src="/Images/web/productImg/@Model.ProImage" width="300" height="300" />
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProductInfo.ProName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProductInfo.ProName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProductColor.ColorName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProductColor.ColorName)
+    </div>
+
+        
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+            <p  style="text-align:center;width:100%">
+                <input type="submit" value="删 除" class="btn"/> 
+            </p>
+        }
+
+</fieldset>
+
+@section scripts {
+   <script>
+       jQuery(function ($) {
+           $("#proStorage").addClass("selected");
+           $("#main_container").fadeIn("slow");
+       });
+    </script>
+
+}
+
+

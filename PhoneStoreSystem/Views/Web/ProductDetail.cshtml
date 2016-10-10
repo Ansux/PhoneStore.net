@@ -1,0 +1,258 @@
+﻿@model PhoneStoreSystem.Models.ProductInfo
+@using PhoneStoreSystem.Models;
+@{
+    ViewBag.Title = "产品详情";
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+@section css {
+    @Styles.Render("~/Content/web/ProductDetail.css")
+}
+
+<div class="inner">
+
+    <div class="Nav">
+        <a href="/Web/index" title="首页">首页</a>
+        &gt;
+        <a href="/Web/ProductList" title="手机列表">手机列表</a>       
+        &gt;
+        <span>@Model.ProName</span>
+    </div>
+   
+   
+    <div class="ProductInfo">
+        <div id="ProImg"> 
+            <ul class="imgUl">  
+                @{int i = 0;}         
+                @foreach (ProductStorage x in ViewBag.productStorage as IQueryable<ProductStorage>)
+                {
+                    if (i == 0)
+                    { 
+                        <li class="li" data-sotrageId="@x.StorageId" style="background-image: url(/Images/web/storageImg/@x.ProImage)"></li>
+                    }
+                    else
+                    {
+                        <li class="li" data-sotrageId="@x.StorageId" style="display:none;background-image: url(/Images/web/storageImg/@x.ProImage)"></li>
+                    }
+                    i++;
+                }                          
+            </ul>
+        </div>
+        <div class="ProParam">
+            <ul>
+                <li class="title">@Model.ProName
+                </li>
+                <li>
+                    <span>价　　格：</span><div class="price">￥@Model.ProPrice</div>
+                    <span>特　　色：</span><div class="feature">@Model.ProFeature</div>
+                </li>
+                <li>
+                    <span>上市时间：</span><div>@Model.ProReleaseDate.ToLongDateString()</div>
+                    <span>颜　　色：</span><ul class="color">
+                                                @{i = 0;}         
+                                                @foreach (ProductStorage x in ViewBag.productStorage as IQueryable<ProductStorage>)
+                                                {
+                                                    if (i == 0)
+                                                    { 
+                                                        <li class="currentLi" data-sotrageId="@x.StorageId" data-colorId="@x.ColorId" data-storageNumber="@x.StorageNumber">@x.ProductColor.ColorName</li> 
+                                                    }
+                                                    else
+                                                    {
+                                                        <li data-sotrageId="@x.StorageId" data-colorId="@x.ColorId" data-storageNumber="@x.StorageNumber">@x.ProductColor.ColorName</li> 
+                                                    }
+                                                    i++;
+                                                }                                                 
+                           　　           </ul>
+                    <span>库　　存：</span><div class="repertory"><span id="storageNumber" style="width:auto">0</span>件</div>
+                </li>
+                <li>
+                    <span>数　　量：</span>
+                    <div class="buyNumber">
+                        <div class="change-goods-num">                    
+                            <a href="javascript:void(0)" id="minus">-</a> 
+                            <input type="text" id="GoodsNumber" name="GoodsNumber" value="0"  data-max-num="10" autocomplete="off"  readonly="true" class="goods-num J_goodsNum"> 
+                            <a href="javascript:void(0)" id="plus">+</a>
+                        </div>                        
+                    </div>        
+                     <span style="width:auto;padding-left:10px;font-size:12px;color:#999;">*最多可一次性购买10件</span>                    
+                </li>
+                <li>                
+                    @{
+                        if (Model.ProIsSale == true)
+                        {
+                            using (Html.BeginForm("MemberCheckOrder", "Web", FormMethod.Post, new { id = "submitCheckout", style = "display: inline;" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("ProInfo")
+                                <a href="javascript:;" class="buy" id="buyBtn">立即购买</a>                            
+                            }
+                   
+                            <a href="javascript:;" class="addCart" id="addCardBtn">加入购物车</a>
+                       <a href="javascript:;" style="color:#999;cursor:default">浏览量（@Model.ProReadNumber） &nbsp;&nbsp;成交量（@Model.ProSales）</a>
+                        }
+                        else
+                        {
+                            <p style="color:#666;font-size:20px;">对不起该产品已经下架！</p>
+                        }
+                    }  
+                  
+                </li>
+            </ul>           
+        </div>
+
+        <div style="clear:both"></div>   
+    </div>
+   
+    <div class="ProductList">
+        <div class="titleDiv">
+            <span class="title">热门手机</span>
+        </div>
+        <div class="content">
+             @{
+                int c = 0;                          
+                <ul>     
+                
+                        @foreach (var h in ViewBag.productHot)
+                        { 
+                            <li>
+                                <a href="@h.ProId" style="display:block;">
+                                    <img src="/Images/web/productImg/@h.ProCoverImage" width="50" height="50"/>
+                                    <div class="nr" style="float:left">
+                                        <span class="name">@h.ProName</span>
+                      
+                                        <span class="price">￥@h.ProPrice</span>
+                                    </div>
+                                </a>
+                            </li>
+                            c++;
+                        }
+                       
+                                     
+                </ul>    
+                if (c == 0)
+                {
+                    <p style="line-height:50px;width:240px; font-size:16px;text-align:center;color:#666">暂无数据!</p>
+                }  
+            }
+        </div>
+
+        <div style="clear:both"></div>
+    </div>
+
+    <div class="ProductContent">
+        <div class="titleDiv">
+            <span class="title">商品详细介绍</span>
+        </div>
+        <div class="content">
+            @Html.Raw(Model.ProIntroduce)
+        </div>
+
+        <div style="clear:both"></div>
+    </div>
+
+    <div style="clear:both"></div>
+</div>
+
+
+
+@section scripts{
+    <script src="~/Scripts/layer-v2.1/layer/layer.js"></script>
+    @Scripts.Render("~/Scripts/web/other.js")
+  
+   
+    <script>      
+
+
+        $(".repertory #storageNumber").html($(".ProParam .color li:first").attr("data-storageNumber"));
+        $(".ProParam .color li").click(function () {           
+            $(".ProParam .color li.currentLi").removeClass("currentLi");
+            $(this).addClass("currentLi");
+            $(".repertory #storageNumber").html($(this).attr("data-storageNumber"));
+            $("#GoodsNumber").val(0);
+
+            $("#ProImg .imgUl li:visible").hide(0);
+            $("#ProImg .imgUl li[data-sotrageId=" + $(this).attr("data-sotrageId") + "]").show(0);
+        });
+
+
+        $(".buyNumber #minus").click(function () {           
+            var num = $("#GoodsNumber").val();
+            if (num > 0) {
+                $("#GoodsNumber").val(--num);
+            }
+        })
+
+        $(".buyNumber #plus").click(function () {
+            var num = $("#GoodsNumber").val()*1;
+            var currentMaxNum = $(".repertory #storageNumber").html() * 1;
+            var maxNum=$("#GoodsNumber").attr("data-max-num")
+
+            if (num < currentMaxNum && num < maxNum) {            
+                $("#GoodsNumber").val(++num);
+            }
+        })
+
+        $("#buyBtn").click(function () {
+            var memberId =@Session["MemberId"] +"";
+            if (memberId == 0) {
+                layer.alert("请登录！\(^o^)/", { icon: 7, closeBtn: 0, btn: ["前往登录", "取消"] }, function () {
+                    window.location.href = "/Web/MemberLogin";
+                });
+                return;
+            }
+
+            var proStorageId = $(".ProParam .color li.currentLi").attr("data-sotrageid") * 1;
+            var goodNum = $("#GoodsNumber").val();           
+            if (goodNum > 0) {
+
+                var pro = proStorageId +  "," + goodNum;
+
+                $("#submitCheckout").find("#ProInfo").val(pro);
+                $("#submitCheckout").submit();
+
+            } else {
+                layer.alert('请选择购买数量！', { icon: 7, closeBtn: 0 });
+            }                          
+           
+        });
+        
+
+        $("#addCardBtn").click(function () {
+            var memberId =@Session["MemberId"] +"";
+            if (memberId == 0) {
+                layer.alert("请登录！\(^o^)/", { icon: 7, closeBtn: 0, btn: ["前往登录", "取消"] }, function () {
+                    window.location.href = "/Web/MemberLogin";
+                });
+                return;
+            }
+
+            var proStorageId = $(".ProParam .color li.currentLi").attr("data-sotrageid") * 1;
+            var goodNum = $("#GoodsNumber").val();
+            var proColorId=$(".ProParam .color li.currentLi").attr("data-colorid") * 1;
+            if (goodNum > 0) {
+                $.ajax({
+                    type: "Post",
+                    dataType: "text",
+                    url: '/WebPublic/AddCart',     //提交到一般处理程序请求数据   
+                    data: "proId=@Model.ProId&proStorageId=" + proStorageId + "&cartCount=" + goodNum + "&proColorId=" + proColorId,           //提交参数              
+                    success: function (data) {
+                        if (data == "True") {
+                            layer.alert('加入购物车成功啦！', { icon: 6, closeBtn: 0 });
+                        } else {
+                            layer.alert(data, { icon: 5, closeBtn: 0 });
+                        }
+                    },
+                    error: function (msg) {
+                        layer.alert('加入购物车失败！', { icon: 5, closeBtn: 0 });
+                    }
+                });
+            } else {
+                layer.alert('请选择购买数量！', { icon: 7, closeBtn: 0 });
+            }
+                
+        })
+
+        
+
+    </script>
+
+}

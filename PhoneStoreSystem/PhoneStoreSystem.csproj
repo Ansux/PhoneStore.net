@@ -1,0 +1,1354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{165924F0-FA96-4D58-BFD6-4B7388772E67}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PhoneStoreSystem</RootNamespace>
+    <AssemblyName>PhoneStoreSystem</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.20710.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.2.0.20710.0\lib\net40\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.1.4.12333\lib\net45-full\DotNetOpenAuth.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.1.4.12333\lib\net45-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Core.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.OData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.4.0.0\lib\net40\System.Web.Http.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.Edm.5.2.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.OData.5.2.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Spatial, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\System.Spatial.5.2.0\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BackupRestoreController.cs" />
+    <Compile Include="Controllers\ClearDataController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LogoSetController.cs" />
+    <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Controllers\ProductColorController.cs" />
+    <Compile Include="Controllers\ProductInfoController.cs" />
+    <Compile Include="Controllers\ProductOrderController.cs" />
+    <Compile Include="Controllers\ProductStorageController.cs" />
+    <Compile Include="Controllers\ProductTypeController.cs" />
+    <Compile Include="Controllers\PublicController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\SlidesController.cs" />
+    <Compile Include="Controllers\SqlHelperController.cs" />
+    <Compile Include="Controllers\UserManageController.cs" />
+    <Compile Include="Controllers\WebController.cs" />
+    <Compile Include="Controllers\WebPartialController.cs" />
+    <Compile Include="Controllers\WebPublicController.cs" />
+    <Compile Include="Controllers\ProductMemberController.cs" />
+    <Compile Include="Filters\CustomHandlerErrorAttribute.cs" />
+    <Compile Include="Filters\OrderStatusAutoValidateAttribute.cs" />
+    <Compile Include="Filters\ProductNotFoundExceptionAttribute.cs" />
+    <Compile Include="Filters\VaildateLoginRoleAttribute.cs" />
+    <Compile Include="Filters\ValidateLoginAttribute.cs" />
+    <Compile Include="Filters\ValidateUniqueAttribute.cs" />
+    <Compile Include="Filters\ValidateMemberLoginAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602271256261_init.cs" />
+    <Compile Include="Migrations\201602271256261_init.Designer.cs">
+      <DependentUpon>201602271256261_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\MyHelper.cs" />
+    <Compile Include="Models\PhoneStoreModels.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\LitJSON.dll" />
+    <Content Include="bin\MvcPager.dll" />
+    <Content Include="Content\admin\index.css" />
+    <Content Include="Content\admin\login.css" />
+    <Content Include="Content\admin\ui.css" />
+    <Content Include="Content\pagination.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\web\about.css" />
+    <Content Include="Content\web\index.css" />
+    <Content Include="Content\web\MemberAddress.css" />
+    <Content Include="Content\web\MemberCart.css" />
+    <Content Include="Content\web\MemberCenter.css" />
+    <Content Include="Content\web\MemberCheckOrder.css" />
+    <Content Include="Content\web\MemberEditPwd.css" />
+    <Content Include="Content\web\MemberInfo.css" />
+    <Content Include="Content\web\MemberOrder.css" />
+    <Content Include="Content\web\MemberOrderDetail.css" />
+    <Content Include="Content\web\MemberPay.css" />
+    <Content Include="Content\web\MemberPayOrder.css" />
+    <Content Include="Content\web\ProductDetail.css" />
+    <Content Include="Content\web\ProductList.css" />
+    <Content Include="Content\web\ProductSearch.css" />
+    <Content Include="Content\web\ui.css" />
+    <Content Include="Content\web\_MemberCenterStyle.css" />
+    <Content Include="Content\web\MemberPayRegister.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\404.jpg" />
+    <Content Include="Images\500.png" />
+    <Content Include="Images\admin\login_bj.png" />
+    <Content Include="Images\web\20151113003939684.png" />
+    <Content Include="Images\web\20151115205857.png" />
+    <Content Include="Images\web\cart-empty.png" />
+    <Content Include="Images\web\favicon.ico" />
+    <Content Include="Images\web\loginBg.jpg" />
+    <Content Include="Images\web\memberImg\photo.jpg" />
+    <Content Include="Images\web\photo.jpg" />
+    <Content Include="Images\web\photo.png" />
+    <Content Include="Images\web\portal-icon-1.png" />
+    <Content Include="Images\web\portal-icon-2.png" />
+    <Content Include="Images\web\portal-icon-3.png" />
+    <Content Include="Images\web\portal-icon-4.png" />
+    <Content Include="Images\web\slideImg\M9efd_1920_05.jpg" />
+    <Content Include="Images\web\slideImg\M9efd_1920_06.jpg" />
+    <Content Include="Images\web\slideImg\M9efd_1920_07.jpg" />
+    <Content Include="Images\web\slideImg\M9efd_1920_12.jpg" />
+    <Content Include="Images\web\slideImg\M9efd_1920_13.jpg" />
+    <Content Include="Images\web\slideImg\M9efd_1920_16.jpg" />
+    <Content Include="Images\web\white.gif" />
+    <Content Include="kindeditor-4.1.3\asp.net\file_manager_json.ashx" />
+    <Content Include="kindeditor-4.1.3\asp.net\upload_json.ashx" />
+    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Images\admin\admin_logo.png" />
+    <Content Include="Images\admin\admin_logo1.png" />
+    <Content Include="Images\admin\icon_menu_ad.png" />
+    <Content Include="Images\admin\icon_menu_developer.png" />
+    <Content Include="Images\admin\icon_menu_function.png" />
+    <Content Include="Images\admin\icon_menu_management.png" />
+    <Content Include="Images\admin\icon_menu_setup.png" />
+    <Content Include="Images\admin\icon_menu_statistics.png" />
+    <Content Include="Images\admin\login_btn1.png" />
+    <Content Include="Images\admin\login_btn2.png" />
+    <Content Include="Images\load_img.gif" />
+    <Content Include="kindeditor-4.1.3\asp.net\bin\LitJSON.dll" />
+    <Content Include="kindeditor-4.1.3\asp.net\demo.aspx" />
+    <Content Include="kindeditor-4.1.3\asp.net\log.txt" />
+    <Content Include="kindeditor-4.1.3\asp.net\README.txt" />
+    <Content Include="kindeditor-4.1.3\examples\colorpicker.html" />
+    <Content Include="kindeditor-4.1.3\examples\custom-plugin.html" />
+    <Content Include="kindeditor-4.1.3\examples\custom-theme.html" />
+    <Content Include="kindeditor-4.1.3\examples\default.html" />
+    <Content Include="kindeditor-4.1.3\examples\dialog.html" />
+    <Content Include="kindeditor-4.1.3\examples\dynamic-load.html" />
+    <Content Include="kindeditor-4.1.3\examples\file-dialog.html" />
+    <Content Include="kindeditor-4.1.3\examples\file-manager.html" />
+    <Content Include="kindeditor-4.1.3\examples\filter-mode.html" />
+    <Content Include="kindeditor-4.1.3\examples\image-dialog.html" />
+    <Content Include="kindeditor-4.1.3\examples\index.css" />
+    <Content Include="kindeditor-4.1.3\examples\index.html" />
+    <Content Include="kindeditor-4.1.3\examples\jquery-ui.html" />
+    <Content Include="kindeditor-4.1.3\examples\jquery.html" />
+    <Content Include="kindeditor-4.1.3\examples\mootools.html" />
+    <Content Include="kindeditor-4.1.3\examples\multi-image-dialog.html" />
+    <Content Include="kindeditor-4.1.3\examples\multi-language.html" />
+    <Content Include="kindeditor-4.1.3\examples\newline.html" />
+    <Content Include="kindeditor-4.1.3\examples\node.html" />
+    <Content Include="kindeditor-4.1.3\examples\paste-type.html" />
+    <Content Include="kindeditor-4.1.3\examples\qqstyle.html" />
+    <Content Include="kindeditor-4.1.3\examples\readonly.html" />
+    <Content Include="kindeditor-4.1.3\examples\simple.html" />
+    <Content Include="kindeditor-4.1.3\examples\total.html" />
+    <Content Include="kindeditor-4.1.3\examples\uploadbutton.html" />
+    <Content Include="kindeditor-4.1.3\examples\url-type.html" />
+    <Content Include="kindeditor-4.1.3\examples\word-count.html" />
+    <Content Include="kindeditor-4.1.3\kindeditor-all-min.js" />
+    <Content Include="kindeditor-4.1.3\kindeditor-all.js" />
+    <Content Include="kindeditor-4.1.3\kindeditor-min.js" />
+    <Content Include="kindeditor-4.1.3\kindeditor.js" />
+    <Content Include="kindeditor-4.1.3\lang\ar.js" />
+    <Content Include="kindeditor-4.1.3\lang\en.js" />
+    <Content Include="kindeditor-4.1.3\lang\zh_CN.js" />
+    <Content Include="kindeditor-4.1.3\lang\zh_TW.js" />
+    <Content Include="kindeditor-4.1.3\license.txt" />
+    <Content Include="kindeditor-4.1.3\plugins\anchor\anchor.js" />
+    <Content Include="kindeditor-4.1.3\plugins\baidumap\baidumap.js" />
+    <Content Include="kindeditor-4.1.3\plugins\baidumap\index.html" />
+    <Content Include="kindeditor-4.1.3\plugins\baidumap\map.html" />
+    <Content Include="kindeditor-4.1.3\plugins\clearhtml\clearhtml.js" />
+    <Content Include="kindeditor-4.1.3\plugins\code\code.js" />
+    <Content Include="kindeditor-4.1.3\plugins\code\prettify.css" />
+    <Content Include="kindeditor-4.1.3\plugins\code\prettify.js" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\emoticons.js" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\0.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\1.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\10.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\100.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\101.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\102.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\103.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\104.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\105.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\106.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\107.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\108.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\109.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\11.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\110.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\111.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\112.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\113.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\114.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\115.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\116.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\117.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\118.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\119.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\12.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\120.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\121.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\122.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\123.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\124.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\125.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\126.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\127.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\128.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\129.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\13.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\130.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\131.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\132.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\133.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\134.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\14.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\15.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\16.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\17.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\18.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\19.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\2.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\20.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\21.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\22.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\23.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\24.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\25.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\26.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\27.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\28.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\29.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\3.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\30.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\31.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\32.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\33.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\34.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\35.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\36.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\37.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\38.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\39.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\4.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\40.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\41.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\42.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\43.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\44.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\45.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\46.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\47.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\48.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\49.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\5.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\50.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\51.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\52.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\53.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\54.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\55.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\56.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\57.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\58.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\59.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\6.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\60.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\61.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\62.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\63.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\64.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\65.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\66.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\67.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\68.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\69.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\7.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\70.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\71.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\72.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\73.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\74.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\75.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\76.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\77.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\78.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\79.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\8.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\80.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\81.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\82.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\83.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\84.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\85.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\86.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\87.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\88.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\89.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\9.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\90.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\91.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\92.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\93.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\94.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\95.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\96.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\97.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\98.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\99.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\emoticons\images\static.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\filemanager\filemanager.js" />
+    <Content Include="kindeditor-4.1.3\plugins\filemanager\images\file-16.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\filemanager\images\file-64.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\filemanager\images\folder-16.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\filemanager\images\folder-64.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\filemanager\images\go-up.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\flash\flash.js" />
+    <Content Include="kindeditor-4.1.3\plugins\image\image.js" />
+    <Content Include="kindeditor-4.1.3\plugins\image\images\align_left.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\image\images\align_right.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\image\images\align_top.gif" />
+    <Content Include="kindeditor-4.1.3\plugins\image\images\refresh.png" />
+    <Content Include="kindeditor-4.1.3\plugins\insertfile\insertfile.js" />
+    <Content Include="kindeditor-4.1.3\plugins\lineheight\lineheight.js" />
+    <Content Include="kindeditor-4.1.3\plugins\link\link.js" />
+    <Content Include="kindeditor-4.1.3\plugins\map\map.html" />
+    <Content Include="kindeditor-4.1.3\plugins\map\map.js" />
+    <Content Include="kindeditor-4.1.3\plugins\media\media.js" />
+    <Content Include="kindeditor-4.1.3\plugins\multiimage\images\image.png" />
+    <Content Include="kindeditor-4.1.3\plugins\multiimage\images\select-files-en.png" />
+    <Content Include="kindeditor-4.1.3\plugins\multiimage\images\select-files-zh_CN.png" />
+    <Content Include="kindeditor-4.1.3\plugins\multiimage\images\swfupload.swf" />
+    <Content Include="kindeditor-4.1.3\plugins\multiimage\multiimage.js" />
+    <Content Include="kindeditor-4.1.3\plugins\pagebreak\pagebreak.js" />
+    <Content Include="kindeditor-4.1.3\plugins\plainpaste\plainpaste.js" />
+    <Content Include="kindeditor-4.1.3\plugins\preview\preview.js" />
+    <Content Include="kindeditor-4.1.3\plugins\quickformat\quickformat.js" />
+    <Content Include="kindeditor-4.1.3\plugins\table\table.js" />
+    <Content Include="kindeditor-4.1.3\plugins\template\html\1.html" />
+    <Content Include="kindeditor-4.1.3\plugins\template\html\2.html" />
+    <Content Include="kindeditor-4.1.3\plugins\template\html\3.html" />
+    <Content Include="kindeditor-4.1.3\plugins\template\template.js" />
+    <Content Include="kindeditor-4.1.3\plugins\wordpaste\wordpaste.js" />
+    <Content Include="kindeditor-4.1.3\themes\common\anchor.gif" />
+    <Content Include="kindeditor-4.1.3\themes\common\blank.gif" />
+    <Content Include="kindeditor-4.1.3\themes\common\flash.gif" />
+    <Content Include="kindeditor-4.1.3\themes\common\loading.gif" />
+    <Content Include="kindeditor-4.1.3\themes\common\media.gif" />
+    <Content Include="kindeditor-4.1.3\themes\common\rm.gif" />
+    <Content Include="kindeditor-4.1.3\themes\default\background.png" />
+    <Content Include="kindeditor-4.1.3\themes\default\default.css" />
+    <Content Include="kindeditor-4.1.3\themes\default\default.png" />
+    <Content Include="kindeditor-4.1.3\themes\qq\editor.gif" />
+    <Content Include="kindeditor-4.1.3\themes\qq\qq.css" />
+    <Content Include="kindeditor-4.1.3\themes\simple\simple.css" />
+    <Content Include="My97DatePicker\calendar.js" />
+    <Content Include="My97DatePicker\config.js" />
+    <Content Include="My97DatePicker\lang\en.js" />
+    <Content Include="My97DatePicker\lang\zh-cn.js" />
+    <Content Include="My97DatePicker\lang\zh-tw.js" />
+    <Content Include="My97DatePicker\My97DatePicker.htm" />
+    <Content Include="My97DatePicker\skin\datePicker.gif" />
+    <Content Include="My97DatePicker\skin\default\datepicker.css" />
+    <Content Include="My97DatePicker\skin\default\img.gif" />
+    <Content Include="My97DatePicker\skin\WdatePicker.css" />
+    <Content Include="My97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="My97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="My97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="My97DatePicker\WdatePicker.js" />
+    <Content Include="My97DatePicker\开发包\lang\en.js" />
+    <Content Include="My97DatePicker\开发包\lang\zh-cn.js" />
+    <Content Include="My97DatePicker\开发包\lang\zh-tw.js" />
+    <Content Include="My97DatePicker\开发包\readme.txt" />
+    <Content Include="My97DatePicker\开发包\skin\datePicker.gif" />
+    <Content Include="My97DatePicker\开发包\skin\default\datepicker.css" />
+    <Content Include="My97DatePicker\开发包\skin\default\img.gif" />
+    <Content Include="My97DatePicker\开发包\skin\WdatePicker.css" />
+    <Content Include="My97DatePicker\开发包\skin\whyGreen\bg.jpg" />
+    <Content Include="My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
+    <Content Include="My97DatePicker\开发包\skin\whyGreen\img.gif" />
+    <Content Include="Scripts\admin\html5.js" />
+    <Content Include="Scripts\admin\index.js" />
+    <Content Include="Scripts\admin\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.8.2.js" />
+    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery.pagination.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-2.2.0.debug.js" />
+    <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\layer-v2.1\demo.html" />
+    <Content Include="Scripts\layer-v2.1\layer\extend\layer.ext.js" />
+    <Content Include="Scripts\layer-v2.1\layer\layer.js" />
+    <Content Include="Scripts\layer-v2.1\layer\skin\default\icon-ext.png" />
+    <Content Include="Scripts\layer-v2.1\layer\skin\default\icon.png" />
+    <Content Include="Scripts\layer-v2.1\layer\skin\default\loading-0.gif" />
+    <Content Include="Scripts\layer-v2.1\layer\skin\default\loading-1.gif" />
+    <Content Include="Scripts\layer-v2.1\layer\skin\default\loading-2.gif" />
+    <Content Include="Scripts\layer-v2.1\layer\skin\layer.css" />
+    <Content Include="Scripts\layer-v2.1\layer\skin\layer.ext.css" />
+    <Content Include="Scripts\layer-v2.1\更新日志.txt" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\MyAjaxForm.js" />
+    <Content Include="Scripts\web\content.js" />
+    <Content Include="Scripts\web\index.js" />
+    <Content Include="Scripts\web\jquery.lazyload.js" />
+    <Content Include="Scripts\web\jquery.lazyload.min.js" />
+    <Content Include="Scripts\web\other.js" />
+    <Content Include="Upload\image\20151104\20151104153927_5032.png" />
+    <Content Include="Upload\image\20151104\20151104153939_2582.png" />
+    <Content Include="Upload\image\20151206\20151206134854_2282.png" />
+    <Content Include="Upload\image\20151206\20151206135301_5224.png" />
+    <Content Include="Upload\image\20151206\20151206201228_5492.jpg" />
+    <Content Include="Upload\image\20151206\20151206201228_6806.jpg" />
+    <Content Include="Upload\image\20151206\20151206201228_7446.jpg" />
+    <Content Include="Upload\image\20151206\20151206201228_8127.jpg" />
+    <Content Include="Upload\image\20151206\20151206201228_8787.jpg" />
+    <Content Include="Upload\image\20151206\20151206201228_9458.jpg" />
+    <Content Include="Upload\image\20151206\20151206201229_0178.jpg" />
+    <Content Include="Upload\image\20151206\20151206201229_0859.jpg" />
+    <Content Include="Upload\image\20151206\20151206201229_1569.jpg" />
+    <Content Include="Upload\image\20151206\20151206201229_2120.jpg" />
+    <Content Include="Upload\image\20151206\20151206201229_2760.jpg" />
+    <Content Include="Upload\image\20151206\20151206201229_3400.jpg" />
+    <Content Include="Upload\image\20151206\20151206201229_4071.jpg" />
+    <Content Include="Upload\image\20151206\20151206201229_4851.jpg" />
+    <Content Include="Upload\image\20151206\20151206201229_5362.jpg" />
+    <Content Include="Upload\image\20151206\20151206201229_6262.jpg" />
+    <Content Include="Upload\image\20151206\20151206201229_6713.jpg" />
+    <Content Include="Upload\image\20151206\20151206201229_7510.jpg" />
+    <Content Include="Upload\image\20151206\20151206201355_3439.jpg" />
+    <Content Include="Upload\image\20151206\20151206201626_8244.jpg" />
+    <Content Include="Upload\image\20151206\20151206201701_5852.jpg" />
+    <Content Include="Upload\image\20151206\20151206201724_9664.jpg" />
+    <Content Include="Upload\image\20151206\20151206201742_8904.jpg" />
+    <Content Include="Upload\image\20151206\20151206201823_8672.jpg" />
+    <Content Include="Upload\image\20151206\20151206201850_1681.jpg" />
+    <Content Include="Upload\image\20151206\20151206201905_4191.jpg" />
+    <Content Include="Upload\image\20151206\20151206201925_0675.jpg" />
+    <Content Include="Upload\image\20151206\20151206201941_7535.jpg" />
+    <Content Include="Upload\image\20151206\20151206201949_8199.jpg" />
+    <Content Include="Upload\image\20151206\20151206205627_1517.jpg" />
+    <Content Include="Upload\image\20151206\20151206205627_2558.jpg" />
+    <Content Include="Upload\image\20151206\20151206205627_3274.jpg" />
+    <Content Include="Upload\image\20151206\20151206205627_3894.jpg" />
+    <Content Include="Upload\image\20151206\20151206205627_4529.jpg" />
+    <Content Include="Upload\image\20151206\20151206205627_5219.jpg" />
+    <Content Include="Upload\image\20151206\20151206205627_6570.jpg" />
+    <Content Include="Upload\image\20151206\20151206205627_7211.jpg" />
+    <Content Include="Upload\image\20151206\20151206205627_7921.jpg" />
+    <Content Include="Upload\image\20151206\20151206205627_8598.jpg" />
+    <Content Include="Upload\image\20151206\20151206205627_9128.jpg" />
+    <Content Include="Upload\image\20151206\20151206205627_9828.jpg" />
+    <Content Include="Upload\image\20151206\20151206205628_0489.jpg" />
+    <Content Include="Upload\image\20151206\20151206205628_1388.jpg" />
+    <Content Include="Upload\image\20151206\20151206205628_2584.jpg" />
+    <Content Include="Upload\image\20151206\20151206205736_1815.jpg" />
+    <Content Include="Upload\image\20151206\20151206205736_2345.jpg" />
+    <Content Include="Upload\image\20151206\20151206205736_2935.jpg" />
+    <Content Include="Upload\image\20151206\20151206205736_3629.jpg" />
+    <Content Include="Upload\image\20151206\20151206205736_4337.jpg" />
+    <Content Include="Upload\image\20151206\20151206205736_5027.jpg" />
+    <Content Include="Upload\image\20151206\20151206205736_5718.jpg" />
+    <Content Include="Upload\image\20151206\20151206205736_6338.jpg" />
+    <Content Include="Upload\image\20151206\20151206205736_6983.jpg" />
+    <Content Include="Upload\image\20151206\20151206205736_8304.jpg" />
+    <Content Include="Upload\image\20151206\20151206205736_9024.jpg" />
+    <Content Include="Upload\image\20151206\20151206205736_9725.jpg" />
+    <Content Include="Upload\image\20151206\20151206205737_0345.jpg" />
+    <Content Include="Upload\image\20151206\20151206205737_1036.jpg" />
+    <Content Include="Upload\image\20151206\20151206205737_1697.jpg" />
+    <Content Include="Upload\image\20151206\20151206205956_6448.jpg" />
+    <Content Include="Upload\image\20151206\20151206210011_6908.jpg" />
+    <Content Include="Upload\image\20151206\20151206210025_6080.jpg" />
+    <Content Include="Upload\image\20151206\20151206210039_8817.jpg" />
+    <Content Include="Upload\image\20151206\20151206210049_5107.jpg" />
+    <Content Include="Upload\image\20151206\20151206210132_5476.jpg" />
+    <Content Include="Upload\image\20151206\20151206210146_1547.jpg" />
+    <Content Include="Upload\image\20151206\20151206210219_9115.jpg" />
+    <Content Include="Upload\image\20151206\20151206210232_7495.jpg" />
+    <Content Include="Upload\image\20151206\20151206210240_8625.jpg" />
+    <Content Include="Upload\image\20151206\20151206210249_2926.jpg" />
+    <Content Include="Upload\image\20151206\20151206210312_1344.jpg" />
+    <Content Include="Upload\image\20151206\20151206212410_0912.jpg" />
+    <Content Include="Upload\image\20151206\20151206213329_2353.jpg" />
+    <Content Include="Upload\image\20151206\20151206213510_8966.jpg" />
+    <Content Include="Upload\image\20151206\20151206215407_0626.jpg" />
+    <Content Include="Upload\image\20151206\20151206215407_1702.jpg" />
+    <Content Include="Upload\image\20151206\20151206215407_2353.jpg" />
+    <Content Include="Upload\image\20151206\20151206215407_3025.jpg" />
+    <Content Include="Upload\image\20151206\20151206215407_3816.jpg" />
+    <Content Include="Upload\image\20151206\20151206215407_4276.jpg" />
+    <Content Include="Upload\image\20151206\20151206215407_5127.jpg" />
+    <Content Include="Upload\image\20151206\20151206215407_5687.jpg" />
+    <Content Include="Upload\image\20151206\20151206215407_6398.jpg" />
+    <Content Include="Upload\image\20151206\20151206215407_7097.jpg" />
+    <Content Include="Upload\image\20151206\20151206215407_7678.jpg" />
+    <Content Include="Upload\image\20151206\20151206215407_8298.jpg" />
+    <Content Include="Upload\image\20151206\20151206215407_9049.jpg" />
+    <Content Include="Upload\image\20151207\20151207095200_6708.jpg" />
+    <Content Include="Upload\image\20151207\20151207095310_6208.jpg" />
+    <Content Include="Upload\image\20151207\20151207095315_7794.jpg" />
+    <Content Include="Upload\image\20151207\20151207095320_1068.jpg" />
+    <Content Include="Upload\image\20151207\20151207095626_8139.jpg" />
+    <Content Include="Upload\image\20151207\20151207132356_9575.jpg" />
+    <Content Include="Upload\image\20151207\20151207132530_9850.jpg" />
+    <Content Include="Upload\image\20151207\20151207132531_0541.jpg" />
+    <Content Include="Upload\image\20151207\20151207132531_1121.jpg" />
+    <Content Include="Upload\image\20151207\20151207132531_1827.jpg" />
+    <Content Include="Upload\image\20151207\20151207132531_2518.jpg" />
+    <Content Include="Upload\image\20151207\20151207132531_3138.jpg" />
+    <Content Include="Upload\image\20151207\20151207135338_2842.jpg" />
+    <Content Include="Upload\image\20151207\20151207135338_3242.jpg" />
+    <Content Include="Upload\image\20151207\20151207135338_3843.jpg" />
+    <Content Include="Upload\image\20151207\20151207210605_3108.jpg" />
+    <Content Include="Upload\image\20151207\20151207210605_7918.jpg" />
+    <Content Include="Upload\image\20151207\20151207210605_8538.jpg" />
+    <Content Include="Upload\image\20151207\20151207210605_9158.jpg" />
+    <Content Include="Upload\image\20151207\20151207210605_9798.jpg" />
+    <Content Include="Upload\image\20151207\20151207210606_0618.jpg" />
+    <Content Include="Upload\image\20151207\20151207210606_1198.jpg" />
+    <Content Include="Upload\image\20151207\20151207210606_1908.jpg" />
+    <Content Include="Upload\image\20151207\20151207210606_2459.jpg" />
+    <Content Include="Upload\image\20151207\20151207210606_3169.jpg" />
+    <Content Include="Upload\image\20151207\20151207210606_3869.jpg" />
+    <Content Include="Upload\image\20151207\20151207210606_5369.jpg" />
+    <Content Include="Upload\image\20151207\20151207210606_5849.jpg" />
+    <Content Include="Upload\image\20151207\20151207210606_6499.jpg" />
+    <Content Include="Upload\image\20151207\20151207210606_7099.jpg" />
+    <Content Include="Upload\image\20151207\20151207210606_7859.jpg" />
+    <Content Include="Upload\image\20151207\20151207210606_8469.jpg" />
+    <Content Include="Upload\image\20151207\20151207210606_9319.jpg" />
+    <Content Include="Upload\image\20151207\20151207210606_9869.jpg" />
+    <Content Include="Upload\image\20151207\20151207210607_0439.jpg" />
+    <Content Include="Upload\image\20151207\20151207210715_7022.jpg" />
+    <Content Include="Upload\image\20151207\20151207210715_8162.jpg" />
+    <Content Include="Upload\image\20151207\20151207210715_8832.jpg" />
+    <Content Include="Upload\image\20151207\20151207210715_9482.jpg" />
+    <Content Include="Upload\image\20151207\20151207210716_0122.jpg" />
+    <Content Include="Upload\image\20151207\20151207210716_0882.jpg" />
+    <Content Include="Upload\image\20151207\20151207220059_1497.jpg" />
+    <Content Include="Upload\image\20151207\20151207220059_2117.jpg" />
+    <Content Include="Upload\image\20151207\20151207220059_2987.jpg" />
+    <Content Include="Upload\image\20151207\20151207220059_3967.jpg" />
+    <Content Include="Upload\image\20151207\20151207220059_4637.jpg" />
+    <Content Include="Upload\image\20151207\20151207220059_5377.jpg" />
+    <Content Include="Upload\image\20151207\20151207220059_6028.jpg" />
+    <Content Include="Upload\image\20151207\20151207220059_6698.jpg" />
+    <Content Include="Upload\image\20151207\20151207220059_7328.jpg" />
+    <Content Include="Upload\image\20151207\20151207220059_7988.jpg" />
+    <Content Include="Upload\image\20151207\20151207220059_8728.jpg" />
+    <Content Include="Upload\image\20151207\20151207220059_9348.jpg" />
+    <Content Include="Upload\image\20151207\20151207220100_0068.jpg" />
+    <Content Include="Upload\image\20151207\20151207220100_0678.jpg" />
+    <Content Include="Upload\image\20151207\20151207220100_1308.jpg" />
+    <Content Include="Upload\image\20151207\20151207220100_2028.jpg" />
+    <Content Include="Upload\image\20151207\20151207220100_2718.jpg" />
+    <Content Include="Upload\image\20151207\20151207220100_3338.jpg" />
+    <Content Include="Upload\image\20151207\20151207220100_4028.jpg" />
+    <Content Include="Upload\image\20151207\20151207220100_4638.jpg" />
+    <Content Include="Upload\image\20151207\20151207220117_3453.jpg" />
+    <Content Include="Upload\image\20151207\20151207220117_4253.jpg" />
+    <Content Include="Upload\image\20151207\20151207220117_4773.jpg" />
+    <Content Include="Upload\image\20151207\20151207220117_5433.jpg" />
+    <Content Include="Upload\image\20151207\20151207220117_6123.jpg" />
+    <Content Include="Upload\image\20151207\20151207220117_6923.jpg" />
+    <Content Include="Upload\image\20151208\20151208120949_2062.jpg" />
+    <Content Include="Upload\image\20151208\20151208120949_3602.jpg" />
+    <Content Include="Upload\image\20151208\20151208120949_4232.jpg" />
+    <Content Include="Upload\image\20151208\20151208120949_4852.jpg" />
+    <Content Include="Upload\image\20151208\20151208120949_5562.jpg" />
+    <Content Include="Upload\image\20151208\20151208120949_6792.jpg" />
+    <Content Include="Upload\image\20151208\20151208120949_7222.jpg" />
+    <Content Include="Upload\image\20151208\20151208120949_8112.jpg" />
+    <Content Include="Upload\image\20151208\20151208120949_9162.jpg" />
+    <Content Include="Upload\image\20151208\20151208120950_0272.jpg" />
+    <Content Include="Upload\image\20151208\20151208120950_0912.jpg" />
+    <Content Include="Upload\image\20151208\20151208120950_1852.jpg" />
+    <Content Include="Upload\image\20151208\20151208120950_2932.jpg" />
+    <Content Include="Upload\image\20151208\20151208120950_3302.jpg" />
+    <Content Include="Upload\image\20151208\20151208120950_4072.jpg" />
+    <Content Include="Upload\image\20151208\20151208120950_4762.jpg" />
+    <Content Include="Upload\image\20151208\20151208120950_5622.jpg" />
+    <Content Include="Upload\image\20151208\20151208120950_5902.jpg" />
+    <Content Include="Upload\image\20151208\20151208120950_7093.jpg" />
+    <Content Include="Upload\image\20151208\20151208120950_8193.jpg" />
+    <Content Include="Upload\image\20151208\20151208121006_3411.jpg" />
+    <Content Include="Upload\image\20151208\20151208121006_4682.jpg" />
+    <Content Include="Upload\image\20151208\20151208121006_5572.jpg" />
+    <Content Include="Upload\image\20151208\20151208121006_5992.jpg" />
+    <Content Include="Upload\image\20151208\20151208125214_4537.jpg" />
+    <Content Include="Upload\image\20151208\20151208125214_5728.jpg" />
+    <Content Include="Upload\image\20151208\20151208125214_6448.jpg" />
+    <Content Include="Upload\image\20151208\20151208125214_7678.jpg" />
+    <Content Include="Upload\image\20151208\20151208125214_8238.jpg" />
+    <Content Include="Upload\image\20151208\20151208125214_9058.jpg" />
+    <Content Include="Upload\image\20151208\20151208125214_9558.jpg" />
+    <Content Include="Upload\image\20151208\20151208125215_0278.jpg" />
+    <Content Include="Upload\image\20151208\20151208125215_0998.jpg" />
+    <Content Include="Upload\image\20151208\20151208125215_1508.jpg" />
+    <Content Include="Upload\image\20151208\20151208125215_2148.jpg" />
+    <Content Include="Upload\image\20151208\20151208125215_2928.jpg" />
+    <Content Include="Upload\image\20151208\20151208131017_0247.jpg" />
+    <Content Include="Upload\image\20151208\20151208131017_0867.jpg" />
+    <Content Include="Upload\image\20151208\20151208131017_2197.jpg" />
+    <Content Include="Upload\image\20151208\20151208131017_2877.jpg" />
+    <Content Include="Upload\image\20151208\20151208131017_3417.jpg" />
+    <Content Include="Upload\image\20151208\20151208131017_4107.jpg" />
+    <Content Include="Upload\image\20151208\20151208131017_4747.jpg" />
+    <Content Include="Upload\image\20151208\20151208131017_5427.jpg" />
+    <Content Include="Upload\image\20151208\20151208131017_6087.jpg" />
+    <Content Include="Upload\image\20151208\20151208131017_6627.jpg" />
+    <Content Include="Upload\image\20151208\20151208131017_7357.jpg" />
+    <Content Include="Upload\image\20151208\20151208131017_8297.jpg" />
+    <Content Include="Upload\image\20151208\20151208133200_2462.jpg" />
+    <Content Include="Upload\image\20151208\20151208133200_3062.jpg" />
+    <Content Include="Upload\image\20151208\20151208133200_3662.jpg" />
+    <Content Include="Upload\image\20151208\20151208133200_4362.jpg" />
+    <Content Include="Upload\image\20151208\20151208133200_5052.jpg" />
+    <Content Include="Upload\image\20151208\20151208133200_5702.jpg" />
+    <Content Include="Upload\image\20151208\20151208133200_6342.jpg" />
+    <Content Include="Upload\image\20151208\20151208133200_6992.jpg" />
+    <Content Include="Upload\image\20151208\20151208133200_7792.jpg" />
+    <Content Include="Upload\image\20151208\20151208133200_8312.jpg" />
+    <Content Include="Upload\image\20151208\20151208133200_9012.jpg" />
+    <Content Include="Upload\image\20151208\20151208133200_9722.jpg" />
+    <Content Include="Upload\image\20151208\20151208133201_0292.jpg" />
+    <Content Include="Upload\image\20151208\20151208133201_0983.jpg" />
+    <Content Include="Upload\image\20151208\20151208133201_1603.jpg" />
+    <Content Include="Upload\image\20151208\20151208133201_2283.jpg" />
+    <Content Include="Upload\image\20151208\20151208133201_2983.jpg" />
+    <Content Include="Upload\image\20151208\20151208133646_6646.jpg" />
+    <Content Include="Upload\image\20151208\20151208133646_7286.jpg" />
+    <Content Include="Upload\image\20151208\20151208133811_0394.jpg" />
+    <Content Include="Upload\image\20151208\20151208135343_4887.jpg" />
+    <Content Include="Upload\image\20151208\20151208135343_5828.jpg" />
+    <Content Include="Upload\image\20151208\20151208135343_6358.jpg" />
+    <Content Include="Upload\image\20151208\20151208135343_7078.jpg" />
+    <Content Include="Upload\image\20151208\20151208135343_7728.jpg" />
+    <Content Include="Upload\image\20151208\20151208135343_8398.jpg" />
+    <Content Include="Upload\image\20151208\20151208135343_8988.jpg" />
+    <Content Include="Upload\image\20151208\20151208135343_9898.jpg" />
+    <Content Include="Upload\image\20151208\20151208135344_0348.jpg" />
+    <Content Include="Upload\image\20151208\20151208135344_1028.jpg" />
+    <Content Include="Upload\image\20151208\20151208135344_1688.jpg" />
+    <Content Include="Upload\image\20151208\20151208135344_2378.jpg" />
+    <Content Include="Upload\image\20151208\20151208171006_1457.jpg" />
+    <Content Include="Upload\image\20151208\20151208175547_0204.jpg" />
+    <Content Include="Upload\image\20151208\20151208175547_0934.jpg" />
+    <Content Include="Upload\image\20151208\20151208175547_1595.jpg" />
+    <Content Include="Upload\image\20151208\20151208175547_2285.jpg" />
+    <Content Include="Upload\image\20151208\20151208175547_2925.jpg" />
+    <Content Include="Upload\image\20151208\20151208175547_3615.jpg" />
+    <Content Include="Upload\image\20151208\20151208175547_4245.jpg" />
+    <Content Include="Upload\image\20151208\20151208175547_4975.jpg" />
+    <Content Include="Upload\image\20151208\20151208175547_5535.jpg" />
+    <Content Include="Upload\image\20151208\20151208175547_6345.jpg" />
+    <Content Include="Upload\image\20151208\20151208175547_6895.jpg" />
+    <Content Include="Upload\image\20151208\20151208175547_7645.jpg" />
+    <Content Include="Upload\image\20151208\20151208175547_8205.jpg" />
+    <Content Include="Upload\image\20151208\20151208175547_8925.jpg" />
+    <Content Include="Upload\image\20151208\20151208175547_9515.jpg" />
+    <Content Include="Upload\image\20151208\20151208175548_0215.jpg" />
+    <Content Include="Upload\image\20151208\20151208175548_0855.jpg" />
+    <Content Include="Upload\image\20151208\20151208175548_1595.jpg" />
+    <Content Include="Upload\image\20151208\20151208175548_2345.jpg" />
+    <Content Include="Upload\image\20151208\20151208175548_2865.jpg" />
+    <Content Include="Upload\image\20151208\20151208175603_3424.jpg" />
+    <Content Include="Upload\image\20151208\20151208175603_4314.jpg" />
+    <Content Include="Upload\image\20151208\20151208175603_4844.jpg" />
+    <Content Include="Upload\image\20151208\20151208175603_5504.jpg" />
+    <Content Include="Upload\image\20151208\20151208175603_6164.jpg" />
+    <Content Include="Upload\image\20151208\20151208183800_4213.jpg" />
+    <Content Include="Upload\image\20151208\20151208183800_4693.jpg" />
+    <Content Include="Upload\image\20151208\20151208183800_5404.jpg" />
+    <Content Include="Upload\image\20151208\20151208183800_5944.jpg" />
+    <Content Include="Upload\image\20151208\20151208183800_6574.jpg" />
+    <Content Include="Upload\image\20151208\20151208183800_7244.jpg" />
+    <Content Include="Upload\image\20151208\20151208183800_7904.jpg" />
+    <Content Include="Upload\image\20151208\20151208183800_8634.jpg" />
+    <Content Include="Upload\image\20151208\20151208183800_9224.jpg" />
+    <Content Include="Upload\image\20151208\20151208183800_9874.jpg" />
+    <Content Include="Upload\image\20151208\20151208183801_0604.jpg" />
+    <Content Include="Upload\image\20151208\20151208183801_1244.jpg" />
+    <Content Include="Upload\image\20151208\20151208185225_8868.jpg" />
+    <Content Include="Upload\image\20151208\20151208185226_0079.jpg" />
+    <Content Include="Upload\image\20151208\20151208185226_1149.jpg" />
+    <Content Include="Upload\image\20151208\20151208185226_1759.jpg" />
+    <Content Include="Upload\image\20151208\20151208185226_2639.jpg" />
+    <Content Include="Upload\image\20151208\20151208185226_3309.jpg" />
+    <Content Include="Upload\image\20151208\20151208185226_3929.jpg" />
+    <Content Include="Upload\image\20151208\20151208193649_5072.jpg" />
+    <Content Include="Upload\image\20151208\20151208193649_6192.jpg" />
+    <Content Include="Upload\image\20151208\20151208193649_7292.jpg" />
+    <Content Include="Upload\image\20151208\20151208193649_7802.jpg" />
+    <Content Include="Upload\image\20151208\20151208193649_8502.jpg" />
+    <Content Include="Upload\image\20151208\20151208193649_9052.jpg" />
+    <Content Include="Upload\image\20151208\20151208193649_9802.jpg" />
+    <Content Include="Upload\image\20151208\20151208195136_1359.jpg" />
+    <Content Include="Upload\image\20151208\20151208195136_2059.jpg" />
+    <Content Include="Upload\image\20151208\20151208195136_2839.jpg" />
+    <Content Include="Upload\image\20151208\20151208195136_3389.jpg" />
+    <Content Include="Upload\image\20151208\20151208195136_4029.jpg" />
+    <Content Include="Upload\image\20151208\20151208200726_0202.jpg" />
+    <Content Include="Upload\image\20151208\20151208200726_0682.jpg" />
+    <Content Include="Upload\image\20151208\20151208200726_1352.jpg" />
+    <Content Include="Upload\image\20151208\20151208200726_1852.jpg" />
+    <Content Include="Upload\image\20151208\20151208200726_2683.jpg" />
+    <Content Include="Upload\image\20151208\20151208200726_3623.jpg" />
+    <Content Include="Upload\image\20151208\20151208201627_8142.jpg" />
+    <Content Include="Upload\image\20151208\20151208201627_9172.jpg" />
+    <Content Include="Upload\image\20151208\20151208201627_9782.jpg" />
+    <Content Include="Upload\image\20151208\20151208201628_0532.jpg" />
+    <Content Include="Upload\image\20151208\20151208201628_1272.jpg" />
+    <Content Include="Upload\image\20151208\20151208201628_1803.jpg" />
+    <Content Include="Upload\image\20151208\20151208201628_2613.jpg" />
+    <Content Include="Upload\image\20151208\20151208201628_3173.jpg" />
+    <Content Include="Upload\image\20151208\20151208201628_3823.jpg" />
+    <Content Include="Upload\image\20151208\20151208201628_4563.jpg" />
+    <Content Include="Upload\image\20151208\20151208201628_5213.jpg" />
+    <Content Include="Upload\image\20151208\20151208202806_5412.jpg" />
+    <Content Include="Upload\image\20151208\20151208202806_6262.jpg" />
+    <Content Include="Upload\image\20151208\20151208202806_6852.jpg" />
+    <Content Include="Upload\image\20151208\20151208202806_7502.jpg" />
+    <Content Include="Upload\image\20151208\20151208202806_8182.jpg" />
+    <Content Include="Upload\image\20151208\20151208203710_1223.jpg" />
+    <Content Include="Upload\image\20151208\20151208203710_2173.jpg" />
+    <Content Include="Upload\image\20151208\20151208203710_4333.jpg" />
+    <Content Include="Upload\image\20151208\20151208203710_5493.jpg" />
+    <Content Include="Upload\image\20151208\20151208203710_6143.jpg" />
+    <Content Include="Upload\image\20151208\20151208203710_6823.jpg" />
+    <Content Include="Upload\image\20151208\20151208203710_7433.jpg" />
+    <Content Include="Upload\image\20151208\20151208203710_8083.jpg" />
+    <Content Include="Upload\image\20151208\20151208203710_8893.jpg" />
+    <Content Include="Upload\image\20151208\20151208203710_9503.jpg" />
+    <Content Include="Upload\image\20151208\20151208203711_0183.jpg" />
+    <Content Include="Upload\image\20151208\20151208203711_0803.jpg" />
+    <Content Include="Upload\image\20151208\20151208203711_1503.jpg" />
+    <Content Include="Upload\image\20151208\20151208203711_2073.jpg" />
+    <Content Include="Upload\image\20151208\20151208203711_2814.jpg" />
+    <Content Include="Upload\image\20151213\20151213184741_4931.jpg" />
+    <Content Include="Upload\image\20151213\20151213184741_6871.jpg" />
+    <Content Include="Upload\image\20151213\20151213184741_7381.jpg" />
+    <Content Include="Upload\image\20151213\20151213184741_8661.jpg" />
+    <Content Include="Upload\image\20151213\20151213184741_9271.jpg" />
+    <Content Include="Upload\image\20151213\20151213184742_0011.jpg" />
+    <Content Include="Upload\image\20151213\20151213184742_0611.jpg" />
+    <Content Include="Upload\image\20151213\20151213184742_1461.jpg" />
+    <Content Include="Upload\image\20151213\20151213184742_1971.jpg" />
+    <Content Include="Upload\image\20151213\20151213191632_8981.jpg" />
+    <Content Include="Upload\image\20151213\20151213191632_9641.jpg" />
+    <Content Include="Upload\image\20151213\20151213191633_0891.jpg" />
+    <Content Include="Upload\image\20151213\20151213191633_1551.jpg" />
+    <Content Include="Upload\image\20151213\20151213191633_2161.jpg" />
+    <Content Include="Upload\image\20151213\20151213193320_1907.jpg" />
+    <Content Include="Upload\image\20151213\20151213193320_3267.jpg" />
+    <Content Include="Upload\image\20151213\20151213193320_4697.jpg" />
+    <Content Include="Upload\image\20151213\20151213193320_6057.jpg" />
+    <Content Include="Upload\image\20151213\20151213193320_6577.jpg" />
+    <Content Include="Upload\image\20151213\20151213193320_7237.jpg" />
+    <Content Include="Upload\image\20151213\20151213193320_8198.jpg" />
+    <Content Include="Upload\image\20151213\20151213193320_8608.jpg" />
+    <Content Include="Upload\image\20151213\20151213193320_9208.jpg" />
+    <Content Include="Upload\image\20151213\20151213193320_9858.jpg" />
+    <Content Include="Upload\image\20151213\20151213193321_0708.jpg" />
+    <Content Include="Upload\image\20151213\20151213193321_1458.jpg" />
+    <Content Include="Upload\image\20151213\20151213193321_1938.jpg" />
+    <Content Include="Upload\image\20151213\20151213193321_3068.jpg" />
+    <Content Include="Upload\image\20151213\20151213193321_4318.jpg" />
+    <Content Include="Upload\image\20151213\20151213193321_6188.jpg" />
+    <Content Include="Upload\image\20151213\20151213193321_7248.jpg" />
+    <Content Include="Upload\image\20151213\20151213193321_8128.jpg" />
+    <Content Include="Upload\image\20151213\20151213193321_8578.jpg" />
+    <Content Include="Upload\image\20151213\20151213193321_9228.jpg" />
+    <Content Include="Upload\image\20151213\20151213194206_7648.jpg" />
+    <Content Include="Upload\image\20151213\20151213194206_8878.jpg" />
+    <Content Include="Upload\image\20151213\20151213194207_0028.jpg" />
+    <Content Include="Upload\image\20151213\20151213194207_1019.jpg" />
+    <Content Include="Upload\image\20151213\20151213194207_1979.jpg" />
+    <Content Include="Upload\image\20151213\20151213195346_2968.jpg" />
+    <Content Include="Upload\image\20151213\20151213195346_3918.jpg" />
+    <Content Include="Upload\image\20151213\20151213195346_4599.jpg" />
+    <Content Include="Upload\image\20151213\20151213195346_5219.jpg" />
+    <Content Include="Upload\image\20151213\20151213195346_5929.jpg" />
+    <Content Include="Upload\image\20151213\20151213195346_6829.jpg" />
+    <Content Include="Upload\image\20151213\20151213195346_7179.jpg" />
+    <Content Include="Upload\image\20151213\20151213195346_7919.jpg" />
+    <Content Include="Upload\image\20151213\20151213195346_8539.jpg" />
+    <Content Include="Upload\image\20151213\20151213195346_9269.jpg" />
+    <Content Include="Upload\image\20151213\20151213195346_9959.jpg" />
+    <Content Include="Upload\image\20151213\20151213195347_0529.jpg" />
+    <Content Include="Upload\image\20151213\20151213195347_1199.jpg" />
+    <Content Include="Upload\image\20151213\20151213195347_1929.jpg" />
+    <Content Include="Upload\image\20151213\20151213201023_2379.jpg" />
+    <Content Include="Upload\image\20151213\20151213204022_3318.jpg" />
+    <Content Include="Upload\image\20151213\20151213204022_4468.jpg" />
+    <Content Include="Upload\image\20151213\20151213204022_5008.jpg" />
+    <Content Include="Upload\image\20151213\20151213204022_5648.jpg" />
+    <Content Include="Upload\image\20151213\20151213204022_6228.jpg" />
+    <Content Include="Upload\image\20151213\20151213204022_6948.jpg" />
+    <Content Include="Upload\image\20151213\20151213204022_7618.jpg" />
+    <Content Include="Upload\image\20151213\20151213204022_8228.jpg" />
+    <Content Include="Upload\image\20151213\20151213204022_8998.jpg" />
+    <Content Include="Upload\image\20151213\20151213210736_5812.jpg" />
+    <Content Include="Upload\image\20151213\20151213211457_4695.jpg" />
+    <Content Include="Upload\image\20151213\20151213213247_0806.jpg" />
+    <Content Include="Upload\image\20151213\20151213213247_1676.jpg" />
+    <Content Include="Upload\image\20151213\20151213213247_2826.jpg" />
+    <Content Include="Upload\image\20151213\20151213213247_3477.jpg" />
+    <Content Include="Upload\image\20151213\20151213213247_4117.jpg" />
+    <Content Include="Upload\image\20151213\20151213213247_4717.jpg" />
+    <Content Include="Upload\image\20151213\20151213213247_5417.jpg" />
+    <Content Include="Upload\image\20151213\20151213213247_6097.jpg" />
+    <Content Include="Upload\image\20151213\20151213213247_6727.jpg" />
+    <Content Include="Upload\image\20151214\20151214221053_6478.jpg" />
+    <Content Include="Upload\image\20151214\20151214221053_9752.jpg" />
+    <Content Include="Upload\image\20151214\20151214221524_3486.jpg" />
+    <Content Include="Upload\image\20151214\20151214222304_3533.jpg" />
+    <Content Include="Upload\image\20151214\20151214222304_4381.jpg" />
+    <Content Include="Upload\image\20151214\20151214222304_4852.jpg" />
+    <Content Include="Upload\image\20151214\20151214222304_5772.jpg" />
+    <Content Include="Upload\image\20151214\20151214222304_7002.jpg" />
+    <Content Include="Upload\image\20151214\20151214222304_7862.jpg" />
+    <Content Include="Upload\image\20151214\20151214222949_7852.jpg" />
+    <Content Include="Upload\image\20151214\20151214222949_9220.jpg" />
+    <Content Include="Upload\image\20151214\20151214222950_0430.jpg" />
+    <Content Include="Upload\image\20151214\20151214222950_1530.jpg" />
+    <Content Include="Upload\image\20151214\20151214222950_3608.jpg" />
+    <Content Include="Upload\image\20151214\20151214222950_5096.jpg" />
+    <Content Include="Upload\image\20151214\20151214222950_6176.jpg" />
+    <Content Include="Upload\image\20151214\20151214222950_7644.jpg" />
+    <Content Include="Upload\image\20151214\20151214222950_8754.jpg" />
+    <Content Include="Upload\image\20151214\20151214222950_9324.jpg" />
+    <Content Include="Upload\image\20151214\20151214222950_9954.jpg" />
+    <Content Include="Upload\image\20151214\20151214222951_0674.jpg" />
+    <Content Include="Upload\image\20151214\20151214222951_1624.jpg" />
+    <Content Include="Upload\image\20151214\20151214222951_3712.jpg" />
+    <Content Include="Upload\image\20151214\20151214222951_5236.jpg" />
+    <Content Include="Upload\image\20151214\20151214222951_6484.jpg" />
+    <Content Include="Upload\image\20151214\20151214222951_7174.jpg" />
+    <Content Include="Upload\image\20151214\20151214223646_6859.jpg" />
+    <Content Include="Upload\image\20151214\20151214223646_7919.jpg" />
+    <Content Include="Upload\image\20151214\20151214223646_9737.jpg" />
+    <Content Include="Upload\image\20151214\20151214223647_0597.jpg" />
+    <Content Include="Upload\image\20151214\20151214223647_2297.jpg" />
+    <Content Include="Upload\image\20151214\20151214223647_3667.jpg" />
+    <Content Include="Upload\image\20151214\20151214223647_4977.jpg" />
+    <Content Include="Upload\image\20151214\20151214223647_6017.jpg" />
+    <Content Include="Upload\image\20151214\20151214223647_7837.jpg" />
+    <Content Include="Upload\image\20151214\20151214224112_0148.jpg" />
+    <Content Include="Upload\image\20151214\20151214224112_1298.jpg" />
+    <Content Include="Upload\image\20151214\20151214224112_2048.jpg" />
+    <Content Include="Upload\image\20151214\20151214224112_3476.jpg" />
+    <Content Include="Upload\image\20151214\20151214224112_4646.jpg" />
+    <Content Include="Upload\image\20151214\20151214224112_5236.jpg" />
+    <Content Include="Upload\image\20151214\20151214224112_7116.jpg" />
+    <Content Include="Upload\image\20151214\20151214224112_8206.jpg" />
+    <Content Include="Upload\image\20151214\20151214224112_9846.jpg" />
+    <Content Include="Upload\image\20151214\20151214224727_7900.jpg" />
+    <Content Include="Upload\image\20151214\20151214224727_8700.jpg" />
+    <Content Include="Upload\image\20151214\20151214224727_9980.jpg" />
+    <Content Include="Upload\image\20151214\20151214225042_1310.jpg" />
+    <Content Include="Upload\image\20151214\20151214225042_2240.jpg" />
+    <Content Include="Upload\image\20151214\20151214225042_2980.png" />
+    <Content Include="Upload\image\20151214\20151214225042_3490.jpg" />
+    <Content Include="Upload\image\20151214\20151214225042_4290.jpg" />
+    <Content Include="Upload\image\20151214\20151214225042_5000.png" />
+    <Content Include="Upload\image\20151214\20151214225042_6061.png" />
+    <Content Include="Upload\image\20151214\20151214225042_6891.jpg" />
+    <Content Include="Upload\image\20151214\20151214225042_7571.png" />
+    <Content Include="Upload\image\20151214\20151214225415_5023.jpg" />
+    <Content Include="Upload\image\20151214\20151214225756_7424.jpg" />
+    <Content Include="Upload\image\20151214\20151214225756_8074.jpg" />
+    <Content Include="Upload\image\20151214\20151214225756_8594.jpg" />
+    <Content Include="Upload\image\20151214\20151214225756_9654.jpg" />
+    <Content Include="Upload\image\20151214\20151214225756_9974.jpg" />
+    <Content Include="Upload\image\20151214\20151214225757_0804.jpg" />
+    <Content Include="Upload\image\20151214\20151214225757_1344.jpg" />
+    <Content Include="Upload\image\20151214\20151214225757_1994.jpg" />
+    <Content Include="Upload\image\20151214\20151214230012_3373.jpg" />
+    <Content Include="Upload\image\20151214\20151214230510_7760.jpg" />
+    <Content Include="Upload\image\20151214\20151214230510_9400.jpg" />
+    <Content Include="Upload\image\20151214\20151214230511_0440.jpg" />
+    <Content Include="Upload\image\20151214\20151214230511_1680.jpg" />
+    <Content Include="Upload\image\20151214\20151214230511_2610.jpg" />
+    <Content Include="Upload\image\20151214\20151214230511_3481.jpg" />
+    <Content Include="Upload\image\20151214\20151214230511_4981.jpg" />
+    <Content Include="Upload\image\20151214\20151214230511_6361.jpg" />
+    <Content Include="Upload\image\20151214\20151214230511_7351.jpg" />
+    <Content Include="Upload\image\20151214\20151214230511_9211.jpg" />
+    <Content Include="Upload\image\20151214\20151214230512_0291.jpg" />
+    <Content Include="Upload\image\20151214\20151214230512_2381.jpg" />
+    <Content Include="Upload\image\20151214\20151214230512_4869.jpg" />
+    <Content Include="Upload\image\20151214\20151214230512_6359.jpg" />
+    <Content Include="Upload\image\20151214\20151214230512_7309.jpg" />
+    <Content Include="Upload\image\20151214\20151214230512_8689.jpg" />
+    <Content Include="Upload\image\20151214\20151214230513_0317.jpg" />
+    <Content Include="Upload\image\20151214\20151214230523_7375.jpg" />
+    <Content Include="Upload\image\20151214\20151214230523_8065.jpg" />
+    <Content Include="Upload\image\20151214\20151214230523_9145.jpg" />
+    <Content Include="Upload\image\20151214\20151214230524_0205.jpg" />
+    <Content Include="Upload\image\20151214\20151214230524_1815.jpg" />
+    <Content Include="Upload\image\20151215\20151215125439_7621.jpg" />
+    <Content Include="Upload\image\20151215\20151215125439_9331.jpg" />
+    <Content Include="Upload\image\20151215\20151215125439_9841.jpg" />
+    <Content Include="Upload\image\20151215\20151215125440_0491.jpg" />
+    <Content Include="Upload\image\20151215\20151215125736_5442.jpg" />
+    <Content Include="Upload\image\20151215\20151215125736_6302.jpg" />
+    <Content Include="Upload\image\20151215\20151215125736_6922.jpg" />
+    <Content Include="Upload\image\20151215\20151215125736_7552.jpg" />
+    <Content Include="Upload\image\20151215\20151215125736_8262.jpg" />
+    <Content Include="Upload\image\20151215\20151215125736_9502.jpg" />
+    <Content Include="Upload\image\20151215\20151215125737_0212.jpg" />
+    <Content Include="Upload\image\20151215\20151215125737_0973.jpg" />
+    <Content Include="Upload\image\20151215\20151215125737_1503.jpg" />
+    <Content Include="Upload\image\20151215\20151215125737_2233.jpg" />
+    <Content Include="Upload\image\20151215\20151215125737_2943.jpg" />
+    <Content Include="Upload\image\20151215\20151215125737_3443.jpg" />
+    <Content Include="Upload\image\20151215\20151215125737_4213.jpg" />
+    <Content Include="Upload\image\20151215\20151215125737_4843.jpg" />
+    <Content Include="Upload\image\20151215\20151215125737_5493.jpg" />
+    <Content Include="Upload\image\20151215\20151215125737_6103.jpg" />
+    <Content Include="Upload\image\20151215\20151215125737_6803.jpg" />
+    <Content Include="Upload\image\20151215\20151215125737_7513.jpg" />
+    <Content Include="Upload\image\20151215\20151215125737_8133.jpg" />
+    <Content Include="Upload\image\20151215\20151215125737_8813.jpg" />
+    <Content Include="Upload\image\20151215\20151215125746_7848.jpg" />
+    <Content Include="Upload\image\20151215\20151215130044_2060.jpg" />
+    <Content Include="Upload\image\20151215\20151215130044_3400.jpg" />
+    <Content Include="Upload\image\20151215\20151215130044_5550.jpg" />
+    <Content Include="Upload\image\20151215\20151215130044_9190.jpg" />
+    <Content Include="Upload\image\20151215\20151215130045_2280.jpg" />
+    <Content Include="Upload\image\20151215\20151215130045_4460.jpg" />
+    <Content Include="Upload\image\20151215\20151215130045_7150.jpg" />
+    <Content Include="Upload\image\20151215\20151215130045_8300.jpg" />
+    <Content Include="Upload\image\20151215\20151215130046_0351.jpg" />
+    <Content Include="Upload\image\20151215\20151215130046_1691.jpg" />
+    <Content Include="Upload\image\20151215\20151215130046_3751.jpg" />
+    <Content Include="Upload\image\20151215\20151215130046_4991.jpg" />
+    <Content Include="Upload\image\20151215\20151215130046_6521.jpg" />
+    <Content Include="Upload\image\20151215\20151215130046_7971.jpg" />
+    <Content Include="Upload\image\20151215\20151215130046_8921.jpg" />
+    <Content Include="Upload\image\20151215\20151215130047_0341.jpg" />
+    <Content Include="Upload\image\20151215\20151215130225_5348.jpg" />
+    <Content Include="Upload\image\20151215\20151215130225_5988.jpg" />
+    <Content Include="Upload\image\20151215\20151215130225_6558.jpg" />
+    <Content Include="Upload\image\20151215\20151215130225_7198.jpg" />
+    <Content Include="Upload\image\20151215\20151215130516_7555.jpg" />
+    <Content Include="Upload\image\20151215\20151215130516_8976.jpg" />
+    <Content Include="Upload\image\20151215\20151215130517_0666.jpg" />
+    <Content Include="Upload\image\20151215\20151215130517_1936.jpg" />
+    <Content Include="Upload\image\20151215\20151215130517_3756.jpg" />
+    <Content Include="Upload\image\20151215\20151215130736_1955.jpg" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Images\accent.png" />
+    <Content Include="Images\bullet.png" />
+    <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\orderedList0.png" />
+    <Content Include="Images\orderedList1.png" />
+    <Content Include="Images\orderedList2.png" />
+    <Content Include="Images\orderedList3.png" />
+    <Content Include="Images\orderedList4.png" />
+    <Content Include="Images\orderedList5.png" />
+    <Content Include="Images\orderedList6.png" />
+    <Content Include="Images\orderedList7.png" />
+    <Content Include="Images\orderedList8.png" />
+    <Content Include="Images\orderedList9.png" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Role\Details.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\Role\Delete.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\About.cshtml" />
+    <Content Include="Views\Admin\MyInfo.cshtml" />
+    <Content Include="Views\Admin\EditMyInfo.cshtml" />
+    <Content Include="Views\Admin\AlterPassword.cshtml" />
+    <Content Include="Views\Admin\NoAccess.cshtml" />
+    <Content Include="Views\ProductInfo\Index.cshtml" />
+    <Content Include="Views\ProductInfo\Details.cshtml" />
+    <Content Include="Views\ProductInfo\Create.cshtml" />
+    <Content Include="Views\ProductInfo\Edit.cshtml" />
+    <Content Include="Views\ProductInfo\Delete.cshtml" />
+    <Content Include="Views\ProductType\Index.cshtml" />
+    <Content Include="Views\ProductType\Details.cshtml" />
+    <Content Include="Views\ProductType\Create.cshtml" />
+    <Content Include="Views\ProductType\Edit.cshtml" />
+    <Content Include="Views\ProductType\Delete.cshtml" />
+    <Content Include="Views\ProductColor\Index.cshtml" />
+    <Content Include="Views\ProductColor\Create.cshtml" />
+    <Content Include="Views\ProductColor\Edit.cshtml" />
+    <Content Include="Views\ProductStorage\Index.cshtml" />
+    <Content Include="Views\ProductStorage\Details.cshtml" />
+    <Content Include="Views\ProductStorage\Create.cshtml" />
+    <Content Include="Views\ProductStorage\Edit.cshtml" />
+    <Content Include="Views\ProductStorage\Delete.cshtml" />
+    <Content Include="Views\ProductMember\Index.cshtml" />
+    <Content Include="Views\ProductMember\Details.cshtml" />
+    <Content Include="Views\ProductMember\Create.cshtml" />
+    <Content Include="Views\ProductMember\Edit.cshtml" />
+    <Content Include="Views\ProductMember\Delete.cshtml" />
+    <Content Include="Views\ProductOrder\Index.cshtml" />
+    <Content Include="Views\ProductOrder\Details.cshtml" />
+    <Content Include="Views\ProductOrder\Create.cshtml" />
+    <Content Include="Views\ProductOrder\Edit.cshtml" />
+    <Content Include="Views\ProductOrder\Delete.cshtml" />
+    <Content Include="Views\UserManage\Index.cshtml" />
+    <Content Include="Views\UserManage\Details.cshtml" />
+    <Content Include="Views\UserManage\Create.cshtml" />
+    <Content Include="Views\UserManage\Edit.cshtml" />
+    <Content Include="Views\UserManage\Delete.cshtml" />
+    <Content Include="Views\BackupRestore\Index.cshtml" />
+    <Content Include="Views\Shared\_WebLayout.cshtml" />
+    <Content Include="Views\Web\Index.cshtml" />
+    <Content Include="Views\Web\ProductList.cshtml" />
+    <Content Include="Views\Web\ProductDetail.cshtml" />
+    <Content Include="Views\Web\MemberCenter.cshtml" />
+    <Content Include="Views\WebPartial\_MemberCenterPartial.cshtml" />
+    <Content Include="Views\Web\MemberOrder.cshtml" />
+    <Content Include="Views\Web\MemberCart.cshtml" />
+    <Content Include="Views\Web\MemberAddress.cshtml" />
+    <Content Include="Views\Web\MemberPay.cshtml" />
+    <Content Include="Views\Web\MemberPayRegister.cshtml" />
+    <Content Include="Views\Web\MemberInfo.cshtml" />
+    <Content Include="Views\Web\MemberEditPwd.cshtml" />
+    <Content Include="Views\Web\MemberCheckOrder.cshtml" />
+    <Content Include="Views\Web\MemberOrderDetail.cshtml" />
+    <Content Include="Views\Web\MemberPayOrder.cshtml" />
+    <Content Include="Views\WebPartial\_SlidePartial.cshtml" />
+    <Content Include="Views\WebPartial\_mainHotChoose.cshtml" />
+    <Content Include="Views\WebPartial\_mainHotProduct.cshtml" />
+    <Content Include="Views\WebPartial\_mainNewProduct.cshtml" />
+    <Content Include="Views\WebPartial\_NavPartial.cshtml" />
+    <Content Include="Views\WebPartial\_sideNavPartial.cshtml" />
+    <Content Include="Scripts\layer-v2.1\doc\jquery下载.url" />
+    <Content Include="Scripts\layer-v2.1\doc\layer交流.url" />
+    <Content Include="Scripts\layer-v2.1\doc\layer官网.url" />
+    <Content Include="Views\Web\MemberAddAddress.cshtml" />
+    <Content Include="Views\Web\MemberEditAddress.cshtml" />
+    <Content Include="Views\Web\MemberEditPay.cshtml" />
+    <Content Include="Views\Web\MemberLogin.cshtml" />
+    <Content Include="Views\Web\MemberEditInfo.cshtml" />
+    <Content Include="Views\Navigation\Index.cshtml" />
+    <Content Include="Views\Navigation\Details.cshtml" />
+    <Content Include="Views\Navigation\Create.cshtml" />
+    <Content Include="Views\Navigation\Edit.cshtml" />
+    <Content Include="Views\Navigation\Delete.cshtml" />
+    <Content Include="Views\LogoSet\Index.cshtml" />
+    <Content Include="Views\Slides\Index.cshtml" />
+    <Content Include="Views\Slides\Details.cshtml" />
+    <Content Include="Views\Slides\Create.cshtml" />
+    <Content Include="Views\Slides\Edit.cshtml" />
+    <Content Include="Views\Slides\Delete.cshtml" />
+    <Content Include="Views\Web\MemberRegister.cshtml" />
+    <Content Include="Views\Home\Error404.cshtml" />
+    <Content Include="Views\Home\Error500.cshtml" />
+    <Content Include="Views\Web\ProductSearch.cshtml" />
+    <Content Include="Views\Admin\DataCount.cshtml" />
+    <Content Include="Views\ClearData\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Images\web\productImg\" />
+    <Folder Include="Images\web\storageImg\" />
+    <Folder Include="Images\web\upload\" />
+    <Folder Include="kindeditor-4.1.3\attached\image\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201602271256261_init.resx">
+      <DependentUpon>201602271256261_init.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>14210</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://127.0.0.1:14210/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>http://180.136.79.77:14210/</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

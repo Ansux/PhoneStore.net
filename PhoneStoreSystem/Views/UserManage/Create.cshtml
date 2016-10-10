@@ -1,0 +1,77 @@
+﻿@model PhoneStoreSystem.Models.UserInfo
+
+@{
+    ViewBag.Title = "添加用户";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<span class="createLink">@Html.ActionLink("返回上一页", "Index")</span>
+
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset class="create_edit_div">
+        <legend>用户信息</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>               
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PassWord)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PassWord)
+            @Html.ValidationMessageFor(model => model.PassWord)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RoleId, "角色")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("RoleId",string.Empty)
+            @Html.ValidationMessageFor(model => model.RoleId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RealName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RealName)
+            @Html.ValidationMessageFor(model => model.RealName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserEmail)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserEmail)
+            @Html.ValidationMessageFor(model => model.UserEmail)
+        </div>
+
+        <p style="text-align:center;width:100%">
+           <!--<input type="button" name="btnUpdate" value="创建" id="btnUpdate" />-->
+           <input type="submit" value="提 交" class="btn" />&nbsp;&nbsp;
+           <input type="reset" value="重 置" class="btn" />
+        </p>
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        jQuery(function ($) {
+            $("#userManage").addClass("selected");
+            $("#main_container").fadeIn("slow");
+        });
+
+   </script>
+}

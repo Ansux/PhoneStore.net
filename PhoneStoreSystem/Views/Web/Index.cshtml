@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "首页";
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+
+@section css {
+    @Styles.Render("~/Content/web/index.css")	
+}
+
+    <div class="mainWebSlider">
+        <div class="inner">
+            <div class="left"></div>
+    	    <div class="jdt">
+
+                @Html.Action("_SlidePartial", "WebPartial", new { row=6})
+       
+            </div>
+        </div>
+        <div style="clear:both;"></div>   
+    </div>
+        
+    <div class="inner mainHotChoose">
+        <span class="title">
+            最新推荐
+        </span>
+        <span id="leftScroll"><<</span>
+        <span id="rightScroll">>></span>
+        <div style="clear:both;"></div>  
+        <div id="wfScroll">  
+            @Html.Action("_mainHotChoose", "WebPartial", new { row=8})
+                         
+            
+            <div style="clear:both;"></div>   
+            
+        </div>
+        <div style="clear:both;"></div>   
+    </div>
+
+         <div class="inner mainHotProduct hotProduct">
+            @Html.Action("_mainHotProduct", "WebPartial", new { row=9})
+                         
+            <div style="clear:both;"></div>   
+        </div>
+
+       
+
+        <div class="inner mainHotProduct newProduct">
+            
+            @Html.Action("_mainNewProduct", "WebPartial", new { row=6})
+
+            <div style="clear:both;"></div>   
+        </div>
+
+
+@section scripts{
+    @Scripts.Render("~/Scripts/web/index.js")
+    <script>
+        
+        lazyImgLoad($(".lazyImg_wfScroll"), 100, 1/*1-10*/, "backImg");
+        setTimeout(function () { lazyImgLoad($(".productUl:visible a.img"), 100, 1/*1-10*/, "backImg"); }, 800);
+        
+    </script>
+
+}

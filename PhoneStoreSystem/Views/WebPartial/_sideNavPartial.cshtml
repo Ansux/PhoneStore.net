@@ -1,0 +1,21 @@
+﻿
+
+<div class="sideNav_div">
+    @foreach (var p in ViewBag.ProList) {
+        int i=0;
+        foreach (var x in p) { 
+            if (i == 0) { 
+                <span class="title">@x</span> 
+            }else{
+                <ul>
+                @foreach (var xx in x as System.Collections.ArrayList)
+                { 
+                    string[] s=xx.ToString().Split(';');
+                     <li><a href="/Web/ProductDetail/@s[0]" >@(s[1])</a></li>
+                }
+                </ul>
+            }
+            i++;     
+        }                                                        
+    }                                                   
+</div>

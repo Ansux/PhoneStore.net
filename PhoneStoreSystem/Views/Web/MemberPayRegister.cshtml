@@ -1,0 +1,85 @@
+﻿@model PhoneStoreSystem.Models.Payment
+
+@{
+    ViewBag.Title = "开通支付通功能";
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+@section css {   
+    @Styles.Render("~/Content/web/MemberPay.css")
+    @Styles.Render("~/Content/web/_MemberCenterStyle.css")
+}
+
+<div class="inner">
+   
+    <div class="Nav">
+        <a href="/Web/index" title="首页">首页</a>
+        &gt;          
+        <a href="/Web/MemberCenter" title="我的商城">我的商城</a>
+        &gt;
+        <span>@ViewBag.Title</span>
+    </div>
+
+    <div class="leftCenterDIV">
+        @Html.Action("_MemberCenterPartial","WebPartial")       
+    </div>
+
+    
+    <div class="rightCenterDIV">
+        <h1 class="box-title">@ViewBag.Title</h1>    
+           
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+             <div class="create_edit_div">
+
+                 
+                <span style="color:red">@ViewBag.StatusMessage</span>
+                              
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PaymentUserName)  
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.PaymentUserName,new {placeholder=Html.DisplayNameFor(model => model.PaymentUserName)})
+                    @Html.ValidationMessageFor(model => model.PaymentUserName)                
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PaymentRealName)  
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.PaymentRealName,new {placeholder=Html.DisplayNameFor(model => model.PaymentRealName)})
+                    @Html.ValidationMessageFor(model => model.PaymentRealName)
+                </div>
+                
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PaymentIdCard)  
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.PaymentIdCard ,new {placeholder=Html.DisplayNameFor(model => model.PaymentIdCard) })
+                    @Html.ValidationMessageFor(model => model.PaymentIdCard)
+                </div>
+                 
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PaymentBankCard)  
+                </div>                       
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.PaymentBankCard,new {placeholder=Html.DisplayNameFor(model => model.PaymentBankCard) })
+                    @Html.ValidationMessageFor(model => model.PaymentBankCard)
+                </div>                
+                
+                <p style="text-align:left;width:100%;margin-top:10px;">
+                    <input type="submit" value="保　存" class="btn btn-primary" />&nbsp;&nbsp;&nbsp;
+                    <input type="reset" value="重　置" class="btn btn-primary" />
+                </p>
+            </div>
+        }
+        </div>
+    <div style="clear:both"></div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/web/other.js")    
+}

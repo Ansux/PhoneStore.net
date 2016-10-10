@@ -1,0 +1,117 @@
+﻿@model IEnumerable<PhoneStoreSystem.Models.Address>
+
+@{
+    ViewBag.Title = "收货地址管理";
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+@section css {   
+    @Styles.Render("~/Content/web/MemberAddress.css")
+    @Styles.Render("~/Content/web/_MemberCenterStyle.css")
+
+}
+
+<div class="inner">
+   
+    <div class="Nav">
+        <a href="/Web/index" title="首页">首页</a>
+        &gt;          
+        <a href="/Web/MemberCenter" title="我的商城">我的商城</a>
+        &gt;
+        <span>@ViewBag.Title</span>
+    </div>
+
+    <div class="leftCenterDIV">
+        @Html.Action("_MemberCenterPartial","WebPartial")       
+    </div>
+
+    
+    <div class="rightCenterDIV">
+        <h1 class="box-title">@ViewBag.Title</h1>    
+    
+        <div class="user-address-list">
+            <div class="address-item address-item-new" id="J_newAddress">      
+                <span class="addIcon">+</span>                    
+                添加新地址
+            </div>
+
+            @foreach (var item in Model) { 
+                <div class="address-item J_addressItem" >      
+                    <dl>
+                        <dt>                       
+                            <em class="uname">@item.AddressName</em>
+                        </dt>
+                        <dd class="utel">@item.AddressPhone</dd>
+                        <dd class="uaddress">@item.AddressProvince @item.AddressCity @item.AddressCounty<br>@item.AddressDetail (@item.AddressCode)
+                        </dd>
+                    </dl>
+                    <div class="actions">                    
+                        <a class="modify" href="/Web/MemberEditAddress/@item.AddressId">修改</a>
+                        <a class="modify J_addressDelete" data-AddressId="@item.AddressId"  href="javascript:void(0);">删除</a>
+                    </div>
+                </div>
+
+            }           
+        </div>
+
+        <div style="clear:both"></div>
+      
+        
+    </div>
+
+    
+    <div style="clear:both"></div>
+</div>
+
+
+
+
+@section scripts{
+    @Scripts.Render("~/Scripts/web/other.js")
+    <script src="~/Scripts/layer-v2.1/layer/layer.js"></script>
+   
+    <script>     
+        $("#J_newAddress").click(function () {
+            window.location.href = "/Web/MemberAddAddress";
+        });
+
+        $(".J_addressDelete").click(function () {
+
+            var memberId =@Session["MemberId"] +"";
+            if (memberId == 0) {
+                layer.alert("请登录！\(^o^)/", { icon: 7, closeBtn: 0, btn: ["前往登录", "取消"] }, function () {
+                    window.location.href = "/Web/MemberLogin";
+                });
+                return;
+            }
+
+            var addressId = $(this).attr("data-AddressId");
+            var t = $(this);
+
+            layer.confirm('你确定要移除它吗？', {
+                btn: ['确定', '取消'], //按钮
+                closeBtn: 0,
+                icon: 3
+            }, function () {
+                $.ajax({
+                    type: "Post",
+                    dataType: "text",
+                    url: '/Web/MemberRemoveAddress',     //提交到一般处理程序请求数据   
+                    data: "addressId=" + addressId,           //提交参数              
+                    success: function (data) {
+                        if (data == "True")
+                            t.parent().parent(".J_addressItem").remove();
+                        else {
+                            layer.alert(data, { icon: 5 });
+                        }
+                    },
+                    error: function (msg) {
+                        layer.alert('移除失败，咋回事？', { icon: 5 });
+                    }
+                });
+                layer.msg('移除成功！', { time: 500, icon: 1 });
+            });
+        });
+
+    </script>
+
+}

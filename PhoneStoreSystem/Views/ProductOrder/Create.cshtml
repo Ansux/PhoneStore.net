@@ -1,0 +1,125 @@
+﻿@model PhoneStoreSystem.Models.Order
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Order</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrderNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OrderNumber)
+            @Html.ValidationMessageFor(model => model.OrderNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrderTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OrderTime)
+            @Html.ValidationMessageFor(model => model.OrderTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrderPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OrderPrice)
+            @Html.ValidationMessageFor(model => model.OrderPrice)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrderCount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OrderCount)
+            @Html.ValidationMessageFor(model => model.OrderCount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrderSendTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OrderSendTime)
+            @Html.ValidationMessageFor(model => model.OrderSendTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrderProName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OrderProName)
+            @Html.ValidationMessageFor(model => model.OrderProName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrderProIntroduce)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OrderProIntroduce)
+            @Html.ValidationMessageFor(model => model.OrderProIntroduce)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrderProCoverImage)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OrderProCoverImage)
+            @Html.ValidationMessageFor(model => model.OrderProCoverImage)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ColorName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ColorName)
+            @Html.ValidationMessageFor(model => model.ColorName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrderStatusId, "OrderStatus")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("OrderStatusId", String.Empty)
+            @Html.ValidationMessageFor(model => model.OrderStatusId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProId)
+            @Html.ValidationMessageFor(model => model.ProId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MemberId, "Member")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("MemberId", String.Empty)
+            @Html.ValidationMessageFor(model => model.MemberId)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

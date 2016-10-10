@@ -1,0 +1,44 @@
+﻿@model PhoneStoreSystem.Models.ProductStorage
+
+@{
+    ViewBag.Title = "详细信息";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ProductStorage</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StorageNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StorageNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProImage)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProImage)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProductInfo.ProName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProductInfo.ProName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProductColor.ColorName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProductColor.ColorName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.StorageId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

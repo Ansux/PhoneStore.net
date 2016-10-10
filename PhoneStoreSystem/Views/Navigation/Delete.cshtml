@@ -1,0 +1,44 @@
+﻿@model PhoneStoreSystem.Models.Navigation
+
+@{
+    ViewBag.Title = "删除菜单";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>你确定要删除这条信息吗？</h3>
+<br />
+<span class="createLink">@Html.ActionLink("返回上一页", "Index")</span>
+
+<fieldset class="create_edit_div">
+    <legend>导航菜单</legend>
+
+    <div class="display-label">
+         @Html.LabelFor(model => model.NavName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NavName)
+    </div>
+
+    <div class="display-label">
+         @Html.LabelFor(model => model.NavUrl)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NavUrl)
+    </div>
+
+    @using (Html.BeginForm()) {
+        <p  style="text-align:center;width:100%">
+            <input type="submit" value="删 除" class="btn"/> 
+        </p>
+    }
+</fieldset>
+
+@section scripts {
+    
+   <script>
+       jQuery(function ($) {
+           $("#navSet").addClass("selected");
+           $("#main_container").fadeIn("slow");
+       });
+   </script>
+}
